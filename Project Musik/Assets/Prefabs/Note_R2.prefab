@@ -16,8 +16,8 @@ GameObject:
   - component: {fileID: 3268081684167190200}
   - component: {fileID: 3268081684167190203}
   m_Layer: 0
-  m_Name: Note_0 (0)
-  m_TagString: Untagged
+  m_Name: Note_R2
+  m_TagString: Note
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -360,7 +360,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _data:
     _json: '{"declarations":{"collection":{"$content":[{"name":"CouldPress?","value":{"$content":false,"$type":"System.Boolean"},"$version":"A"},{"name":"On
-      KeyInput","value":{"$content":"W","$type":"UnityEngine.KeyCode"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
+      KeyInput","value":{"$content":"E","$type":"UnityEngine.KeyCode"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
     _objectReferences: []
 --- !u!114 &3268081684167190203
 MonoBehaviour:

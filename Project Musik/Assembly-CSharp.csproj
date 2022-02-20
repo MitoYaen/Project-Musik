@@ -89,6 +89,18 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ObjectSpin.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
+    <Compile Include="Assets\Koreographer\Demos\Scripts\EmitParticlesOnSpan.cs" />
+    <Compile Include="Assets\Koreographer\Demos\Scripts\MusicalImpulse.cs" />
+    <Compile Include="Assets\Koreographer\Demos\Scripts\TempoSwitch.cs" />
+    <Compile Include="Assets\Koreographer\Demos\Scripts\CubeScaler.cs" />
+    <Compile Include="Assets\Koreographer\Demos\Scripts\UIMessageSetter.cs" />
+    <Compile Include="Assets\Koreographer\Demos\Rhythm Game Demo\Scripts\LaneController.cs" />
+    <Compile Include="Assets\Koreographer\Demos\Rhythm Game Demo\Scripts\RhythmGameController.cs" />
+    <Compile Include="Assets\Koreographer\Demos\Rhythm Game Demo\Scripts\NoteObject.cs" />
+    <Compile Include="Assets\Koreographer\Demos\Rhythm Game Demo\Scripts\DemoDelayDisplayUI.cs" />
+    <Compile Include="Assets\Koreographer\Demos\Rhythm Game Demo\Scripts\ButtonController.cs" />
+    <Compile Include="Assets\Koreographer\Demos\Rhythm Game Demo\Scripts\DemoPitchDisplayUI.cs" />
+    <Compile Include="Assets\Scripts\KoreotoBolt.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Ludiq\Ludiq.Core\DotNetDocumentation\System.Web.Extensions.Design.xml" />
@@ -118,6 +130,7 @@
     <None Include="Assets\Ludiq\Ludiq.Core\DotNetDocumentation\System.Web.Entity.Design.xml" />
     <None Include="Assets\Ludiq\Assemblies\Bolt.Core.Editor.dll" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Anton OFL.txt" />
+    <None Include="Assets\Koreographer\ReadMe.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\Ludiq\Assemblies\Ludiq.Graphs.Runtime.xml" />
@@ -474,6 +487,9 @@
     </Reference>
     <Reference Include="Bolt.State.Runtime">
       <HintPath>Assets\Ludiq\Assemblies\Bolt.State.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="SonicBloom.Koreo">
+      <HintPath>Assets\Plugins\Koreographer\Unity Editor\SonicBloom.Koreo.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.18f1\Editor\Data\NetStandard\ref\2.0.0\netstandard.dll</HintPath>

@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Activator
+  - Cleaner
+  - Note
+  - Fartivator
   layers:
   - Default
   - TransparentFX
