@@ -23,6 +23,8 @@ public class RythmGameManager : MonoBehaviour
 
     public int TotalNotes;
 
+    public GameObject BoltLinkObject;
+
     public float HitWindowSize_unit
     { 
         get
@@ -89,6 +91,11 @@ public class RythmGameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        //Multiply the note speed
+
+        NoteSpeed = NoteSpeed * 5;
+
         InitializeLeadIn();
         for (int i = 0; i < noteLanes.Count; ++i)
         {
@@ -130,7 +137,6 @@ public class RythmGameManager : MonoBehaviour
         
     }
 
-    //public bool soundplayed = false;
     // Update is called once per frame
     void Update() {
         if (TimeLeftToPlay > 0)
@@ -148,7 +154,17 @@ public class RythmGameManager : MonoBehaviour
         {
             LeadInTimeLeft = Mathf.Max(LeadInTimeLeft - Time.unscaledDeltaTime, 0);
         }
-        Variables.ActiveScene.Set("Score",CurScore);
+        
+        //Update the scores to Bolt
+        Variables.Object(BoltLinkObject).Set("Score_Ori", CurScore);
+
+        //Cheats to debug
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            CurScore += 3000;
+            Debug.Log("The score adds 3000, now is " + CurScore);
+        }
+
     }
     /// <summary>
     /// InitializeLeadTime  
@@ -200,4 +216,17 @@ public class RythmGameManager : MonoBehaviour
             noteObjectPool.Push(obj);
         }
     }
+
+    //Score Update (Pure)
+    public void PureScoreUpdate()
+    {
+        CurScore += PerScore;
+    }
+
+    //Score Update (Far)
+    public void FarScoreUpdate()
+    {
+        CurScore += PerScore/2;
+    }
+
 }

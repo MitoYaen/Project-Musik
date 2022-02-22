@@ -136,7 +136,7 @@ public class Note : MonoBehaviour
             Debug.Log("FarEarly");
             visuals_Note.material = visuals[2];
             GameObject.Instantiate(PS_Far,gameObject.transform.position,Quaternion.identity);
-            gameController.CurScore += gameController.PerScore / 2;
+            //gameController.CurScore += gameController.PerScore / 2;
         }
         if (-2205<= hitOffset && hitOffset <= 2205)
         {
@@ -145,7 +145,7 @@ public class Note : MonoBehaviour
             Debug.Log("Pure");
             visuals_Note.material = visuals[2];
             GameObject.Instantiate(PS_Pure, gameObject.transform.position, Quaternion.identity);
-            gameController.CurScore += gameController.PerScore;
+            //gameController.CurScore += gameController.PerScore;
         }
         if (2205<=hitOffset && hitOffset <= 4410)
         {
@@ -154,7 +154,7 @@ public class Note : MonoBehaviour
             Debug.Log("FarLate");
             visuals_Note.material = visuals[2];
             GameObject.Instantiate(PS_Far, gameObject.transform.position, Quaternion.identity);
-            gameController.CurScore += gameController.PerScore / 2;
+            //gameController.CurScore += gameController.PerScore / 2;
         }
         if (4411<=hitOffset && hitOffset <= 7000)
         {

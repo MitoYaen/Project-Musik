@@ -15,6 +15,12 @@ public class LaneController : MonoBehaviour
     [Tooltip("音轨所对应事件编号")]
     public int laneID;
 
+    public bool OnLane;
+
+    public string TouchTag;
+
+    public int curLane;
+
     //the list of all the events in the lane
     List<KoreographyEvent> laneEvents = new List<KoreographyEvent>();
 
@@ -69,8 +75,10 @@ public class LaneController : MonoBehaviour
         else if (Input.GetKeyUp(keyboardButton))
         {
             //Check LongNotesEnd
-        }      
+        }    
+        
     }
+
     //Initialize
     public void Initialize(RythmGameManager controller)
     {
@@ -147,14 +155,17 @@ public class LaneController : MonoBehaviour
                 if (hitLevel == 1)
                 {
                     //Far(Early)
+                    GameController.FarScoreUpdate();
                 }
                 if (hitLevel == 2)
                 {
                     //Pure
+                    GameController.PureScoreUpdate();
                 }
                 if (hitLevel == 3)
                 {
                     //Far(Late)
+                    GameController.FarScoreUpdate();
                 }
                 else
                 {
@@ -168,6 +179,25 @@ public class LaneController : MonoBehaviour
             }
 
         }
+    }
+
+
+    //Check Lanes when touch
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag(TouchTag))
+        {
+            OnLane = true;
+            curLane = laneID;
+        }
+        else
+        {
+            curLane = 0;
+        }
+    }
+    public void OnTriggerExit(Collider other)
+    {
+        curLane = 0;
     }
 
 

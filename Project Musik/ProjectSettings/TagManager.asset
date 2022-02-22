@@ -10,6 +10,8 @@ TagManager:
   - Late
   - Early
   - Miss
+  - T1
+  - Debug
   layers:
   - Default
   - TransparentFX
