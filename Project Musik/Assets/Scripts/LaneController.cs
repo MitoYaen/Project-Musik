@@ -48,6 +48,12 @@ public class LaneController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Clear unused notes
+        while (trackedNotes.Count>0&&trackedNotes.Peek().IsNoteMissed())
+        {
+            trackedNotes.Dequeue();
+        }
+
         //Check the Spawning of the new notes
         CheckSpawnNext();
         //

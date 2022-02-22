@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using SonicBloom.Koreo;
-using Bolt;
 
 public class Note : MonoBehaviour
 {
@@ -21,7 +18,12 @@ public class Note : MonoBehaviour
 
     RythmGameManager gameController;
 
+    public ParticleSystem PS_Pure;
+
+    public ParticleSystem PS_Far;
+
     public int hitOffset;
+
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +36,11 @@ public class Note : MonoBehaviour
     {
         UpdatePosition();
         GetHitOffset();
+        if (transform.position.z <=laneController.targetBottomTrans.position.z)
+        {
+            gameController.ReturnNoteObjectToPool(this);
+            ResetNote();
+        }
     }
 
     //Initialize
@@ -72,7 +79,6 @@ public class Note : MonoBehaviour
     }
     public void OnHit()
     {
-        CustomEvent.Trigger(gameObject, "Hit");
         ReturnToPool();
         
     }
@@ -95,7 +101,23 @@ public class Note : MonoBehaviour
         int hitWindow = gameController.HitWindowSampleWidth;
         hitOffset = hitWindow - Mathf.Abs(noteTime - curTime);
     }
-    
+
+    //Check if the note is missed
+    public bool IsNoteMissed()
+    {
+        bool bMissed = true;
+        if (enabled)
+        {
+            int curTime = gameController.DelayedSampleTime;
+            int noteTime = trackedEvent.StartSample;
+            int hitWindow = gameController.HitWindowSampleWidth;
+
+            bMissed = curTime - noteTime > hitWindow;
+
+        }
+        return bMissed;
+    }
+
     public int IsNoteHittable()
     {
         int hitLevel = 0;
@@ -104,32 +126,42 @@ public class Note : MonoBehaviour
         {
             hitLevel = 0;
             this.enabled = false;
-            CustomEvent.Trigger(gameObject, "Lost");
+            //CustomEvent.Trigger(gameObject, "Lost");
             Debug.Log("Lost");
         }
         if (-4410 <= hitOffset && hitOffset <= -2206)
         {
             hitLevel = 1;
-            CustomEvent.Trigger(gameObject, "FarEarly");
+            //CustomEvent.Trigger(gameObject, "FarEarly");
             Debug.Log("FarEarly");
+            visuals_Note.material = visuals[2];
+            GameObject.Instantiate(PS_Far,gameObject.transform.position,Quaternion.identity);
+            gameController.CurScore += gameController.PerScore / 2;
         }
         if (-2205<= hitOffset && hitOffset <= 2205)
         {
             hitLevel = 2;
-            CustomEvent.Trigger(gameObject, "Pure");
+            //CustomEvent.Trigger(gameObject, "Pure");
             Debug.Log("Pure");
+            visuals_Note.material = visuals[2];
+            GameObject.Instantiate(PS_Pure, gameObject.transform.position, Quaternion.identity);
+            gameController.CurScore += gameController.PerScore;
         }
         if (2205<=hitOffset && hitOffset <= 4410)
         {
             hitLevel = 3;
-            CustomEvent.Trigger(gameObject, "FarLate");
+            //CustomEvent.Trigger(gameObject, "FarLate");
             Debug.Log("FarLate");
+            visuals_Note.material = visuals[2];
+            GameObject.Instantiate(PS_Far, gameObject.transform.position, Quaternion.identity);
+            gameController.CurScore += gameController.PerScore / 2;
         }
         if (4411<=hitOffset && hitOffset <= 7000)
         {
             hitLevel = 0;
-            CustomEvent.Trigger(gameObject, "Lost");
+            //CustomEvent.Trigger(gameObject, "Lost");
             Debug.Log("Lost");
+            visuals_Note.material = visuals[4];
             this.enabled = false;
         }
 

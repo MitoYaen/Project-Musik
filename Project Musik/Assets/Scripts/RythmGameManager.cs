@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using SonicBloom.Koreo;
 using Bolt;
+using Ludiq;
 
 public class RythmGameManager : MonoBehaviour
 {
@@ -13,6 +14,14 @@ public class RythmGameManager : MonoBehaviour
 
     [Range(8f,200f)]
     public float HitWindowSize_ms;
+
+    public int FullScore;
+
+    public float PerScore;
+
+    public float CurScore;
+
+    public int TotalNotes;
 
     public float HitWindowSize_unit
     { 
@@ -59,6 +68,7 @@ public class RythmGameManager : MonoBehaviour
     public GameObject HitEffectLongNote;
 
 
+
     //Time Related
     [Tooltip("开始播放音频之前提供的时间量，以秒为单位")]
     public float LeadInTime;
@@ -90,6 +100,9 @@ public class RythmGameManager : MonoBehaviour
 
         List<KoreographyEvent> rawEvents = rythmTrack.GetAllEvents();
 
+        TotalNotes = rawEvents.Count;
+        PerScore = FullScore / TotalNotes ;
+        Variables.ActiveScene.Set("PerScore",PerScore);
         for (int i = 0; i < rawEvents.Count; ++i)
         {
             KoreographyEvent evt = rawEvents[i];
@@ -100,7 +113,7 @@ public class RythmGameManager : MonoBehaviour
                 if (noteID > 4)
                 {
                     noteID = noteID - 4;
-                    if (noteID>6)
+                    if (noteID > 4)
                     {
                         noteID = noteID - 4;
                     }
@@ -113,6 +126,8 @@ public class RythmGameManager : MonoBehaviour
             }
         }
         HitWindowSize_sample = (int)(0.001f * HitWindowSize_ms * SampleRate );
+
+        
     }
 
     //public bool soundplayed = false;
@@ -133,6 +148,7 @@ public class RythmGameManager : MonoBehaviour
         {
             LeadInTimeLeft = Mathf.Max(LeadInTimeLeft - Time.unscaledDeltaTime, 0);
         }
+        Variables.ActiveScene.Set("Score",CurScore);
     }
     /// <summary>
     /// InitializeLeadTime  
@@ -149,6 +165,7 @@ public class RythmGameManager : MonoBehaviour
             AudioCom.Play();
         }
     }
+
 
     //pick up the object from the pool
     public Note GetFreshNoteObject()
@@ -170,6 +187,7 @@ public class RythmGameManager : MonoBehaviour
 
         return retObj;
     }
+
 
     //Put back the object to the pool
 
