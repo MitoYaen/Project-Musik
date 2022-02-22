@@ -7,7 +7,9 @@ TagManager:
   - Activator
   - Cleaner
   - Note
-  - Fartivator
+  - Late
+  - Early
+  - Miss
   layers:
   - Default
   - TransparentFX
