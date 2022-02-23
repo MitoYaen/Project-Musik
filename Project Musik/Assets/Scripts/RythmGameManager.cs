@@ -1,15 +1,16 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using SonicBloom.Koreo;
 using Bolt;
-using Ludiq;
+using UnityEngine.SceneManagement;
 
 public class RythmGameManager : MonoBehaviour
 {
     [EventID]
     public string EventID;
 
+    public float InGameNoteSpeed;
+    
     public float NoteSpeed;
 
     [Range(8f,200f)]
@@ -94,7 +95,7 @@ public class RythmGameManager : MonoBehaviour
 
         //Multiply the note speed
 
-        NoteSpeed = NoteSpeed * 5;
+        NoteSpeed = InGameNoteSpeed * 5;
 
         InitializeLeadIn();
         for (int i = 0; i < noteLanes.Count; ++i)
@@ -229,4 +230,9 @@ public class RythmGameManager : MonoBehaviour
         CurScore += PerScore/2;
     }
 
+    //Reload Scene
+    public void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 }

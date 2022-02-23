@@ -1,8 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using SonicBloom.Koreo;
-using Bolt;
+using DG.Tweening;
 
 public class LaneController : MonoBehaviour
 {
@@ -15,11 +14,9 @@ public class LaneController : MonoBehaviour
     [Tooltip("音轨所对应事件编号")]
     public int laneID;
 
-    public bool OnLane;
+    public Transform VisualLane;
 
-    public string TouchTag;
-
-    public int curLane;
+    public GameObject CamCatcher;
 
     //the list of all the events in the lane
     List<KoreographyEvent> laneEvents = new List<KoreographyEvent>();
@@ -48,7 +45,8 @@ public class LaneController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        DOTween.Init(true, true, LogBehaviour.Default);
+        CamCatcher = GameObject.FindGameObjectWithTag("CamCatcher");
     }
 
     // Update is called once per frame
@@ -181,23 +179,18 @@ public class LaneController : MonoBehaviour
         }
     }
 
-
-    //Check Lanes when touch
-    public void OnTriggerEnter(Collider other)
+    //Visual FeedBack When Pressed
+    public void VisualPressLane()
     {
-        if (other.CompareTag(TouchTag))
-        {
-            OnLane = true;
-            curLane = laneID;
-        }
-        else
-        {
-            curLane = 0;
-        }
+        VisualLane.DOMoveY(-10.65f, 0.2f, false);
+        CamCatcher.transform.DOMoveY(-5.6f, 0.2f, false);
     }
-    public void OnTriggerExit(Collider other)
+
+    //Visual FeedBack When Released
+    public void VisualReleaseLane()
     {
-        curLane = 0;
+        VisualLane.DOMoveY(-10.5f, 0.2f, false);
+        CamCatcher.transform.DOMoveY(-5.2f, 0.2f, false);
     }
 
 

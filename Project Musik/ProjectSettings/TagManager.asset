@@ -12,6 +12,7 @@ TagManager:
   - Miss
   - T1
   - Debug
+  - CamCatcher
   layers:
   - Default
   - TransparentFX
