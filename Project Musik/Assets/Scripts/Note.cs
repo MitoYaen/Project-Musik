@@ -85,6 +85,7 @@ public class Note : MonoBehaviour
     }
     public void OnHit()
     {
+        visuals_Note.material = visuals[6];
         SfxManager.PlayOneShot(HitSound);
         ReturnToPool();
         

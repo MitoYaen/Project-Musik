@@ -66,10 +66,6 @@ public class RythmGameManager : MonoBehaviour
 
     public Note noteObject;
 
-    public GameObject HitEffectNote;
-
-    public GameObject HitEffectLongNote;
-
 
 
     //Time Related
