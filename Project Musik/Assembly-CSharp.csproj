@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>latest</LangVersion>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -22,7 +22,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>Temp\Bin\Debug\</OutputPath>
-    <DefineConstants>UNITY_2020_3_18;UNITY_2020_3;UNITY_2020;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;USE_SEARCH_ENGINE_API;SCENE_TEMPLATE_MODULE;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_VIRTUALTEXTURING;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;INCLUDE_DYNAMIC_GI;ENABLE_MONO_BDWGC;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_VIDEO;PLATFORM_STANDALONE;PLATFORM_STANDALONE_WIN;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;PLATFORM_UPDATES_TIME_OUTSIDE_OF_PLAYER_LOOP;GFXDEVICE_WAITFOREVENT_MESSAGEPUMP;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;NET_STANDARD_2_0;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_LEGACY_INPUT_MANAGER;UNITY_POST_PROCESSING_STACK_V2;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
+    <DefineConstants>UNITY_2020_3_18;UNITY_2020_3;UNITY_2020;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_INCLUDE_TESTS;USE_SEARCH_ENGINE_API;SCENE_TEMPLATE_MODULE;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_NATIVE_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_RUNTIME_PERMISSIONS;ENABLE_ENGINE_CODE_STRIPPING;ENABLE_ONSCREEN_KEYBOARD;INCLUDE_DYNAMIC_GI;ENABLE_MONO_BDWGC;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;ENABLE_VIDEO;PLATFORM_ANDROID;UNITY_ANDROID;UNITY_ANDROID_API;ENABLE_EGL;ENABLE_NETWORK;ENABLE_RUNTIME_GI;ENABLE_CRUNCH_TEXTURE_COMPRESSION;UNITY_CAN_SHOW_SPLASH_SCREEN;UNITY_HAS_GOOGLEVR;UNITY_HAS_TANGO;ENABLE_SPATIALTRACKING;PLATFORM_EXTENDS_VULKAN_DEVICE;PLATFORM_HAS_MULTIPLE_SWAPCHAINS;UNITY_ANDROID_SUPPORTS_SHADOWFILES;ENABLE_UNITYADS_RUNTIME;UNITY_UNITYADS_API;ENABLE_MONO;NET_STANDARD_2_0;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_INPUT_SYSTEM;ENABLE_LEGACY_INPUT_MANAGER;UNITY_POST_PROCESSING_STACK_V2;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
@@ -49,9 +49,12 @@
     <UnityProjectGenerator>Package</UnityProjectGenerator>
     <UnityProjectGeneratorVersion>2.0.11</UnityProjectGeneratorVersion>
     <UnityProjectType>Game:1</UnityProjectType>
-    <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
+    <UnityBuildTarget>Android:13</UnityBuildTarget>
     <UnityVersion>2020.3.18f1</UnityVersion>
   </PropertyGroup>
+  <ItemGroup>
+    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
@@ -61,10 +64,12 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
     <Compile Include="Assets\Scripts\RythmGameManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
+    <Compile Include="Assets\Scripts\LaneController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
+    <Compile Include="Assets\Scripts\TouchDetect.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />
@@ -80,6 +85,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_FrameRateCounter.cs" />
     <Compile Include="Assets\Scripts\BoltSuperUnits\Scripts\Logics.cs" />
+    <Compile Include="Assets\Scripts\Note.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
@@ -92,8 +98,124 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
-    <Compile Include="Assets\Scripts\Note.cs" />
-    <Compile Include="Assets\Scripts\LaneController.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Core\TouchManagerInstance.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Utils\ClusterUtils.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Gestures\TransformGestures\Base\OnePointTrasformGestureBase.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Layers\ProjectionParams.cs" />
+    <Compile Include="Assets\TouchScript\Examples\RawInput\Scripts\Spawner.cs" />
+    <Compile Include="Assets\TouchScript\Examples\Portal\Scripts\Planet.cs" />
+    <Compile Include="Assets\TouchScript\Examples\Cube\Scripts\Init.cs" />
+    <Compile Include="Assets\TouchScript\Examples\_misc\Scripts\ExamplesList.cs" />
+    <Compile Include="Assets\TouchScript\Modules\TUIO\Scripts\InputSources\TuioInput.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\IDebuggable.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Gestures\FlickGesture.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Pointers\ObjectPointer.cs" />
+    <Compile Include="Assets\TouchScript\Examples\Photos\Scripts\SetColor.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Gestures\PressGesture.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Behaviors\Cursors\ObjectCursor.cs" />
+    <Compile Include="Assets\TouchScript\Examples\Checkers\Scripts\Board.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Gestures\TransformGestures\Clustered\ClusteredTransformGesture.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Utils\PointerUtils.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Hit\Untouchable.cs" />
+    <Compile Include="Assets\TouchScript\Examples\_misc\Scripts\ShowMe.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Utils\TimedSequence.cs" />
+    <Compile Include="Assets\TouchScript\Examples\Cube\Scripts\LayerDelegate.cs" />
+    <Compile Include="Assets\TouchScript\Examples\Cube\Scripts\CustomPointerProxy.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\InputSources\StandardInput.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Clusters\Clusters2D.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Utils\ObjectPool.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Hit\HitData.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Core\LayerManagerInstance.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Behaviors\Cursors\UI\TextureSwitch.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Utils\Attributes\NullToggleAttribute.cs" />
+    <Compile Include="Assets\TouchScript\Examples\Camera\Scripts\CameraController.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\IGestureManager.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Devices\Display\IDisplayDevice.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Utils\Platform\WindowsUtils.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Gestures\ReleaseGesture.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Debugging\GL\GLDebug.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Debugging\Filters\PointerLogFilter.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Gestures\TransformGestures\PinnedTransformGesture.cs" />
+    <Compile Include="Assets\TouchScript\Examples\Taps\Scripts\Spawn.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\InputSources\IInputSource.cs" />
+    <Compile Include="Assets\TouchScript\Examples\_misc\Scripts\Checker.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Debugging\Loggers\FileReaderLogger.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Gestures\IGestureDelegate.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Layers\TouchLayer.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\InputSources\ICoordinatesRemapper.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Debugging\Filters\IPointerLogFilter.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Pointers\TouchPointer.cs" />
+    <Compile Include="Assets\TouchScript\Examples\_misc\Scripts\Runner.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Gestures\TransformGestures\TransformGesture.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Utils\Geom\TwoD.cs" />
+    <Compile Include="Assets\TouchScript\Examples\Portal\Scripts\Vortex.cs" />
+    <Compile Include="Assets\TouchScript\Examples\Portal\Scripts\Rotator.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Pointers\PointerFactory.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Devices\Display\DisplayDevice.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Utils\Attributes\ToggleLeftAttribute.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Behaviors\Cursors\PenCursor.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Devices\Display\GenericDisplayDevice.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Debugging\Loggers\PointerLogger.cs" />
+    <Compile Include="Assets\TouchScript\Examples\RawInput\Scripts\Ball.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Core\DebuggableMonoBehaviour.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Gestures\TransformGestures\Base\TwoPointTransformGestureBase.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Layers\UI\TouchScriptInputModule.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\LayerManager.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Core\GestureManagerInstance.cs" />
+    <Compile Include="Assets\TouchScript\Examples\Multiuser\Scripts\Logo.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Gestures\TransformGestures\Base\TransformGestureBase.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Layers\StandardLayer.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Hit\RaycastHitUI.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Behaviors\Cursors\TouchCursor.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Layers\ILayerDelegate.cs" />
+    <Compile Include="Assets\TouchScript\Examples\Colors\Scripts\Circle.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Gestures\MetaGesture.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\ITouchManager.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\GestureManager.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Utils\EventHandlerExtensions.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Gestures\LongPressGesture.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Behaviors\Transformer.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\InputSources\InputHandlers\WindowsPointerHandlers.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Behaviors\Cursors\UI\GradientTexture.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Layers\FullscreenLayer.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Debugging\Loggers\FileWriterLogger.cs" />
+    <Compile Include="Assets\TouchScript\Examples\Photos\Scripts\Container.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Gestures\Gesture.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Behaviors\Cursors\MouseCursor.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\InputSources\InputHandlers\MouseHandler.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\InputSources\InputHandlers\TouchHandler.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Hit\HitTest.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Utils\TransformUtils.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Behaviors\Cursors\CursorManager.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Pointers\IPointer.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\TouchManager.cs" />
+    <Compile Include="Assets\TouchScript\Examples\Taps\Scripts\Break.cs" />
+    <Compile Include="Assets\TouchScript\Examples\_misc\Scripts\KillMe.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Behaviors\UI\OverHelper.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Gestures\TransformGestures\ITransformGesture.cs" />
+    <Compile Include="Assets\TouchScript\Examples\_misc\Scripts\Highlight.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Gestures\TransformGestures\Clustered\ClusteredScreenTransformGesture.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Gestures\TransformGestures\ScreenTransformGesture.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Gestures\TapGesture.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Debugging\TouchScriptDebugger.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Pointers\FakePointer.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Pointers\Pointer.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Utils\Geom\ProjectionUtils.cs" />
+    <Compile Include="Assets\TouchScript\Examples\Colors\Scripts\Colors.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Utils\BinaryUtils.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\ILayerManager.cs" />
+    <Compile Include="Assets\TouchScript\Examples\Checkers\Scripts\Exclusive.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Pointers\MousePointer.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Behaviors\Cursors\PointerCursor.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Debugging\Loggers\IPointerLogger.cs" />
+    <Compile Include="Assets\TouchScript\Examples\Taps\Scripts\Kick.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Gestures\TransformGestures\Clustered\ClusteredPinnedTransformGesture.cs" />
+    <Compile Include="Assets\TouchScript\Examples\Portal\Scripts\Spawner.cs" />
+    <Compile Include="Assets\TouchScript\Examples\Cube\Scripts\RedirectInput.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Debugging\GL\DebugHelper.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\InputSources\InputSource.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Debugging\Filters\IPointerDataFilter.cs" />
+    <Compile Include="Assets\TouchScript\Scripts\Pointers\PenPointer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Ludiq\Ludiq.Core\DotNetDocumentation\System.Web.Extensions.Design.xml" />
@@ -115,6 +237,9 @@
     <None Include="Assets\Ludiq\Ludiq.Core\DotNetDocumentation\System.Web.Routing.xml" />
     <None Include="Assets\Ludiq\Ludiq.Core\DotNetDocumentation\System.DirectoryServices.xml" />
     <None Include="Assets\Ludiq\Ludiq.Core\DotNetDocumentation\System.Configuration.Install.xml" />
+    <None Include="Assets\TouchScript\Modules\TUIO\Libraries\OSCsharp.dll" />
+    <None Include="Assets\TouchScript\license.txt" />
+    <None Include="Assets\TouchScript\Plugins\WindowsTouch\WindowsTouch.dll" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\Ludiq\Ludiq.Core\DotNetDocumentation\System.Data.Entity.Design.xml" />
     <None Include="Assets\Ludiq\Ludiq.Core\DotNetDocumentation\System.ServiceModel.Web.xml" />
@@ -125,8 +250,12 @@
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Anton OFL.txt" />
     <None Include="Assets\Koreographer\ReadMe.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
+    <None Include="Assets\TouchScript\Examples\_misc\Shaders\BorderDiffuse.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
+    <None Include="Assets\TouchScript\Shaders\DebugNoDepthTest.shader" />
     <None Include="Assets\Ludiq\Assemblies\Ludiq.Graphs.Runtime.xml" />
+    <None Include="Assets\TouchScript\Shaders\DebugDepthTest.shader" />
+    <None Include="Assets\TouchScript\Examples\_misc\Shaders\UnlitColor.shader" />
     <None Include="Assets\Ludiq\Ludiq.Core\DotNetDocumentation\System.Printing.xml" />
     <None Include="Assets\Ludiq\Assemblies\Bolt.State.Editor.dll" />
     <None Include="Assets\Ludiq\Ludiq.Core\DotNetDocumentation\System.Management.Instrumentation.xml" />
@@ -164,9 +293,12 @@
     <None Include="Assets\Ludiq\Ludiq.Core\DotNetDocumentation\System.ServiceProcess.xml" />
     <None Include="Assets\Ludiq\Assemblies\Bolt.Flow.Runtime.xml" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
+    <None Include="Assets\TouchScript\Modules\TUIO\Libraries\TUIOsharp.dll" />
     <None Include="Assets\Ludiq\Assemblies\YamlDotNet.xml" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\TouchScript\Shaders\Cursor.shader" />
     <None Include="Assets\Ludiq\Ludiq.Core\DotNetDocumentation\System.EnterpriseServices.xml" />
+    <None Include="Assets\TouchScript\Shaders\DebugMultiplyDepthTest.shader" />
     <None Include="Assets\Ludiq\Ludiq.Core\DotNetDocumentation\System.IdentityModel.xml" />
     <None Include="Assets\Ludiq\Ludiq.Core\DotNetDocumentation\Microsoft.VisualC.STLCLR.xml" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
@@ -194,6 +326,7 @@
     <None Include="Assets\Ludiq\Ludiq.Core\DotNetDocumentation\System.DirectoryServices.AccountManagement.xml" />
     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
     <None Include="Assets\Ludiq\Ludiq.Core\DotNetDocumentation\System.Runtime.Serialization.Formatters.Soap.xml" />
+    <None Include="Assets\TouchScript\Plugins\WindowsTouch\x64\WindowsTouch.dll" />
     <None Include="Assets\Ludiq\Ludiq.Core\DotNetDocumentation\System.Data.Entity.xml" />
     <None Include="Assets\Ludiq\Ludiq.Core\DotNetDocumentation\System.ComponentModel.DataAnnotations.xml" />
     <None Include="Assets\Ludiq\Ludiq.Core\DotNetDocumentation\System.Web.Abstractions.xml" />
@@ -203,6 +336,7 @@
     <None Include="Assets\Ludiq\Bolt\LICENSES.txt" />
     <None Include="Assets\Ludiq\Ludiq.Core\DotNetDocumentation\System.Net.xml" />
     <None Include="Assets\Ludiq\Ludiq.Core\DotNetDocumentation\System.Data.SqlXml.xml" />
+    <None Include="Assets\TouchScript\Shaders\DebugMultiplyNoDepthTest.shader" />
     <None Include="Assets\Ludiq\Ludiq.Core\DotNetDocumentation\System.xml" />
     <None Include="Assets\Ludiq\Ludiq.Core\DotNetDocumentation\System.Windows.Presentation.xml" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
@@ -237,12 +371,6 @@
     </Reference>
     <Reference Include="UnityEngine.ClothModule">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.18f1\Editor\Data\Managed\UnityEngine\UnityEngine.ClothModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.ClusterInputModule">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.18f1\Editor\Data\Managed\UnityEngine\UnityEngine.ClusterInputModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.ClusterRendererModule">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.18f1\Editor\Data\Managed\UnityEngine\UnityEngine.ClusterRendererModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.18f1\Editor\Data\Managed\UnityEngine\UnityEngine.CoreModule.dll</HintPath>
@@ -397,9 +525,6 @@
     <Reference Include="UnityEngine.VideoModule">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.18f1\Editor\Data\Managed\UnityEngine\UnityEngine.VideoModule.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.VirtualTexturingModule">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.18f1\Editor\Data\Managed\UnityEngine\UnityEngine.VirtualTexturingModule.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.WindModule">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.18f1\Editor\Data\Managed\UnityEngine\UnityEngine.WindModule.dll</HintPath>
     </Reference>
@@ -483,6 +608,18 @@
     </Reference>
     <Reference Include="SonicBloom.Koreo">
       <HintPath>Assets\Plugins\Koreographer\Unity Editor\SonicBloom.Koreo.dll</HintPath>
+    </Reference>
+    <Reference Include="TUIOsharp">
+      <HintPath>Assets\TouchScript\Modules\TUIO\Libraries\TUIOsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="OSCsharp">
+      <HintPath>Assets\TouchScript\Modules\TUIO\Libraries\OSCsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.18f1\Editor\Data\PlaybackEngines\iOSSupport\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Common">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.18f1\Editor\Data\PlaybackEngines\iOSSupport\UnityEditor.iOS.Extensions.Common.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.18f1\Editor\Data\NetStandard\ref\2.0.0\netstandard.dll</HintPath>
@@ -871,6 +1008,9 @@
     <Reference Include="UnityEditor.UI">
       <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.InputSystem">
+      <HintPath>Library\ScriptAssemblies\Unity.InputSystem.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Rider.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
     </Reference>
@@ -912,6 +1052,9 @@
     </Reference>
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.DeviceSimulator.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.DeviceSimulator.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Mathematics.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>

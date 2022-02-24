@@ -24,6 +24,12 @@ public class Note : MonoBehaviour
 
     public int hitOffset;
 
+    public AudioClip HitSound;
+
+    public AudioSource SfxManager;
+
+    public bool noteInteract = true;
+
 
     // Start is called before the first frame update
     void Start()
@@ -79,6 +85,7 @@ public class Note : MonoBehaviour
     }
     public void OnHit()
     {
+        SfxManager.PlayOneShot(HitSound);
         ReturnToPool();
         
     }
@@ -125,9 +132,10 @@ public class Note : MonoBehaviour
         if (-7000<=hitOffset&&hitOffset<=-4411)
         {
             hitLevel = 0;
-            this.enabled = false;
+            //noteInteract = false;
             //CustomEvent.Trigger(gameObject, "Lost");
             Debug.Log("Lost");
+            this.enabled = false;
         }
         if (-4410 <= hitOffset && hitOffset <= -2206)
         {
@@ -161,7 +169,7 @@ public class Note : MonoBehaviour
             hitLevel = 0;
             //CustomEvent.Trigger(gameObject, "Lost");
             Debug.Log("Lost");
-            visuals_Note.material = visuals[4];
+            //noteInteract = false;
             this.enabled = false;
         }
 
