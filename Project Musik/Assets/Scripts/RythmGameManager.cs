@@ -3,13 +3,15 @@ using UnityEngine;
 using SonicBloom.Koreo;
 using Bolt;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class RythmGameManager : MonoBehaviour
 {
     [EventID]
     public string EventID;
 
-    public float InGameNoteSpeed;
+    [Range(0.5f,8f)]
+    [SerializeField]  public float InGameNoteSpeed;
     
     public float NoteSpeed;
 
@@ -24,13 +26,30 @@ public class RythmGameManager : MonoBehaviour
 
     public int TotalNotes;
 
+    public int pureFloat;
+
+    public int farFloat;
+
+    public int lostFloat;
+
+    public bool AutoPlay = false;
+
     public GameObject BoltLinkObject;
+
+    public Slider NoteOffsetSlider;
+
+    public Slider NoteSpeedSlider;
+
+
+    [Tooltip("如果感觉点击过晚，请增大；如果感觉点击过早，请减少。")]
+    [Range(-50,50)]
+    [SerializeField] public int NoteOffset_ms;
 
     public float HitWindowSize_unit
     { 
         get
         {
-            return NoteSpeed * (HitWindowSize_ms * 0.01f);
+            return 1/NoteSpeed * (HitWindowSize_ms * 0.01f);
         }
     }
     
@@ -89,9 +108,9 @@ public class RythmGameManager : MonoBehaviour
     void Start()
     {
 
-        //Multiply the note speed
-
-        NoteSpeed = InGameNoteSpeed * 5;
+        //Inital Sliders
+        NoteSpeedSlider.value = InGameNoteSpeed;
+        NoteOffsetSlider.value = NoteOffset_ms;
 
         InitializeLeadIn();
         for (int i = 0; i < noteLanes.Count; ++i)
@@ -136,6 +155,18 @@ public class RythmGameManager : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
+
+        //get sliders
+
+        InGameNoteSpeed = NoteSpeedSlider.value;
+        NoteOffset_ms = (int)NoteOffsetSlider.value;
+
+        //Multiply the note speed
+
+        NoteSpeed = InGameNoteSpeed * 10;
+
+        //CountDown
+
         if (TimeLeftToPlay > 0)
         {
             TimeLeftToPlay -= Time.unscaledDeltaTime;
@@ -230,5 +261,19 @@ public class RythmGameManager : MonoBehaviour
     public void ReloadScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    //Auto Plays
+
+    public void EAP()
+    {
+        AutoPlay = true;
+        Debug.Log("AP Enabled.");
+    }
+
+    public void DAP()
+    {
+        AutoPlay = false;
+        Debug.Log("AP Disabled.");
     }
 }

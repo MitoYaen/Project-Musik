@@ -56,35 +56,35 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\TouchScript\Editor\EditorUI\GUIElements.cs" />
-    <Compile Include="Assets\TouchScript\Editor\Gestures\TransformGestures\TransformGestureEditor.cs" />
-    <Compile Include="Assets\TouchScript\Editor\TouchManagerEditor.cs" />
-    <Compile Include="Assets\TouchScript\Editor\EditorResources.cs" />
-    <Compile Include="Assets\TouchScript\Editor\Debugging\PointerDebuggerWindow.cs" />
-    <Compile Include="Assets\TouchScript\Editor\Layers\FullscreenLayerEditor.cs" />
+    <Compile Include="Assets\TouchScript\Editor\Gestures\FlickGestureEditor.cs" />
     <Compile Include="Assets\TouchScript\Modules\TUIO\Editor\InputSources\TuioInputEditor.cs" />
-    <Compile Include="Assets\TouchScript\Editor\EditorUI\PagedList.cs" />
-    <Compile Include="Assets\TouchScript\Editor\TouchScriptSettingsWindow.cs" />
+    <Compile Include="Assets\TouchScript\Editor\Gestures\TransformGestures\Base\TwoPointTransformGestureBaseEditor.cs" />
+    <Compile Include="Assets\TouchScript\Editor\Utils\PropertyDrawers\ToggleLeftDrawer.cs" />
+    <Compile Include="Assets\TouchScript\Editor\Gestures\ReleaseGestureEditor.cs" />
+    <Compile Include="Assets\TouchScript\Editor\EditorResources.cs" />
     <Compile Include="Assets\TouchScript\Editor\InputSources\InputSourceEditor.cs" />
+    <Compile Include="Assets\TouchScript\Editor\TouchScriptSettingsWindow.cs" />
+    <Compile Include="Assets\TouchScript\Editor\Behaviors\TransformerEditor.cs" />
+    <Compile Include="Assets\TouchScript\Editor\Gestures\TransformGestures\PinnedTransformGestureEditor.cs" />
     <Compile Include="Assets\TouchScript\Editor\Gestures\TransformGestures\Base\OnePointTransformGestureBaseEditor.cs" />
     <Compile Include="Assets\TouchScript\Editor\Utils\PropertyDrawers\NullToggleDrawer.cs" />
-    <Compile Include="Assets\TouchScript\Editor\Gestures\TransformGestures\Base\TwoPointTransformGestureBaseEditor.cs" />
     <Compile Include="Assets\TouchScript\Editor\Behaviors\Cursors\CursorManagerEditor.cs" />
-    <Compile Include="Assets\TouchScript\Editor\Gestures\FlickGestureEditor.cs" />
-    <Compile Include="Assets\TouchScript\Editor\Gestures\MetaGestureEditor.cs" />
-    <Compile Include="Assets\TouchScript\Editor\Behaviors\TransformerEditor.cs" />
-    <Compile Include="Assets\TouchScript\Editor\Gestures\TransformGestures\Base\TransformGestureBaseEditor.cs" />
-    <Compile Include="Assets\TouchScript\Editor\Utils\PropertyDrawers\ToggleLeftDrawer.cs" />
-    <Compile Include="Assets\TouchScript\Editor\EditorUI\GUIUtils.cs" />
-    <Compile Include="Assets\TouchScript\Editor\Gestures\TransformGestures\PinnedTransformGestureEditor.cs" />
-    <Compile Include="Assets\TouchScript\Editor\Gestures\TransformGestures\ScreenTransformGestureEditor.cs" />
-    <Compile Include="Assets\TouchScript\Editor\Gestures\ReleaseGestureEditor.cs" />
-    <Compile Include="Assets\TouchScript\Editor\Gestures\LongPressGestureEditor.cs" />
+    <Compile Include="Assets\TouchScript\Editor\EditorUI\GUIElements.cs" />
+    <Compile Include="Assets\TouchScript\Editor\TouchManagerEditor.cs" />
     <Compile Include="Assets\TouchScript\Editor\Gestures\TapGestureEditor.cs" />
-    <Compile Include="Assets\TouchScript\Editor\Gestures\GestureEditor.cs" />
-    <Compile Include="Assets\TouchScript\Editor\Layers\StandardLayerEditor.cs" />
-    <Compile Include="Assets\TouchScript\Editor\InputSources\StandardInputEditor.cs" />
     <Compile Include="Assets\TouchScript\Editor\Gestures\PressGestureEditor.cs" />
+    <Compile Include="Assets\TouchScript\Editor\Layers\FullscreenLayerEditor.cs" />
+    <Compile Include="Assets\TouchScript\Editor\Gestures\GestureEditor.cs" />
+    <Compile Include="Assets\TouchScript\Editor\Gestures\TransformGestures\TransformGestureEditor.cs" />
+    <Compile Include="Assets\TouchScript\Editor\Debugging\PointerDebuggerWindow.cs" />
+    <Compile Include="Assets\TouchScript\Editor\EditorUI\PagedList.cs" />
+    <Compile Include="Assets\TouchScript\Editor\Gestures\TransformGestures\ScreenTransformGestureEditor.cs" />
+    <Compile Include="Assets\TouchScript\Editor\Gestures\LongPressGestureEditor.cs" />
+    <Compile Include="Assets\TouchScript\Editor\EditorUI\GUIUtils.cs" />
+    <Compile Include="Assets\TouchScript\Editor\Layers\StandardLayerEditor.cs" />
+    <Compile Include="Assets\TouchScript\Editor\Gestures\MetaGestureEditor.cs" />
+    <Compile Include="Assets\TouchScript\Editor\Gestures\TransformGestures\Base\TransformGestureBaseEditor.cs" />
+    <Compile Include="Assets\TouchScript\Editor\InputSources\StandardInputEditor.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -342,6 +342,9 @@
     <Reference Include="Bolt.Core.Runtime">
       <HintPath>Assets\Ludiq\Assemblies\Bolt.Core.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="TUIOsharp">
+      <HintPath>Assets\TouchScript\Modules\TUIO\Libraries\TUIOsharp.dll</HintPath>
+    </Reference>
     <Reference Include="Antlr3.Runtime">
       <HintPath>Assets\Ludiq\Assemblies\Antlr3.Runtime.dll</HintPath>
     </Reference>
@@ -390,17 +393,14 @@
     <Reference Include="Bolt.State.Runtime">
       <HintPath>Assets\Ludiq\Assemblies\Bolt.State.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="OSCsharp">
+      <HintPath>Assets\TouchScript\Modules\TUIO\Libraries\OSCsharp.dll</HintPath>
+    </Reference>
     <Reference Include="SonicBloom.Koreo">
       <HintPath>Assets\Plugins\Koreographer\Unity Editor\SonicBloom.Koreo.dll</HintPath>
     </Reference>
     <Reference Include="unityplastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.9.0\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
-    </Reference>
-    <Reference Include="TUIOsharp">
-      <HintPath>Assets\TouchScript\Modules\TUIO\Libraries\TUIOsharp.dll</HintPath>
-    </Reference>
-    <Reference Include="OSCsharp">
-      <HintPath>Assets\TouchScript\Modules\TUIO\Libraries\OSCsharp.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>Library\PackageCache\com.unity.ext.nunit@1.0.6\net35\unity-custom\nunit.framework.dll</HintPath>
@@ -870,6 +870,14 @@
     <ProjectReference Include="Assembly-CSharp.csproj">
       <Project>{614FECBF-ECA9-9385-DE70-86BAAAF9A7F2}</Project>
       <Name>Assembly-CSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="IngameDebugConsole.Editor.csproj">
+      <Project>{E8DAF42E-02D8-11A7-BC41-B84992481CCF}</Project>
+      <Name>IngameDebugConsole.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="IngameDebugConsole.Runtime.csproj">
+      <Project>{C4BF93D6-0D11-C1C2-6AB5-8A929F400CE0}</Project>
+      <Name>IngameDebugConsole.Runtime</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

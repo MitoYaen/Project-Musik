@@ -28,7 +28,8 @@ public class Note : MonoBehaviour
 
     public AudioSource SfxManager;
 
-    public bool noteInteract = true;
+    public int targetOffset;
+
 
 
     // Start is called before the first frame update
@@ -44,9 +45,23 @@ public class Note : MonoBehaviour
         GetHitOffset();
         if (transform.position.z <=laneController.targetBottomTrans.position.z)
         {
+
             gameController.ReturnNoteObjectToPool(this);
             ResetNote();
         }
+
+        //Needed to ask about null reference
+        if (gameController.AutoPlay && hitOffset > targetOffset)
+        {
+            laneController.CheckNoteHit();
+            ResetNote();
+        }
+        else
+        {
+            
+        }
+
+        
     }
 
     //Initialize
@@ -86,9 +101,8 @@ public class Note : MonoBehaviour
     public void OnHit()
     {
         visuals_Note.material = visuals[6];
-        SfxManager.PlayOneShot(HitSound);
         ReturnToPool();
-        
+
     }
 
     //
@@ -96,7 +110,7 @@ public class Note : MonoBehaviour
     {
         Vector3 pos = laneController.TargetPosition;
 
-        pos.z -= (gameController.DelayedSampleTime - trackedEvent.StartSample) / (float)gameController.SampleRate * gameController.NoteSpeed;
+        pos.z -= (gameController.DelayedSampleTime - (trackedEvent.StartSample + gameController.NoteOffset_ms * 0.01f * gameController.SampleRate)) / (float)gameController.SampleRate * gameController.NoteSpeed;
 
         transform.position = pos;
 
@@ -105,7 +119,7 @@ public class Note : MonoBehaviour
     void GetHitOffset()
     {
         int curTime = gameController.DelayedSampleTime;
-        int noteTime = trackedEvent.StartSample;
+        int noteTime = trackedEvent.StartSample + (int)(gameController.NoteOffset_ms * 0.001f * gameController.SampleRate);
         int hitWindow = gameController.HitWindowSampleWidth;
         hitOffset = hitWindow - Mathf.Abs(noteTime - curTime);
     }
@@ -130,47 +144,40 @@ public class Note : MonoBehaviour
     {
         int hitLevel = 0;
         visuals_Note.material = visuals[3];
-        if (-7000<=hitOffset&&hitOffset<=-4411)
+        if (targetOffset - (gameController.lostFloat * 0.001f * gameController.SampleRate) <= hitOffset&&hitOffset<= targetOffset - (gameController.farFloat * 0.001f * gameController.SampleRate))
         {
             hitLevel = 0;
-            //noteInteract = false;
-            //CustomEvent.Trigger(gameObject, "Lost");
-            Debug.Log("Lost");
+            Debug.Log("结果为 Lost, " + "误差为" + (int)((targetOffset - hitOffset) / 44.4) + "ms.");
             this.enabled = false;
         }
-        if (-4410 <= hitOffset && hitOffset <= -2206)
+        if (targetOffset - (gameController.farFloat * 0.001f * gameController.SampleRate) <= hitOffset && hitOffset <= targetOffset - (gameController.pureFloat * 0.001f * gameController.SampleRate))
         {
             hitLevel = 1;
-            //CustomEvent.Trigger(gameObject, "FarEarly");
-            Debug.Log("FarEarly");
+            Debug.Log("结果为 FarEarly, " + "误差为" + (int)((targetOffset - hitOffset) / 44.4) + "ms.");
+            SfxManager.PlayOneShot(HitSound);
             visuals_Note.material = visuals[2];
             GameObject.Instantiate(PS_Far,gameObject.transform.position,Quaternion.identity);
-            //gameController.CurScore += gameController.PerScore / 2;
         }
-        if (-2205<= hitOffset && hitOffset <= 2205)
+        if (targetOffset - (gameController.pureFloat * 0.001f * gameController.SampleRate) <= hitOffset && hitOffset <= targetOffset + (gameController.pureFloat * 0.001f * gameController.SampleRate))
         {
             hitLevel = 2;
-            //CustomEvent.Trigger(gameObject, "Pure");
-            Debug.Log("Pure");
+            Debug.Log("结果为 Pure, " + "误差为" + (int)((targetOffset - hitOffset) / 44.4) + "ms.");
+            SfxManager.PlayOneShot(HitSound);
             visuals_Note.material = visuals[2];
             GameObject.Instantiate(PS_Pure, gameObject.transform.position, Quaternion.identity);
-            //gameController.CurScore += gameController.PerScore;
         }
-        if (2205<=hitOffset && hitOffset <= 4410)
+        if (targetOffset + (gameController.pureFloat * 0.001f * gameController.SampleRate) <= hitOffset && hitOffset <= targetOffset + (gameController.farFloat * 0.001f * gameController.SampleRate))
         {
             hitLevel = 3;
-            //CustomEvent.Trigger(gameObject, "FarLate");
-            Debug.Log("FarLate");
+            Debug.Log("结果为 FarLate, " + "误差为" + (int)((targetOffset - hitOffset) / 44.4) + "ms.");
+            SfxManager.PlayOneShot(HitSound);
             visuals_Note.material = visuals[2];
             GameObject.Instantiate(PS_Far, gameObject.transform.position, Quaternion.identity);
-            //gameController.CurScore += gameController.PerScore / 2;
         }
-        if (4411<=hitOffset && hitOffset <= 7000)
+        if (targetOffset + (gameController.farFloat * 0.001f * gameController.SampleRate) <= hitOffset && hitOffset <= targetOffset + (gameController.lostFloat * 0.001f * gameController.SampleRate))
         {
             hitLevel = 0;
-            //CustomEvent.Trigger(gameObject, "Lost");
-            Debug.Log("Lost");
-            //noteInteract = false;
+            Debug.Log("结果为 Lost, " + "误差为" + Mathf.RoundToInt(targetOffset - hitOffset) / 44.4 + "ms.");
             this.enabled = false;
         }
 

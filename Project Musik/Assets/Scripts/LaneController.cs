@@ -55,8 +55,11 @@ public class LaneController : MonoBehaviour
         //Clear unused notes
         while (trackedNotes.Count>0&&trackedNotes.Peek().IsNoteMissed())
         {
+            Debug.Log("½á¹ûÎª Lost, " + "Â©¼ü¡£");
             trackedNotes.Dequeue();
+
         }
+
 
         //Check the Spawning of the new notes
         CheckSpawnNext();
@@ -74,6 +77,8 @@ public class LaneController : MonoBehaviour
         {
             //Check LongNotesEnd
         }    
+
+
         
     }
 
@@ -146,7 +151,7 @@ public class LaneController : MonoBehaviour
         if (trackedNotes.Count>0)
         {
             Note noteObject = trackedNotes.Peek();
-            if (noteObject.hitOffset>-7000)
+            if (noteObject.hitOffset > noteObject.targetOffset - (GameController.lostFloat * 0.001f * GameController.SampleRate))
             {
                 trackedNotes.Dequeue();
                 int hitLevel = noteObject.IsNoteHittable();

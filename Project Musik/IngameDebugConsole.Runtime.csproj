@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>latest</LangVersion>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -53,21 +53,24 @@
     <UnityVersion>2020.3.18f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\ConsoleMethodAttribute.cs" />
-    <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\CircularBuffer.cs" />
+    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\DebugLogIndexList.cs" />
+    <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\Commands\PlayerPrefsCommands.cs" />
+    <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\DebugsOnScrollListener.cs" />
+    <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\DebugLogItem.cs" />
+    <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\DebugLogPopup.cs" />
     <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\DebugLogResizeListener.cs" />
     <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\DebugLogConsole.cs" />
     <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\DebugLogRecycledListView.cs" />
-    <Compile Include="Assets\Plugins\IngameDebugConsole\Android\DebugLogLogcatListener.cs" />
-    <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\DebugLogPopup.cs" />
+    <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\CircularBuffer.cs" />
     <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\DebugLogEntry.cs" />
+    <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\ConsoleMethodAttribute.cs" />
     <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\DebugLogItemCopyWebGL.cs" />
-    <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\DebugsOnScrollListener.cs" />
-    <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\DebugLogIndexList.cs" />
-    <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\Commands\SceneCommands.cs" />
     <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\Commands\TimeCommands.cs" />
-    <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\DebugLogItem.cs" />
-    <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\Commands\PlayerPrefsCommands.cs" />
+    <Compile Include="Assets\Plugins\IngameDebugConsole\Android\DebugLogLogcatListener.cs" />
+    <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\Commands\SceneCommands.cs" />
     <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\DebugLogManager.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -321,6 +324,9 @@
     <Reference Include="Bolt.Core.Runtime">
       <HintPath>Assets\Ludiq\Assemblies\Bolt.Core.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="TUIOsharp">
+      <HintPath>Assets\TouchScript\Modules\TUIO\Libraries\TUIOsharp.dll</HintPath>
+    </Reference>
     <Reference Include="Antlr3.Runtime">
       <HintPath>Assets\Ludiq\Assemblies\Antlr3.Runtime.dll</HintPath>
     </Reference>
@@ -369,17 +375,14 @@
     <Reference Include="Bolt.State.Runtime">
       <HintPath>Assets\Ludiq\Assemblies\Bolt.State.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="OSCsharp">
+      <HintPath>Assets\TouchScript\Modules\TUIO\Libraries\OSCsharp.dll</HintPath>
+    </Reference>
     <Reference Include="SonicBloom.Koreo">
       <HintPath>Assets\Plugins\Koreographer\Unity Editor\SonicBloom.Koreo.dll</HintPath>
     </Reference>
     <Reference Include="unityplastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.9.0\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
-    </Reference>
-    <Reference Include="TUIOsharp">
-      <HintPath>Assets\TouchScript\Modules\TUIO\Libraries\TUIOsharp.dll</HintPath>
-    </Reference>
-    <Reference Include="OSCsharp">
-      <HintPath>Assets\TouchScript\Modules\TUIO\Libraries\OSCsharp.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.18f1\Editor\Data\PlaybackEngines\iOSSupport\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
