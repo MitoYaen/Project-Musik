@@ -118,6 +118,7 @@ public class LaneController : MonoBehaviour
         int sampleToTarget = GetSpawnSampleOffset();
 
         int currentTime = GameController.DelayedSampleTime;
+        //int currentTime = GameController.DelayedSampleTime + (int)(GameController.NoteOffset_ms * 0.001f * GameController.SampleRate);
 
         while (pendingEventIdx < laneEvents.Count
             && laneEvents[pendingEventIdx].StartSample < currentTime + sampleToTarget)
@@ -159,6 +160,7 @@ public class LaneController : MonoBehaviour
                 {
                     //Far(Early)
                     GameController.FarScoreUpdate();
+                    
                 }
                 if (hitLevel == 2)
                 {
@@ -178,7 +180,7 @@ public class LaneController : MonoBehaviour
             }
             else
             {
-
+                //Debug.Log("目前偏移量为 " + noteObject.hitOffset + "ms.");
             }
 
         }

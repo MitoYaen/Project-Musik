@@ -111,6 +111,7 @@ public class Note : MonoBehaviour
         Vector3 pos = laneController.TargetPosition;
 
         pos.z -= (gameController.DelayedSampleTime - (trackedEvent.StartSample + gameController.NoteOffset_ms * 0.01f * gameController.SampleRate)) / (float)gameController.SampleRate * gameController.NoteSpeed;
+        //pos.z -= (gameController.DelayedSampleTime - trackedEvent.StartSample) / (float)gameController.SampleRate * gameController.NoteSpeed;
 
         transform.position = pos;
 
@@ -120,6 +121,7 @@ public class Note : MonoBehaviour
     {
         int curTime = gameController.DelayedSampleTime;
         int noteTime = trackedEvent.StartSample + (int)(gameController.NoteOffset_ms * 0.001f * gameController.SampleRate);
+        //int noteTime = trackedEvent.StartSample + gameController.SampleRate;
         int hitWindow = gameController.HitWindowSampleWidth;
         hitOffset = hitWindow - Mathf.Abs(noteTime - curTime);
     }
