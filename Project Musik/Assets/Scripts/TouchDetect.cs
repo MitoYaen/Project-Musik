@@ -30,7 +30,7 @@ public class TouchDetect : MonoBehaviour, IPointerDownHandler, IPointerClickHand
     {
         Debug.Log("Mouse Down: " + eventData.pointerCurrentRaycast.gameObject.name);
         LinkedLane.CheckNoteHit();
-        LinkedLane.VisualPressLane();
+        //LinkedLane.VisualPressLane();
 
     }
 
@@ -47,6 +47,6 @@ public class TouchDetect : MonoBehaviour, IPointerDownHandler, IPointerClickHand
     public void OnPointerUp(PointerEventData eventData)
     {
         Debug.Log("Mouse Release");
-        LinkedLane.VisualReleaseLane();
+        //LinkedLane.VisualReleaseLane();
     }
 }

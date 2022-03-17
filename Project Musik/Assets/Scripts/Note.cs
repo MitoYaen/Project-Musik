@@ -39,7 +39,7 @@ public class Note : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         UpdatePosition();
         GetHitOffset();
@@ -48,17 +48,17 @@ public class Note : MonoBehaviour
 
             gameController.ReturnNoteObjectToPool(this);
             ResetNote();
+            return;
         }
-
         //Needed to ask about null reference
-        if (gameController.AutoPlay && hitOffset > targetOffset)
+        if(gameController.AutoPlay && hitOffset >= targetOffset)
         {
             laneController.CheckNoteHit();
             ResetNote();
         }
         else
         {
-            
+
         }
 
         

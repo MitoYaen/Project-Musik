@@ -187,18 +187,18 @@ public class LaneController : MonoBehaviour
     }
 
     //Visual FeedBack When Pressed
-    public void VisualPressLane()
-    {
-        VisualLane.DOMoveY(-10.65f, 0.2f, false);
-        CamCatcher.transform.DOMoveY(-5.6f, 0.2f, false);
-    }
+    //public void VisualPressLane()
+    //{
+        //VisualLane.DOMoveY(-10.65f, 0.2f, false);
+        //CamCatcher.transform.DOMoveY(-5.6f, 0.2f, false);
+    //}
 
     //Visual FeedBack When Released
-    public void VisualReleaseLane()
-    {
-        VisualLane.DOMoveY(-10.5f, 0.2f, false);
-        CamCatcher.transform.DOMoveY(-5.2f, 0.2f, false);
-    }
+    //public void VisualReleaseLane()
+    //{
+        //VisualLane.DOMoveY(-10.5f, 0.2f, false);
+        //CamCatcher.transform.DOMoveY(-5.2f, 0.2f, false);
+    //}
 
 
 }
