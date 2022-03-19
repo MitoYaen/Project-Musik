@@ -216,7 +216,7 @@ public class RythmGameManager : MonoBehaviour
     {
         Note retObj;
 
-        if (noteObjectPool.Count>0)
+        if (noteObjectPool.Count>0) 
         {
             retObj = noteObjectPool.Pop();
         }

@@ -4,15 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Activator
-  - Cleaner
-  - Note
-  - Late
-  - Early
-  - Miss
-  - T1
   - Debug
-  - CamCatcher
+  - Note
   layers:
   - Default
   - TransparentFX

@@ -14,10 +14,6 @@ public class LaneController : MonoBehaviour
     [Tooltip("音轨所对应事件编号")]
     public int laneID;
 
-    public Transform VisualLane;
-
-    public GameObject CamCatcher;
-
     //the list of all the events in the lane
     List<KoreographyEvent> laneEvents = new List<KoreographyEvent>();
 
@@ -42,11 +38,15 @@ public class LaneController : MonoBehaviour
     public Transform targetTopTrans;
     public Transform targetBottomTrans;
 
+    //Lane Status
+    public bool Flicking;    //Check Flick Status
+    public bool Holding;    //Check Hold Status
+    //Lane Status
+
     // Start is called before the first frame update
     void Start()
     {
         DOTween.Init(true, true, LogBehaviour.Default);
-        CamCatcher = GameObject.FindGameObjectWithTag("CamCatcher");
     }
 
     // Update is called once per frame
@@ -107,10 +107,17 @@ public class LaneController : MonoBehaviour
         //Spawn pos and target pos
         float spawnDistToTarget = targetTopTrans.position.z - transform.position.z;
 
-        //Time of arrival
-        float spawnPosToTargetTime = spawnDistToTarget / GameController.NoteSpeed;
-
-        return (int)spawnPosToTargetTime * GameController.SampleRate;
+        if (GameController != null)
+        {
+            //Time of arrival
+            float spawnPosToTargetTime = spawnDistToTarget / GameController.NoteSpeed;
+            return (int)spawnPosToTargetTime * GameController.SampleRate;
+        }
+        else
+        {
+            Debug.Log("no GC.");
+            return 0;
+        }
     }
     //to check if needed to spawn new note when reach certain event
     void CheckSpawnNext()
@@ -125,21 +132,101 @@ public class LaneController : MonoBehaviour
         {
             KoreographyEvent evt = laneEvents[pendingEventIdx];
             int noteNum = evt.GetIntValue();
-            Note newObj = GameController.GetFreshNoteObject();
+            int AbsNoteNum = evt.GetIntValue();
+            Note newObj = GameController.GetFreshNoteObject(AbsNoteNum);
             bool isLongNoteStart = false;
             bool isLongNoteEnd = false;
-            if (noteNum > 4)
+            bool isFlick = false;
+            bool isBig = false;
+            bool isSide = false;
+            if (noteNum >16)
             {
-                isLongNoteStart = true;
-                noteNum = noteNum - 4;
-                if (noteNum > 4)
+                switch (noteNum){
+                    //17-18 Big Hold Start
+                    case 17:
+                        isBig = true;
+                        isLongNoteStart = true;
+                        noteNum = 9;
+                        break;
+                    case 18:
+                        isBig = true;
+                        isLongNoteStart = true;
+                        noteNum = 10;
+                        break;
+                    //19-20 Big Hold End
+                    case 19:
+                        isBig = true;
+                        isLongNoteEnd = true;
+                        noteNum = 9;
+                        break;
+                    case 20:
+                        isBig = true;
+                        isLongNoteEnd = true;
+                        noteNum = 10;
+                        break;
+                    //21-22 Big Flick;
+                    case 21:
+                        isBig = true;
+                        isFlick = true;
+                        noteNum = 9;
+                        break;
+                    case 22:
+                        isBig = true;
+                        isFlick = true;
+                        noteNum = 10;
+                        break;
+                    default:
+                        break;
+                }
+                /*if (noteNum == 17 || noteNum == 18)
                 {
-                    isLongNoteEnd = true;
+                    isLongNoteStart = true;
+                    switch (noteNum)
+                    {
+                        case 17:
+                            noteNum = 9;
+                            break;
+                    }
+                    
+                }
+                if (noteNum == 19 || noteNum == 20)
+                {
                     isLongNoteStart = false;
-                    noteNum = noteNum - 4;
+                    isLongNoteEnd = true;
+                }
+                if (noteNum == 21 || noteNum == 22)
+                {
+                    isFlick = true;
+                }*/
+            }
+            else
+            {
+                if (isBig == false)
+                {
+                    if (noteNum > 4)
+                    {
+                        //Hold In side(on)?
+                        isLongNoteStart = true;
+                        isSide = true;
+
+                        if (noteNum > 8)
+                        {
+                            //Hold In side(off)?
+                            isLongNoteEnd = true;
+                            isLongNoteStart = false;
+                            noteNum = noteNum - 4;
+                            if (noteNum > 8)
+                            {
+                                isLongNoteEnd = false;
+                                isFlick = true;
+                                noteNum = noteNum - 4;
+                            }
+                        }
+                    }
+                    Debug.Log("Current Lane " + noteNum);
                 }
             }
-            newObj.Initialize(evt, noteNum, this, GameController, isLongNoteStart, isLongNoteEnd);
+            newObj.Initialize(evt, noteNum, AbsNoteNum, this, GameController, isLongNoteStart, isLongNoteEnd, isFlick, isBig,isSide);
             trackedNotes.Enqueue(newObj);
             pendingEventIdx++;
         }
@@ -186,19 +273,22 @@ public class LaneController : MonoBehaviour
         }
     }
 
-    //Visual FeedBack When Pressed
-    //public void VisualPressLane()
-    //{
-        //VisualLane.DOMoveY(-10.65f, 0.2f, false);
-        //CamCatcher.transform.DOMoveY(-5.6f, 0.2f, false);
-    //}
+    public void FlickDetect() 
+    {
+        Debug.Log("Flick Detected in " + laneID);
+        Flicking = true;
+    }
 
-    //Visual FeedBack When Released
-    //public void VisualReleaseLane()
-    //{
-        //VisualLane.DOMoveY(-10.5f, 0.2f, false);
-        //CamCatcher.transform.DOMoveY(-5.2f, 0.2f, false);
-    //}
+    public void FlickDone()
+    {
+        Debug.Log("Flick Done in" + laneID);
+        Flicking = false;
+    }
+    public void HoldDetect()
+    {
+        Debug.Log("Hold Detected in " + laneID);
+        Holding = true;
+    }
 
 
 }
