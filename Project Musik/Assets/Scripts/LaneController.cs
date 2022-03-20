@@ -55,9 +55,9 @@ public class LaneController : MonoBehaviour
         //Clear unused notes
         while (trackedNotes.Count>0&&trackedNotes.Peek().IsNoteMissed())
         {
-            Debug.Log("结果为 Lost, " + "漏键。");
+            //Debug.Log("结果为 Lost, " + "漏键。");
             trackedNotes.Dequeue();
-
+            //Questionable Code
         }
 
 
@@ -133,12 +133,11 @@ public class LaneController : MonoBehaviour
             KoreographyEvent evt = laneEvents[pendingEventIdx];
             int noteNum = evt.GetIntValue();
             int AbsNoteNum = evt.GetIntValue();
-            Note newObj = GameController.GetFreshNoteObject(AbsNoteNum);
+            Note newObj = GameController.GetFreshNoteObject(AbsNoteNum, laneID);
             bool isLongNoteStart = false;
             bool isLongNoteEnd = false;
             bool isFlick = false;
             bool isBig = false;
-            bool isSide = false;
             if (noteNum >16)
             {
                 switch (noteNum){
@@ -178,26 +177,6 @@ public class LaneController : MonoBehaviour
                     default:
                         break;
                 }
-                /*if (noteNum == 17 || noteNum == 18)
-                {
-                    isLongNoteStart = true;
-                    switch (noteNum)
-                    {
-                        case 17:
-                            noteNum = 9;
-                            break;
-                    }
-                    
-                }
-                if (noteNum == 19 || noteNum == 20)
-                {
-                    isLongNoteStart = false;
-                    isLongNoteEnd = true;
-                }
-                if (noteNum == 21 || noteNum == 22)
-                {
-                    isFlick = true;
-                }*/
             }
             else
             {
@@ -207,7 +186,6 @@ public class LaneController : MonoBehaviour
                     {
                         //Hold In side(on)?
                         isLongNoteStart = true;
-                        isSide = true;
 
                         if (noteNum > 8)
                         {
@@ -223,10 +201,10 @@ public class LaneController : MonoBehaviour
                             }
                         }
                     }
-                    Debug.Log("Current Lane " + noteNum);
+                    
                 }
             }
-            newObj.Initialize(evt, noteNum, AbsNoteNum, this, GameController, isLongNoteStart, isLongNoteEnd, isFlick, isBig,isSide);
+            newObj.Initialize(evt, noteNum, AbsNoteNum, this, GameController, isLongNoteStart, isLongNoteEnd, isFlick, isBig);
             trackedNotes.Enqueue(newObj);
             pendingEventIdx++;
         }
@@ -267,7 +245,7 @@ public class LaneController : MonoBehaviour
             }
             else
             {
-                //Debug.Log("目前偏移量为 " + noteObject.hitOffset + "ms.");
+                Debug.Log("目前偏移量为 " + noteObject.hitOffset + "ms.");
             }
 
         }

@@ -4,6 +4,7 @@ using SonicBloom.Koreo;
 using Bolt;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Collections;
 
 public class RythmGameManager : MonoBehaviour
 {
@@ -72,6 +73,8 @@ public class RythmGameManager : MonoBehaviour
     }
 
     Stack<Note> noteObjectPool = new Stack<Note>();
+    Stack<Note> SidenoteObjectPool = new Stack<Note>();
+    Stack<Note> BignoteObjectPool = new Stack<Note>();
 
     //Quote
 
@@ -84,6 +87,8 @@ public class RythmGameManager : MonoBehaviour
     //Prefab
 
     public Note noteObject;
+    public Note noteObjectSide;
+    public Note noteObjectBig;
 
 
 
@@ -130,13 +135,46 @@ public class RythmGameManager : MonoBehaviour
         {
             KoreographyEvent evt = rawEvents[i];
             int noteID = evt.GetIntValue();
+            bool skip = false;
             for (int j = 0; j < noteLanes.Count; ++j)
             {
                 LaneController lane = noteLanes[j];
-                if (noteID > 4)
+                if (noteID > 16)
+                {
+                    switch (noteID)
+                    {
+                        case 17:
+                            noteID = 9; //Big Left Hold Start
+                            skip = true;
+                            break;
+                        case 18:
+                            noteID = 10; //Big Right Hold Start
+                            skip = true;
+                            break;
+                        case 19:
+                            noteID = 9; //Big Left Hold End
+                            skip = true;
+                            break;
+                        case 20:
+                            noteID = 10; //Big Right Hold End
+                            skip = true;
+                            break;
+                        case 21:
+                            noteID = 9; //Big Left Flick Start
+                            skip = true;
+                            break;
+                        case 22:
+                            noteID = 10; //Big Right Flick Start
+                            skip = true;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                else if (noteID > 8 && noteID < 17 && !skip)
                 {
                     noteID = noteID - 4;
-                    if (noteID > 4)
+                    if (noteID > 8)
                     {
                         noteID = noteID - 4;
                     }
@@ -185,6 +223,7 @@ public class RythmGameManager : MonoBehaviour
         
         //Update the scores to Bolt
         Variables.Object(BoltLinkObject).Set("Score_Ori", CurScore);
+#if UNITY_EDITOR
 
         //Cheats to debug
         if (Input.GetKeyDown(KeyCode.K))
@@ -192,6 +231,7 @@ public class RythmGameManager : MonoBehaviour
             CurScore += 3000;
             Debug.Log("The score adds 3000, now is " + CurScore);
         }
+#endif
 
     }
     /// <summary>
@@ -212,18 +252,47 @@ public class RythmGameManager : MonoBehaviour
 
 
     //pick up the object from the pool
-    public Note GetFreshNoteObject()
+    public Note GetFreshNoteObject(int NoteIDref, int LaneID)
     {
         Note retObj;
 
         if (noteObjectPool.Count>0) 
         {
+            //Debug.Log("note spawned as" + NoteIDref + ", in Lane" + LaneID);
             retObj = noteObjectPool.Pop();
         }
+        //Questionable Code
+        
+        if (SidenoteObjectPool.Count > 0)
+        {
+            Debug.Log("Side note spawned as" + NoteIDref + ", in Lane" + LaneID);
+            retObj = SidenoteObjectPool.Pop();
+        }
+        if (BignoteObjectPool.Count > 0)
+        {
+            Debug.Log("Big note spawned as" + NoteIDref + ", in Lane" + LaneID);
+            retObj = BignoteObjectPool.Pop();
+        }
+        //Questionable Code 
         else
         {
             //Origin of the resource
-            retObj = Instantiate(noteObject);
+            if (NoteIDref <= 4)
+            {
+                //Debug.Log("side note spawned as" + NoteIDref);
+                retObj = Instantiate(noteObject);
+            }
+            else if (NoteIDref > 4 && NoteIDref <= 16)
+            {
+                Debug.Log("side note spawned as" + NoteIDref + ", in Lane" + LaneID);
+                retObj = Instantiate(noteObjectSide);
+            }
+            else
+            {
+                Debug.Log("Big NOTE SPAWNED AS" + NoteIDref + ", in Lane" + LaneID);
+                retObj = Instantiate(noteObjectBig);
+            }
+            
         }
 
         retObj.gameObject.SetActive(true);
@@ -242,9 +311,20 @@ public class RythmGameManager : MonoBehaviour
             obj.enabled = false;
             obj.gameObject.SetActive(false);
             noteObjectPool.Push(obj);
+            /*if (obj.Type > 1 && obj.Type < 5 )
+            {
+                SidenoteObjectPool.Push(obj);
+            }
+            if (obj.Type >= 5)
+            {
+                BignoteObjectPool.Push(obj);
+            }
+            else
+            {
+                noteObjectPool.Push(obj);
+            }*/
         }
     }
-
     //Score Update (Pure)
     public void PureScoreUpdate()
     {
