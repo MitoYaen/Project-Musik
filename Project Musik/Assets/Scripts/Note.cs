@@ -62,9 +62,13 @@ public class Note : MonoBehaviour
     {
         UpdatePosition();
         GetHitOffset();
+        while (laneController.trackedNotes.Peek().isLongNoteEnd)
+        {
+            
+        }
+
         if (transform.position.z <=laneController.targetBottomTrans.position.z)
         {
-
             gameController.ReturnNoteObjectToPool(this);
             ResetNote();
             return;
@@ -159,7 +163,7 @@ public class Note : MonoBehaviour
         }
         else
         {
-            
+           
         }
 
 

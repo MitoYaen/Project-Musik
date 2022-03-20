@@ -18,7 +18,7 @@ public class LaneController : MonoBehaviour
     List<KoreographyEvent> laneEvents = new List<KoreographyEvent>();
 
     //the queue of all active note in current lane
-    Queue<Note> trackedNotes = new Queue<Note>();
+    public Queue<Note> trackedNotes = new Queue<Note>();
 
     //Detect the index of the next-spawn note in the lane
     int pendingEventIdx = 0;
@@ -217,9 +217,10 @@ public class LaneController : MonoBehaviour
         if (trackedNotes.Count>0)
         {
             Note noteObject = trackedNotes.Peek();
+            //Check if the note is further than the detect distance
             if (noteObject.hitOffset > noteObject.targetOffset - (GameController.lostFloat * 0.001f * GameController.SampleRate))
             {
-                trackedNotes.Dequeue();
+                trackedNotes.Dequeue(); 
                 int hitLevel = noteObject.IsNoteHittable();
                 if (hitLevel == 1)
                 {
@@ -266,6 +267,11 @@ public class LaneController : MonoBehaviour
     {
         Debug.Log("Hold Detected in " + laneID);
         Holding = true;
+    }
+    public void Release()
+    {
+        Debug.Log("Released in " + laneID);
+        Holding = false;
     }
 
 
