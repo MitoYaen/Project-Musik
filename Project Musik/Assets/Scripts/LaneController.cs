@@ -1,7 +1,7 @@
+using DG.Tweening;
+using SonicBloom.Koreo;
 using System.Collections.Generic;
 using UnityEngine;
-using SonicBloom.Koreo;
-using DG.Tweening;
 
 public class LaneController : MonoBehaviour
 {
@@ -43,6 +43,11 @@ public class LaneController : MonoBehaviour
     public bool Holding;    //Check Hold Status
     //Lane Status
 
+    //Get Last Hold-Start Note
+    public Note LastHoldStartNote;
+    //Get Last Hold-End Note
+    public Note LastHoldEndNote;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -63,7 +68,9 @@ public class LaneController : MonoBehaviour
 
         //Check the Spawning of the new notes
         CheckSpawnNext();
-        //
+
+
+        //KeyBoardInputDetect
         if (Input.GetKeyDown(keyboardButton))
         {
             CheckNoteHit();
@@ -182,28 +189,44 @@ public class LaneController : MonoBehaviour
             {
                 if (isBig == false)
                 {
-                    if (noteNum > 4)
+                    if (noteNum > 4 && noteNum <= 8)
                     {
-                        //Hold In side(on)?
+                        //Hold In side(on)? (5-8)
+                        Debug.Log("LongNoteStart Spawned");
                         isLongNoteStart = true;
-
-                        if (noteNum > 8)
+                        LastHoldStartNote = newObj;
+                    }
+                    else if (noteNum > 8 && noteNum <= 12)
+                    {
+                        if (LastHoldStartNote != null)
                         {
-                            //Hold In side(off)?
+                            //Hold In side(off)? (9-12)
                             isLongNoteEnd = true;
                             isLongNoteStart = false;
+                            Debug.Log("LongNoteEnd Spawned");
+                            LastHoldStartNote.HoldLineFront.SetActive(true); //Spawn the line if the end exists
+                            LastHoldStartNote.HoldLineBack.SetActive(true);
+                            LastHoldEndNote = newObj;
+                            LastHoldStartNote.RelatedEndNote = LastHoldEndNote;
+                            LastHoldStartNote = newObj.RelatedStartNote;
                             noteNum = noteNum - 4;
-                            if (noteNum > 8)
-                            {
-                                isLongNoteEnd = false;
-                                isFlick = true;
-                                noteNum = noteNum - 4;
-                            }
                         }
+
                     }
+                    else if (noteNum > 12)
+                    {
+
+                         //Flick? (13-16)
+                         isLongNoteEnd = false;
+                         isFlick = true;
+                         noteNum = noteNum - 8;
+
+                    }
+                    
                     
                 }
             }
+            
             newObj.Initialize(evt, noteNum, AbsNoteNum, this, GameController, isLongNoteStart, isLongNoteEnd, isFlick, isBig);
             trackedNotes.Enqueue(newObj);
             pendingEventIdx++;

@@ -265,12 +265,12 @@ public class RythmGameManager : MonoBehaviour
         
         if (SidenoteObjectPool.Count > 0)
         {
-            Debug.Log("Side note spawned as" + NoteIDref + ", in Lane" + LaneID);
+            //Debug.Log("Side note spawned as" + NoteIDref + ", in Lane" + LaneID);
             retObj = SidenoteObjectPool.Pop();
         }
         if (BignoteObjectPool.Count > 0)
         {
-            Debug.Log("Big note spawned as" + NoteIDref + ", in Lane" + LaneID);
+            //Debug.Log("Big note spawned as" + NoteIDref + ", in Lane" + LaneID);
             retObj = BignoteObjectPool.Pop();
         }
         //Questionable Code 
@@ -284,12 +284,12 @@ public class RythmGameManager : MonoBehaviour
             }
             else if (NoteIDref > 4 && NoteIDref <= 16)
             {
-                Debug.Log("side note spawned as" + NoteIDref + ", in Lane" + LaneID);
+                //Debug.Log("side note spawned as" + NoteIDref + ", in Lane" + LaneID);
                 retObj = Instantiate(noteObjectSide);
             }
             else
             {
-                Debug.Log("Big NOTE SPAWNED AS" + NoteIDref + ", in Lane" + LaneID);
+                //Debug.Log("Big NOTE SPAWNED AS" + NoteIDref + ", in Lane" + LaneID);
                 retObj = Instantiate(noteObjectBig);
             }
             

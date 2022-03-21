@@ -33,6 +33,10 @@ public class Note : MonoBehaviour
 
     public bool Big;
 
+    public Note RelatedStartNote;
+
+    public Note RelatedEndNote;
+
     LaneController laneController;
 
     RythmGameManager gameController;
@@ -40,6 +44,10 @@ public class Note : MonoBehaviour
     public ParticleSystem PS_Pure;
 
     public ParticleSystem PS_Far;
+
+    public GameObject HoldLineFront;
+
+    public GameObject HoldLineBack;
 
     public int hitOffset;
 
@@ -51,36 +59,29 @@ public class Note : MonoBehaviour
 
     public Text DebugText;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void FixedUpdate()
     {
         UpdatePosition();
         GetHitOffset();
-        while (laneController.trackedNotes.Peek().isLongNoteEnd)
-        {
-            
-        }
+        UpdateLinePosition();
 
+        //Needed to ask about null reference
+        if (gameController.AutoPlay && hitOffset >= targetOffset)
+        {
+            laneController.CheckNoteHit();
+            ResetNote();
+            return;
+        }
+        else
+        {
+
+        }
         if (transform.position.z <=laneController.targetBottomTrans.position.z)
         {
             gameController.ReturnNoteObjectToPool(this);
             ResetNote();
             return;
-        }
-        //Needed to ask about null reference
-        if(gameController.AutoPlay && hitOffset >= targetOffset)
-        {
-            laneController.CheckNoteHit();
-            ResetNote();
-        }
-        else
-        {
 
         }
 
@@ -135,9 +136,25 @@ public class Note : MonoBehaviour
     //reset note object 
     private void ResetNote()
     {
+        /*if (RelatedEndNote != null)
+        {
+            Debug.Log("Delayed the entrance!");
+            if (RelatedEndNote.hitOffset >= targetOffset)
+            //Case when hit the start note,delay it's entrance into pool until the related end note reaches the target.
+            {
+                trackedEvent = null;
+                laneController = null;
+                gameController = null;
+            }
+        }
+        else 
+        {
+
+        }*/
         trackedEvent = null;
         laneController = null;
         gameController = null;
+
     }
 
     void ReturnToPool()
@@ -187,6 +204,24 @@ public class Note : MonoBehaviour
 
     }
 
+    public void UpdateLinePosition()
+    {
+        if (RelatedEndNote != null && isLongNote)
+        {
+            Vector3 LastHoldEndNotePos = RelatedEndNote.transform.position;
+            Debug.Log("RelatedEndNote found.");
+            //HoldLineFront.SetPosition(1, transform.position);
+            //HoldLineFront.SetPosition(2, LastHoldEndNotePos);
+        }
+        else
+        {
+          
+        }
+        
+    }
+
+        
+
     //Check if the note is missed
     public bool IsNoteMissed()
     {
@@ -218,14 +253,14 @@ public class Note : MonoBehaviour
             <= targetOffset + (gameController.lostFloat * 0.001f * gameController.SampleRate)))
             {
                 hitLevel = 2;
-                Debug.Log("结果为 Flick-Pure, " + "误差为" + (int)((targetOffset - hitOffset) / 44.4) + "ms.");
+                //Debug.Log("结果为 Flick-Pure, " + "误差为" + (int)((targetOffset - hitOffset) / 44.4) + "ms.");
                 SfxManager.PlayOneShot(HitSound);
                 visuals_Note.material = visuals[2];
                 GameObject.Instantiate(PS_Pure, gameObject.transform.position, Quaternion.identity);
             }
             else
             {
-                Debug.Log("结果为 Lost, " + "误差为" + Mathf.RoundToInt(targetOffset - hitOffset) / 44.4 + "ms.");
+                //Debug.Log("结果为 Lost, " + "误差为" + Mathf.RoundToInt(targetOffset - hitOffset) / 44.4 + "ms.");
                 this.enabled = false;
             }
         }
@@ -235,7 +270,7 @@ public class Note : MonoBehaviour
             <= targetOffset - (gameController.farFloat * 0.001f * gameController.SampleRate))
         {
             hitLevel = 0;
-            Debug.Log("结果为 Lost, " + "误差为" + (int)((targetOffset - hitOffset) / 44.4) + "ms.");
+            //Debug.Log("结果为 Lost, " + "误差为" + (int)((targetOffset - hitOffset) / 44.4) + "ms.");
             this.enabled = false;
         }
         if 
@@ -243,7 +278,7 @@ public class Note : MonoBehaviour
             <= targetOffset - (gameController.pureFloat * 0.001f * gameController.SampleRate))
         {
             hitLevel = 1;
-            Debug.Log("结果为 FarEarly, " + "误差为" + (int)((targetOffset - hitOffset) / 44.4) + "ms.");
+            //Debug.Log("结果为 FarEarly, " + "误差为" + (int)((targetOffset - hitOffset) / 44.4) + "ms.");
             SfxManager.PlayOneShot(HitSound);
             visuals_Note.material = visuals[2];
             GameObject.Instantiate(PS_Far,gameObject.transform.position,Quaternion.identity);
@@ -253,7 +288,7 @@ public class Note : MonoBehaviour
             <= targetOffset + (gameController.pureFloat * 0.001f * gameController.SampleRate))
         {
             hitLevel = 2;
-            Debug.Log("结果为 Pure, " + "误差为" + (int)((targetOffset - hitOffset) / 44.4) + "ms.");
+            //Debug.Log("结果为 Pure, " + "误差为" + (int)((targetOffset - hitOffset) / 44.4) + "ms.");
             SfxManager.PlayOneShot(HitSound);
             visuals_Note.material = visuals[2];
             GameObject.Instantiate(PS_Pure, gameObject.transform.position, Quaternion.identity);
@@ -263,7 +298,7 @@ public class Note : MonoBehaviour
             <= targetOffset + (gameController.farFloat * 0.001f * gameController.SampleRate))
         {
             hitLevel = 3;
-            Debug.Log("结果为 FarLate, " + "误差为" + (int)((targetOffset - hitOffset) / 44.4) + "ms.");
+            //Debug.Log("结果为 FarLate, " + "误差为" + (int)((targetOffset - hitOffset) / 44.4) + "ms.");
             SfxManager.PlayOneShot(HitSound);
             visuals_Note.material = visuals[2];
             GameObject.Instantiate(PS_Far, gameObject.transform.position, Quaternion.identity);
@@ -273,7 +308,7 @@ public class Note : MonoBehaviour
             <= targetOffset + (gameController.lostFloat * 0.001f * gameController.SampleRate))
         {
             hitLevel = 0;
-            Debug.Log("结果为 Lost, " + "误差为" + Mathf.RoundToInt(targetOffset - hitOffset) / 44.4 + "ms.");
+            //Debug.Log("结果为 Lost, " + "误差为" + Mathf.RoundToInt(targetOffset - hitOffset) / 44.4 + "ms.");
             this.enabled = false;
         }
 
