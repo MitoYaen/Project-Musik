@@ -241,6 +241,22 @@ public class Note : MonoBehaviour
 
     public void UpdateLinePosition()
     {
+        if (RelatedEndNote != null && isLongNote)
+        {
+            ObjHoldLineFront.SetActive(false);
+            ObjHoldLineBack.SetActive(false);
+            return;
+        }
+        if (RelatedStartNote == null && RelatedEndNote == null && isLongNote)
+        {
+            ObjHoldLineFront.SetActive(true);
+            ObjHoldLineBack.SetActive(true);
+            Vector3 WaitPos = new Vector3(transform.position.x, transform.position.y, 130);
+            HoldLineFront.SetPosition(0, transform.position);
+            HoldLineFront.SetPosition(1, WaitPos);
+            HoldLineBack.SetPosition(0, transform.position);
+            HoldLineBack.SetPosition(1, WaitPos);
+        }
         if (RelatedStartNote != null && isLongNoteEnd)
         {
             Vector3 LastHoldStartNotePos = RelatedStartNote.transform.position;
