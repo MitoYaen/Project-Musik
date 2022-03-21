@@ -251,7 +251,7 @@ public class LaneController : MonoBehaviour
             {
                 if (noteObject.isLongNote && Holding)
                 {
-                    GoodHolding = true; //Detected the Hold input
+                    GoodHolding = true; //Successfully detected the Hold input in right time
                     
                 }
                 trackedNotes.Dequeue();

@@ -294,17 +294,26 @@ public class Note : MonoBehaviour
         //Branch When Flick
         if (Flick)
         {
-            if (
-            !(targetOffset - (gameController.lostFloat * 0.001f * gameController.SampleRate) <= hitOffset && hitOffset
-            <= targetOffset - (gameController.farFloat * 0.001f * gameController.SampleRate)) 
+            /*if (
+            !(targetOffset - (gameController.lostFloat * 0.001f * gameController.SampleRate) <= hitOffset && 
+            hitOffset <= targetOffset - (gameController.farFloat * 0.001f * gameController.SampleRate)) 
             &&
-            !(targetOffset + (gameController.farFloat * 0.001f * gameController.SampleRate) <= hitOffset && hitOffset
-            <= targetOffset + (gameController.lostFloat * 0.001f * gameController.SampleRate)))
+            !(targetOffset + (gameController.farFloat * 0.001f * gameController.SampleRate) <= hitOffset && 
+            hitOffset <= targetOffset + (gameController.lostFloat * 0.001f * gameController.SampleRate)))
             {
                 hitLevel = 2;
                 //Debug.Log("结果为 Flick-Pure, " + "误差为" + (int)((targetOffset - hitOffset) / 44.4) + "ms.");
                 SfxManager.PlayOneShot(HitSound);
                 visuals_Note.material = visuals[2];
+                GameObject.Instantiate(PS_Pure, gameObject.transform.position, Quaternion.identity);
+            }*/
+            if (hitOffset >= (targetOffset - (gameController.farFloat * 0.001f * gameController.SampleRate)) &&
+                hitOffset <= (targetOffset + (gameController.farFloat * 0.001f * gameController.SampleRate))) 
+                
+            {
+                hitLevel = 2;
+                //Debug.Log("结果为 Flick-Pure, " + "误差为" + (int)((targetOffset - hitOffset) / 44.4) + "ms.");
+                SfxManager.PlayOneShot(HitSound);
                 GameObject.Instantiate(PS_Pure, gameObject.transform.position, Quaternion.identity);
             }
             else
@@ -315,7 +324,7 @@ public class Note : MonoBehaviour
         }
         // Detect offset when input
         if 
-            (targetOffset - (gameController.lostFloat * 0.001f * gameController.SampleRate) <= hitOffset&&hitOffset 
+            (targetOffset - (gameController.lostFloat * 0.001f * gameController.SampleRate) <= hitOffset && hitOffset 
             <= targetOffset - (gameController.farFloat * 0.001f * gameController.SampleRate))
         {
             hitLevel = 0;
