@@ -27,6 +27,8 @@ public class Note : MonoBehaviour
 
     public bool isLongNoteEnd;
 
+    public bool HoldFailed = false;
+
     public bool SideNote;
 
     public bool Flick;
@@ -45,9 +47,13 @@ public class Note : MonoBehaviour
 
     public ParticleSystem PS_Far;
 
-    public GameObject HoldLineFront;
+    public GameObject ObjHoldLineFront;
 
-    public GameObject HoldLineBack;
+    public LineRenderer HoldLineFront;
+
+    public GameObject ObjHoldLineBack;
+
+    public LineRenderer HoldLineBack;
 
     public int hitOffset;
 
@@ -59,31 +65,67 @@ public class Note : MonoBehaviour
 
     public Text DebugText;
 
+
+    void Start()
+    {
+        //HoldLineFront = ObjHoldLineFront.GetComponent<LineRenderer>();
+        //HoldLineBack = ObjHoldLineBack.GetComponent<LineRenderer>();
+
+    }
     // Update is called once per frame
     void FixedUpdate()
     {
-        UpdatePosition();
-        GetHitOffset();
-        UpdateLinePosition();
-
-        //Needed to ask about null reference
-        if (gameController.AutoPlay && hitOffset >= targetOffset)
+        if (gameController !=null)
         {
-            laneController.CheckNoteHit();
-            ResetNote();
-            return;
+            UpdatePosition();
+            GetHitOffset();
+            UpdateLinePosition();
+
+            //AutoPlay Options¡ý
+            if (gameController.AutoPlay && hitOffset >= targetOffset)
+            {
+                laneController.CheckNoteHit();
+                //ResetNote();
+                return;
+            }
+            else
+            {
+
+            }
+            //AutoPlay Options ¡ü
+
+            if (laneController.Flicking && hitOffset >= targetOffset)
+            {
+                laneController.CheckNoteHit();
+                //ResetNote();
+                return;
+            }
+            else
+            {
+
+            }
+
+
+            if (laneController.GoodHolding && isLongNoteEnd && hitOffset >= targetOffset)
+            {
+                laneController.CheckNoteHit();
+                //ResetNote();
+                return;
+            }
+
+            if (transform.position.z <= laneController.targetBottomTrans.position.z)
+            {
+                gameController.ReturnNoteObjectToPool(this);
+                ResetNote();
+                return;
+
+            }
         }
         else
         {
-
+            Debug.Log("Error, Game Controller cannot be null.");
         }
-        if (transform.position.z <=laneController.targetBottomTrans.position.z)
-        {
-            gameController.ReturnNoteObjectToPool(this);
-            ResetNote();
-            return;
 
-        }
 
         
     }
@@ -189,29 +231,36 @@ public class Note : MonoBehaviour
 
     void GetHitOffset()
     {
-        if (gameController != null)
-        {
             int curTime = gameController.DelayedSampleTime;
             int noteTime = trackedEvent.StartSample + (int)(gameController.NoteOffset_ms * 0.001f * gameController.SampleRate);
             //int noteTime = trackedEvent.StartSample + gameController.SampleRate;
             int hitWindow = gameController.HitWindowSampleWidth;
             hitOffset = hitWindow - Mathf.Abs(noteTime - curTime);
-        }
-        else
-        {
-            Debug.Log("Bug");
-        }
 
     }
 
     public void UpdateLinePosition()
     {
-        if (RelatedEndNote != null && isLongNote)
+        if (RelatedStartNote != null && isLongNoteEnd)
         {
-            Vector3 LastHoldEndNotePos = RelatedEndNote.transform.position;
-            Debug.Log("RelatedEndNote found.");
-            //HoldLineFront.SetPosition(1, transform.position);
-            //HoldLineFront.SetPosition(2, LastHoldEndNotePos);
+            Vector3 LastHoldStartNotePos = RelatedStartNote.transform.position;
+            //Debug.Log("RelatedStartNote found.");
+            if (!HoldFailed)
+            {
+                HoldLineFront.SetPosition(0, transform.position);
+                HoldLineFront.SetPosition(1, LastHoldStartNotePos);
+                HoldLineBack.SetPosition(0, transform.position);
+                HoldLineBack.SetPosition(1, LastHoldStartNotePos);
+            }
+            else
+            {
+                Vector3 Losepos = new Vector3(transform.position.x, transform.position.y, -20);
+                HoldLineFront.SetPosition(0, transform.position);
+                HoldLineFront.SetPosition(1, Losepos);
+                HoldLineBack.SetPosition(0, transform.position);
+                HoldLineBack.SetPosition(1, Losepos);
+            }
+
         }
         else
         {

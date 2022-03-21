@@ -41,6 +41,7 @@ public class LaneController : MonoBehaviour
     //Lane Status
     public bool Flicking;    //Check Flick Status
     public bool Holding;    //Check Hold Status
+    public bool GoodHolding; // Check if hold and reach Note(Hold)
     //Lane Status
 
     //Get Last Hold-Start Note
@@ -204,11 +205,11 @@ public class LaneController : MonoBehaviour
                             isLongNoteEnd = true;
                             isLongNoteStart = false;
                             Debug.Log("LongNoteEnd Spawned");
-                            LastHoldStartNote.HoldLineFront.SetActive(true); //Spawn the line if the end exists
-                            LastHoldStartNote.HoldLineBack.SetActive(true);
+                            newObj.ObjHoldLineFront.SetActive(true); //Spawn the line if the end exists
+                            newObj.ObjHoldLineBack.SetActive(true);
                             LastHoldEndNote = newObj;
                             LastHoldStartNote.RelatedEndNote = LastHoldEndNote;
-                            LastHoldStartNote = newObj.RelatedStartNote;
+                            newObj.RelatedStartNote = LastHoldStartNote;
                             noteNum = noteNum - 4;
                         }
 
@@ -241,9 +242,20 @@ public class LaneController : MonoBehaviour
         {
             Note noteObject = trackedNotes.Peek();
             //Check if the note is further than the detect distance
+            if (noteObject.isLongNoteEnd && !GoodHolding)
+            {
+                noteObject.HoldFailed = true;
+                return;
+            }
             if (noteObject.hitOffset > noteObject.targetOffset - (GameController.lostFloat * 0.001f * GameController.SampleRate))
             {
-                trackedNotes.Dequeue(); 
+                if (noteObject.isLongNote && Holding)
+                {
+                    GoodHolding = true; //Detected the Hold input
+                    
+                }
+                trackedNotes.Dequeue();
+
                 int hitLevel = noteObject.IsNoteHittable();
                 if (hitLevel == 1)
                 {
@@ -269,7 +281,7 @@ public class LaneController : MonoBehaviour
             }
             else
             {
-                Debug.Log("目前偏移量为 " + noteObject.hitOffset + "ms.");
+                //Debug.Log("目前偏移量为 " + noteObject.hitOffset + "ms.");
             }
 
         }
@@ -294,7 +306,14 @@ public class LaneController : MonoBehaviour
     public void Release()
     {
         Debug.Log("Released in " + laneID);
+        FlickDone();
         Holding = false;
+        if (GoodHolding)
+        {
+            GoodHolding = false;
+            CheckNoteHit();
+            //Reset Combo
+        }
     }
 
 
