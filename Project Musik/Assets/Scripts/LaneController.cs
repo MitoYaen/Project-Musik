@@ -72,7 +72,7 @@ public class LaneController : MonoBehaviour
         }
         
         // PressVisual (Null Check)
-        if ((PressedVisual != null || PressedBigVisual != null) && GameController.GameStart)
+        if ((PressedVisual != null || PressedBigVisual != null))
         {
             if (PressedVisual != null)
             {
@@ -80,7 +80,7 @@ public class LaneController : MonoBehaviour
             }
             else
             {
-
+                
             }
         }
 

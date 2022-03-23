@@ -17,7 +17,7 @@ public class PauseButton : MonoBehaviour
     {
         button = GetComponent<Button>();
         Clickable = true;
-        button.onClick.AddListener(ChangePauseState);
+        //button.onClick.AddListener(ChangePauseState);
         image = GetComponent<Image>();
     }
     public void ChangePauseState()
