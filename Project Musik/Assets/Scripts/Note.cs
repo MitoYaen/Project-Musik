@@ -75,7 +75,11 @@ public class Note : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (gameController !=null)
+        if (gameController.GamePause)
+        {
+            return;
+        }
+        if (gameController != null || laneController != null)
         {
             UpdatePosition();
             GetHitOffset();
@@ -111,6 +115,7 @@ public class Note : MonoBehaviour
                 laneController.CheckNoteHit();
                 //ResetNote();
                 return;
+
             }
 
             if (transform.position.z <= laneController.targetBottomTrans.position.z)
@@ -123,10 +128,8 @@ public class Note : MonoBehaviour
         }
         else
         {
-            Debug.Log("Error, Game Controller cannot be null.");
+            Debug.Log("Error, Game or Lane Controller cannot be null.");
         }
-
-
         
     }
 
@@ -178,21 +181,6 @@ public class Note : MonoBehaviour
     //reset note object 
     private void ResetNote()
     {
-        /*if (RelatedEndNote != null)
-        {
-            Debug.Log("Delayed the entrance!");
-            if (RelatedEndNote.hitOffset >= targetOffset)
-            //Case when hit the start note,delay it's entrance into pool until the related end note reaches the target.
-            {
-                trackedEvent = null;
-                laneController = null;
-                gameController = null;
-            }
-        }
-        else 
-        {
-
-        }*/
         trackedEvent = null;
         laneController = null;
         gameController = null;
@@ -243,12 +231,14 @@ public class Note : MonoBehaviour
     {
         if (RelatedEndNote != null && isLongNote)
         {
+            //Deactivate the render after the EndNote is spawned(StartNote)
             ObjHoldLineFront.SetActive(false);
             ObjHoldLineBack.SetActive(false);
             return;
         }
         if (RelatedStartNote == null && RelatedEndNote == null && isLongNote)
         {
+            //Pre-Render the Line Before the EndNote is spawned(StartNote)
             ObjHoldLineFront.SetActive(true);
             ObjHoldLineBack.SetActive(true);
             Vector3 WaitPos = new Vector3(transform.position.x, transform.position.y, 130);
@@ -259,6 +249,7 @@ public class Note : MonoBehaviour
         }
         if (RelatedStartNote != null && isLongNoteEnd)
         {
+            //Render the line after found the StartNote(EndNote)
             Vector3 LastHoldStartNotePos = RelatedStartNote.transform.position;
             //Debug.Log("RelatedStartNote found.");
             if (!HoldFailed)
@@ -270,6 +261,7 @@ public class Note : MonoBehaviour
             }
             else
             {
+                //Render forward if lost
                 Vector3 Losepos = new Vector3(transform.position.x, transform.position.y, -20);
                 HoldLineFront.SetPosition(0, transform.position);
                 HoldLineFront.SetPosition(1, Losepos);
@@ -287,7 +279,7 @@ public class Note : MonoBehaviour
 
         
 
-    //Check if the note is missed
+    //Check if the note is missed (returns a bool)
     public bool IsNoteMissed()
     {
         bool bMissed = true;

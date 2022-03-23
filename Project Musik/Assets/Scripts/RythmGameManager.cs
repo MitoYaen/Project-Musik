@@ -1,46 +1,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 using SonicBloom.Koreo;
+using SonicBloom.Koreo.Players;
 using Bolt;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using System.Collections;
 
 public class RythmGameManager : MonoBehaviour
 {
+    public bool GameStart = false;
+    public bool GamePause = false;
+
+    public Koreography Song;
     [EventID]
     public string EventID;
 
     [Range(0.5f,8f)]
     [SerializeField]  public float InGameNoteSpeed;
-    
     public float NoteSpeed;
 
     [Range(8f,200f)]
     public float HitWindowSize_ms;
-
     public int FullScore;
-
     public float PerScore;
-
     public float CurScore;
-
     public int TotalNotes;
-
     public int pureFloat;
-
     public int farFloat;
-
     public int lostFloat;
-
     public bool AutoPlay = false;
-
     public GameObject BoltLinkObject;
-
     public Slider NoteOffsetSlider;
-
     public Slider NoteSpeedSlider;
-
 
     [Tooltip("如果感觉点击过晚，请增大；如果感觉点击过早，请减少。")]
     [Range(-50,50)]
@@ -53,9 +44,7 @@ public class RythmGameManager : MonoBehaviour
             return 1/NoteSpeed * (HitWindowSize_ms * 0.01f);
         }
     }
-    
     int HitWindowSize_sample;
-
     public int HitWindowSampleWidth
     {
         get 
@@ -63,7 +52,6 @@ public class RythmGameManager : MonoBehaviour
             return HitWindowSize_sample;
         }
     }
-
     public int SampleRate
     {
         get
@@ -71,37 +59,29 @@ public class RythmGameManager : MonoBehaviour
             return PlayingKoreo.SampleRate;
         }
     }
-
     Stack<Note> noteObjectPool = new Stack<Note>();
     Stack<Note> SidenoteObjectPool = new Stack<Note>();
     Stack<Note> BignoteObjectPool = new Stack<Note>();
+    public Transform SimpleMusicPlayerTransRef;
+    SimpleMusicPlayer simpleMusicPlayer;
 
     //Quote
-
     Koreography PlayingKoreo;
-
     public List<LaneController> noteLanes = new List<LaneController>();
-
     public AudioSource AudioCom;
 
     //Prefab
-
     public Note noteObject;
     public Note noteObjectSide;
     public Note noteObjectBig;
 
-
-
     //Time Related
     [Tooltip("开始播放音频之前提供的时间量，以秒为单位")]
     public float LeadInTime;
-
     float LeadInTimeLeft;
-    //Countdown Before the music actually plays(Which means the events will be called first)
-    float TimeLeftToPlay;
+    float TimeLeftToPlay; //Countdown Before the music actually plays(Which means the events will be called first)
 
-    //Previous SampleTime, including any necessary delay (To koreo)
-    public int DelayedSampleTime
+    public int DelayedSampleTime    //Previous SampleTime, including any necessary delay (To koreo)
     {
         get
         {
@@ -109,12 +89,26 @@ public class RythmGameManager : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
     void Start()
     {
-
-        //Inital Sliders
-        NoteSpeedSlider.value = InGameNoteSpeed;
+        GameObject LvlLoader = GameObject.Find("LevelLoader");
+        if (LvlLoader != null)
+        {
+            //Get Param from last scene
+            EventID = LvlLoader.GetComponent<LevelLoader>().Diff.ToString();
+            Debug.Log("Difficulty " + EventID + "Loaded.");
+            Koreography GameSong = LvlLoader.GetComponent<LevelLoader>().song;
+            Debug.Log("Song Loaded.");
+            simpleMusicPlayer = SimpleMusicPlayerTransRef.GetComponent<SimpleMusicPlayer>();
+            simpleMusicPlayer.LoadSong(GameSong, 0, false);
+        }
+        else
+        {
+            simpleMusicPlayer = SimpleMusicPlayerTransRef.GetComponent<SimpleMusicPlayer>();
+            simpleMusicPlayer.LoadSong(Song, 0, false);
+        }
+        //EventID = 
+        NoteSpeedSlider.value = InGameNoteSpeed;  //Inital Sliders
         NoteOffsetSlider.value = NoteOffset_ms;
 
         InitializeLeadIn();
@@ -191,11 +185,14 @@ public class RythmGameManager : MonoBehaviour
         
     }
 
-    // Update is called once per frame
     void Update() {
 
-        //get sliders
+        if (GamePause)
+        {
+            return;
+        }
 
+        //get sliders
         InGameNoteSpeed = NoteSpeedSlider.value;
         NoteOffset_ms = (int)NoteOffsetSlider.value;
 
@@ -204,7 +201,6 @@ public class RythmGameManager : MonoBehaviour
         NoteSpeed = InGameNoteSpeed * 10;
 
         //CountDown
-
         if (TimeLeftToPlay > 0)
         {
             TimeLeftToPlay -= Time.unscaledDeltaTime;
@@ -213,6 +209,7 @@ public class RythmGameManager : MonoBehaviour
             {
                 AudioCom.Play();
                 TimeLeftToPlay = 0;
+                GameStart = true;
             }
         }
         //
@@ -232,6 +229,13 @@ public class RythmGameManager : MonoBehaviour
             Debug.Log("The score adds 3000, now is " + CurScore);
         }
 #endif
+        if (GameStart)
+        {
+            if (!simpleMusicPlayer.IsPlaying)
+            {
+                //Game Ends
+            }
+        }
 
     }
     /// <summary>
@@ -344,7 +348,6 @@ public class RythmGameManager : MonoBehaviour
     }
 
     //Auto Plays
-
     public void EAP()
     {
         AutoPlay = true;
@@ -355,5 +358,23 @@ public class RythmGameManager : MonoBehaviour
     {
         AutoPlay = false;
         Debug.Log("AP Disabled.");
+    }
+
+    public void PlayMusic()
+    {
+        if (!GameStart)
+        {
+            return;
+        }
+        simpleMusicPlayer.Play();
+    }
+
+    public void PauseMusic()
+    {
+        if (!GameStart)
+        {
+            return;
+        }
+        simpleMusicPlayer.Pause();
     }
 }

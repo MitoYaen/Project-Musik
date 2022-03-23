@@ -33,6 +33,8 @@ public class LaneController : MonoBehaviour
 
     //target visual
     public Transform TargetVisual;
+    public GameObject PressedVisual;
+    public GameObject PressedBigVisual;
 
     //Border
     public Transform targetTopTrans;
@@ -40,7 +42,8 @@ public class LaneController : MonoBehaviour
 
     //Lane Status
     public bool Flicking;    //Check Flick Status
-    public bool Holding;    //Check Hold Status
+    public bool Holding;    //Check Hold Status (Visual)
+    internal bool JudgeHolding; //Check Hold Status (Judgement)
     public bool GoodHolding; // Check if hold and reach Note(Hold)
     //Lane Status
 
@@ -48,7 +51,11 @@ public class LaneController : MonoBehaviour
     public Note LastHoldStartNote;
     //Get Last Hold-End Note
     public Note LastHoldEndNote;
-
+    //Get Related Lane;
+    public LaneController RelatedLane1;
+    public LaneController RelatedLane2;
+    //Get Releated BigLane;
+    public LaneController RelatedBigLane;
     // Start is called before the first frame update
     void Start()
     {
@@ -58,6 +65,25 @@ public class LaneController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (GameController.GamePause)
+        {
+            return;
+        }
+        
+        // PressVisual (Null Check)
+        if ((PressedVisual != null || PressedBigVisual != null) && GameController.GameStart)
+        {
+            if (PressedVisual != null)
+            {
+                PressedVisual.SetActive(Holding);
+            }
+            else
+            {
+
+            }
+        }
+
         //Clear unused notes
         while (trackedNotes.Count>0&&trackedNotes.Peek().IsNoteMissed())
         {
@@ -65,13 +91,11 @@ public class LaneController : MonoBehaviour
             trackedNotes.Dequeue();
             //Questionable Code
         }
-
-
         //Check the Spawning of the new notes
         CheckSpawnNext();
 
 
-        //KeyBoardInputDetect
+        // KeyBoardInputDetect
         if (Input.GetKeyDown(keyboardButton))
         {
             CheckNoteHit();
@@ -84,10 +108,8 @@ public class LaneController : MonoBehaviour
         else if (Input.GetKeyUp(keyboardButton))
         {
             //Check LongNotesEnd
-        }    
+        }
 
-
-        
     }
 
     //Initialize
@@ -153,22 +175,34 @@ public class LaneController : MonoBehaviour
                     case 17:
                         isBig = true;
                         isLongNoteStart = true;
+                        LastHoldStartNote = newObj;
                         noteNum = 9;
                         break;
                     case 18:
                         isBig = true;
                         isLongNoteStart = true;
+                        LastHoldStartNote = newObj;
                         noteNum = 10;
                         break;
                     //19-20 Big Hold End
                     case 19:
                         isBig = true;
                         isLongNoteEnd = true;
+                        newObj.ObjHoldLineFront.SetActive(true); //Spawn the line if the end exists
+                        newObj.ObjHoldLineBack.SetActive(true);
+                        LastHoldEndNote = newObj;
+                        LastHoldStartNote.RelatedEndNote = LastHoldEndNote;
+                        newObj.RelatedStartNote = LastHoldStartNote;
                         noteNum = 9;
                         break;
                     case 20:
                         isBig = true;
                         isLongNoteEnd = true;
+                        newObj.ObjHoldLineFront.SetActive(true); //Spawn the line if the end exists
+                        newObj.ObjHoldLineBack.SetActive(true);
+                        LastHoldEndNote = newObj;
+                        LastHoldStartNote.RelatedEndNote = LastHoldEndNote;
+                        newObj.RelatedStartNote = LastHoldStartNote;
                         noteNum = 10;
                         break;
                     //21-22 Big Flick;
@@ -238,22 +272,53 @@ public class LaneController : MonoBehaviour
     //If so, it will excute "Hit" and delete
     public void CheckNoteHit()
     {
+        if (!GameController.GameStart)
+        {
+            return;
+        }
         if (trackedNotes.Count>0)
         {
             Note noteObject = trackedNotes.Peek();
-            //Check if the note is further than the detect distance
+            //GoodHolding = true;
             if (noteObject.isLongNoteEnd && !GoodHolding)
             {
                 noteObject.HoldFailed = true;
                 return;
             }
+            //Check if the note is further than the detect distance
             if (noteObject.hitOffset > noteObject.targetOffset - (GameController.lostFloat * 0.001f * GameController.SampleRate))
             {
                 if (noteObject.isLongNote && Holding)
                 {
                     GoodHolding = true; //Successfully detected the Hold input in right time
-                    
+
                 }
+                if (noteObject.isLongNoteEnd && GoodHolding)
+                {
+                    GoodHolding = false;
+                    JudgeHolding = false;
+                }
+                if (noteObject.Big)
+                {
+                    if (PressedBigVisual != null)
+                    {
+                        PressedBigVisual.SetActive(true);
+                    }
+                }
+                // Cancel the flick after check note
+                if (RelatedLane1 != null && RelatedLane2 != null)
+                {
+                    Flicking = false;
+                    RelatedLane1.Flicking = false;
+                    RelatedLane2.Flicking = false;
+                }
+                
+                if (RelatedBigLane != null)
+                {
+                    Flicking = false;
+                    RelatedBigLane.Flicking = false;
+                }
+
                 trackedNotes.Dequeue();
 
                 int hitLevel = noteObject.IsNoteHittable();
@@ -283,36 +348,58 @@ public class LaneController : MonoBehaviour
             {
                 //Debug.Log("目前偏移量为 " + noteObject.hitOffset + "ms.");
             }
-
         }
     }
-
+    internal bool DebuglogFlick = true;
+    internal bool DebuglogJudgeHold = true;
     public void FlickDetect() 
     {
-        Debug.Log("Flick Detected in " + laneID);
-        Flicking = true;
+        
+        if (DebuglogFlick)
+        {
+             Debug.Log("Flick Detected in " + laneID);
+            DebuglogFlick = false;
+            Flicking = true;
+        }
+        
     }
 
     public void FlickDone()
     {
         Debug.Log("Flick Done in" + laneID);
         Flicking = false;
+        DebuglogFlick = true;
     }
     public void HoldDetect()
     {
         Debug.Log("Hold Detected in " + laneID);
         Holding = true;
     }
+    public void JudgeHoldStart()
+    {
+        if (DebuglogJudgeHold)
+        {
+            Debug.Log("Judge Hold Detected in " + laneID);
+            JudgeHolding = true;
+        }
+        
+    }
     public void Release()
     {
         Debug.Log("Released in " + laneID);
         FlickDone();
+        DebuglogJudgeHold = true;
+        JudgeHolding = false;
         Holding = false;
         if (GoodHolding)
         {
             GoodHolding = false;
             CheckNoteHit();
             //Reset Combo
+        }
+        if (PressedBigVisual != null)
+        {
+            PressedBigVisual.SetActive(false);
         }
     }
 
