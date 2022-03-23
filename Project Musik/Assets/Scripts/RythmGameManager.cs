@@ -24,6 +24,7 @@ public class RythmGameManager : MonoBehaviour
     public int FullScore;
     public float PerScore;
     public float CurScore;
+    public int Combo;
     public int TotalNotes;
     public int pureFloat;
     public int farFloat;

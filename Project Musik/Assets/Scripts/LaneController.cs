@@ -325,17 +325,20 @@ public class LaneController : MonoBehaviour
                 if (hitLevel == 1)
                 {
                     //Far(Early)
+                    GameController.Combo++;
                     GameController.FarScoreUpdate();
                     
                 }
                 if (hitLevel == 2)
                 {
                     //Pure
+                    GameController.Combo++;
                     GameController.PureScoreUpdate();
                 }
                 if (hitLevel == 3)
                 {
                     //Far(Late)
+                    GameController.Combo++;
                     GameController.FarScoreUpdate();
                 }
                 else
@@ -395,7 +398,6 @@ public class LaneController : MonoBehaviour
         {
             GoodHolding = false;
             CheckNoteHit();
-            //Reset Combo
         }
         if (PressedBigVisual != null)
         {

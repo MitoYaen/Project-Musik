@@ -121,6 +121,7 @@ public class Note : MonoBehaviour
             if (transform.position.z <= laneController.targetBottomTrans.position.z)
             {
                 gameController.ReturnNoteObjectToPool(this);
+                gameController.Combo = 0;
                 ResetNote();
                 return;
 
@@ -128,7 +129,7 @@ public class Note : MonoBehaviour
         }
         else
         {
-            Debug.Log("Error, Game or Lane Controller cannot be null.");
+            Debug.LogError("Error, Game or Lane Controller cannot be null.");
         }
         
     }
@@ -298,23 +299,16 @@ public class Note : MonoBehaviour
     public int IsNoteHittable()
     {
         int hitLevel = 0;
-        visuals_Note.material = visuals[3];
+        if (gameController.AutoPlay)
+        {
+            hitLevel = 2;
+            SfxManager.PlayOneShot(HitSound);
+            GameObject.Instantiate(PS_Pure, gameObject.transform.position, Quaternion.identity);
+            return hitLevel;
+        }
         //Branch When Flick
         if (Flick)
         {
-            /*if (
-            !(targetOffset - (gameController.lostFloat * 0.001f * gameController.SampleRate) <= hitOffset && 
-            hitOffset <= targetOffset - (gameController.farFloat * 0.001f * gameController.SampleRate)) 
-            &&
-            !(targetOffset + (gameController.farFloat * 0.001f * gameController.SampleRate) <= hitOffset && 
-            hitOffset <= targetOffset + (gameController.lostFloat * 0.001f * gameController.SampleRate)))
-            {
-                hitLevel = 2;
-                //Debug.Log("结果为 Flick-Pure, " + "误差为" + (int)((targetOffset - hitOffset) / 44.4) + "ms.");
-                SfxManager.PlayOneShot(HitSound);
-                visuals_Note.material = visuals[2];
-                GameObject.Instantiate(PS_Pure, gameObject.transform.position, Quaternion.identity);
-            }*/
             if (hitOffset >= (targetOffset - (gameController.farFloat * 0.001f * gameController.SampleRate)) &&
                 hitOffset <= (targetOffset + (gameController.farFloat * 0.001f * gameController.SampleRate))) 
                 
@@ -335,6 +329,7 @@ public class Note : MonoBehaviour
             (targetOffset - (gameController.lostFloat * 0.001f * gameController.SampleRate) <= hitOffset && hitOffset 
             <= targetOffset - (gameController.farFloat * 0.001f * gameController.SampleRate))
         {
+            gameController.Combo = 0;
             hitLevel = 0;
             //Debug.Log("结果为 Lost, " + "误差为" + (int)((targetOffset - hitOffset) / 44.4) + "ms.");
             this.enabled = false;
@@ -374,6 +369,7 @@ public class Note : MonoBehaviour
             <= targetOffset + (gameController.lostFloat * 0.001f * gameController.SampleRate))
         {
             hitLevel = 0;
+            gameController.Combo = 0;
             //Debug.Log("结果为 Lost, " + "误差为" + Mathf.RoundToInt(targetOffset - hitOffset) / 44.4 + "ms.");
             this.enabled = false;
         }
