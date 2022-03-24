@@ -12,8 +12,8 @@ public class TestScroll : MonoBehaviour
     {
         GameObject go = Instantiate(Resources.Load("Item")) as GameObject;
         go.name = index.ToString();
-        go.transform.FindChild("Text").GetComponent<Text>().text = index.ToString();
-        go.transform.FindChild("Button").GetComponent<Button>().onClick.AddListener
+        go.transform.Find("Text").GetComponent<Text>().text = index.ToString();
+        go.transform.Find("Button").GetComponent<Button>().onClick.AddListener
         (
            () =>{Remove(go.transform);}
         );

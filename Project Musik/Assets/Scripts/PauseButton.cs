@@ -64,6 +64,12 @@ public class PauseButton : MonoBehaviour
 
     public void ExitSong()
     {
+        Transition.Instance.LeftToMid();
+        StartCoroutine(WaitLoad());
+    }
+    IEnumerator WaitLoad()
+    {
+        yield return new WaitForSeconds(Transition.Instance.WaitDuration);
         SceneManager.LoadScene("Menu");
     }
 }

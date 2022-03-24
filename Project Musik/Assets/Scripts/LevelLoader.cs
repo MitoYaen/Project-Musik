@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using SonicBloom.Koreo;
+using System.Collections;
+
 public class LevelLoader : MonoBehaviour
 {
     public static LevelLoader Instance { get; private set; }
@@ -30,6 +32,12 @@ public class LevelLoader : MonoBehaviour
     }
     public void LoadLevel()
     {
+        Transition.Instance.RightToMid();
+        StartCoroutine(WaitLoad());
+    }
+    IEnumerator WaitLoad()
+    {
+        yield return new WaitForSeconds(Transition.Instance.WaitDuration);
         SceneManager.LoadScene("InGame");
     }
 }
