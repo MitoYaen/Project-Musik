@@ -1,6 +1,7 @@
 using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
+using System.Collections;
+using TMPro;
 using DG.Tweening;
 
 
@@ -10,6 +11,15 @@ public class Transition : MonoBehaviour
     public float WaitDuration = 5f;
     public static Transition Instance { get; private set; }
     public RectTransform Mask;
+    public GameObject SongInfo;
+    public Image songimage;
+    public TextMeshProUGUI songname;
+    public TextMeshProUGUI authur;
+    public TextMeshProUGUI Illustrator;
+    public TextMeshProUGUI LD;
+
+
+    //public bool showinfo = false;
     internal int CurrentState;
     internal int NextState;
     /*
@@ -24,6 +34,8 @@ public class Transition : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            SongInfo.SetActive(false);
+            MidToLeft();
         }
         else
         {
@@ -33,8 +45,10 @@ public class Transition : MonoBehaviour
 
     public void RightToMid()
     {
+        Application.targetFrameRate = 60;
         Mask.anchoredPosition = new Vector2(2800, 0);
         Mask.DOAnchorPosX(0, Duration).SetEase(Ease.OutCubic);
+        SongInfo.SetActive(true);
         CurrentState = 1;
         StartCoroutine(NextStep());
         NextState = 2;
@@ -47,6 +61,8 @@ public class Transition : MonoBehaviour
     }
     public void LeftToMid()
     {
+        Application.targetFrameRate = 60;
+        SongInfo.SetActive(false);
         Mask.anchoredPosition = new Vector2(-2800, 0);
         Mask.DOAnchorPosX(0, Duration).SetEase(Ease.OutCubic);
         CurrentState = 2;
@@ -75,4 +91,13 @@ public class Transition : MonoBehaviour
                 break;
         }
     }
+
+    public void SetSongInfo(Sprite SongImage,string SongName, string Authur, string illustrator, string LevelDesigner)
+    {
+        songimage.sprite = SongImage;
+        songname.text = SongName;
+        authur.text = Authur;
+        Illustrator.text = illustrator;
+        LD.text = LevelDesigner;
+     }
 }

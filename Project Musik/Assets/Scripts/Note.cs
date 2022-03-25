@@ -21,6 +21,7 @@ public class Note : MonoBehaviour
      * 5 - BigLongNote(Start)
      * 6 - BigLongNote(End)
      * 7 - BigFlick
+     * 8 - SideTap
      ==============*/
 
     public bool isLongNote;
@@ -175,6 +176,11 @@ public class Note : MonoBehaviour
         {
             Type = 7;
         }
+        else if (SideNote)
+        {
+            matNum = 1;
+            Type = 8;
+        }
         //Don't forget to change ↑↑↑↑↑
         visuals_Note.material = visuals[matNum];
     }
@@ -302,6 +308,7 @@ public class Note : MonoBehaviour
         if (gameController.AutoPlay)
         {
             hitLevel = 2;
+            gameController.Pure++;
             SfxManager.PlayOneShot(HitSound);
             GameObject.Instantiate(PS_Pure, gameObject.transform.position, Quaternion.identity);
             return hitLevel;
@@ -316,10 +323,12 @@ public class Note : MonoBehaviour
                 hitLevel = 2;
                 //Debug.Log("结果为 Flick-Pure, " + "误差为" + (int)((targetOffset - hitOffset) / 44.4) + "ms.");
                 SfxManager.PlayOneShot(HitSound);
+                gameController.Pure++;
                 GameObject.Instantiate(PS_Pure, gameObject.transform.position, Quaternion.identity);
             }
             else
             {
+                gameController.Lost++;
                 //Debug.Log("结果为 Lost, " + "误差为" + Mathf.RoundToInt(targetOffset - hitOffset) / 44.4 + "ms.");
                 this.enabled = false;
             }
@@ -331,6 +340,7 @@ public class Note : MonoBehaviour
         {
             gameController.Combo = 0;
             hitLevel = 0;
+            gameController.Lost++;
             //Debug.Log("结果为 Lost, " + "误差为" + (int)((targetOffset - hitOffset) / 44.4) + "ms.");
             this.enabled = false;
         }
@@ -341,7 +351,7 @@ public class Note : MonoBehaviour
             hitLevel = 1;
             //Debug.Log("结果为 FarEarly, " + "误差为" + (int)((targetOffset - hitOffset) / 44.4) + "ms.");
             SfxManager.PlayOneShot(HitSound);
-            visuals_Note.material = visuals[2];
+            gameController.Far++;
             GameObject.Instantiate(PS_Far,gameObject.transform.position,Quaternion.identity);
         }
         if 
@@ -351,7 +361,7 @@ public class Note : MonoBehaviour
             hitLevel = 2;
             //Debug.Log("结果为 Pure, " + "误差为" + (int)((targetOffset - hitOffset) / 44.4) + "ms.");
             SfxManager.PlayOneShot(HitSound);
-            visuals_Note.material = visuals[2];
+            gameController.Pure++;
             GameObject.Instantiate(PS_Pure, gameObject.transform.position, Quaternion.identity);
         }
         if 
@@ -361,7 +371,7 @@ public class Note : MonoBehaviour
             hitLevel = 3;
             //Debug.Log("结果为 FarLate, " + "误差为" + (int)((targetOffset - hitOffset) / 44.4) + "ms.");
             SfxManager.PlayOneShot(HitSound);
-            visuals_Note.material = visuals[2];
+            gameController.Far++;
             GameObject.Instantiate(PS_Far, gameObject.transform.position, Quaternion.identity);
         }
         if 
@@ -370,6 +380,7 @@ public class Note : MonoBehaviour
         {
             hitLevel = 0;
             gameController.Combo = 0;
+            gameController.Lost++;
             //Debug.Log("结果为 Lost, " + "误差为" + Mathf.RoundToInt(targetOffset - hitOffset) / 44.4 + "ms.");
             this.enabled = false;
         }

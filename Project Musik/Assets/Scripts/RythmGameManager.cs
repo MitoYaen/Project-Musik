@@ -10,6 +10,8 @@ public class RythmGameManager : MonoBehaviour
 {
     public bool GameStart = false;
     public bool GamePause = false;
+    public bool GameEnd = false;
+    internal bool EndOnce = true;
 
     public Koreography Song;
     [EventID]
@@ -21,15 +23,20 @@ public class RythmGameManager : MonoBehaviour
 
     [Range(8f,200f)]
     public float HitWindowSize_ms;
-    public int FullScore;
-    public float PerScore;
-    public float CurScore;
+    public int Pure;
+    public int Far;
+    public int Lost;
+    public double FullScore;
+    public double PerScore;
+    public double CurScore;
     public int Combo;
+    internal int MaxCombo;
     public int TotalNotes;
     public int pureFloat;
     public int farFloat;
     public int lostFloat;
     public bool AutoPlay = false;
+    public ResultDisplay Result;
     public GameObject BoltLinkObject;
     public Slider NoteOffsetSlider;
     public Slider NoteSpeedSlider;
@@ -108,8 +115,16 @@ public class RythmGameManager : MonoBehaviour
             simpleMusicPlayer = SimpleMusicPlayerTransRef.GetComponent<SimpleMusicPlayer>();
             simpleMusicPlayer.LoadSong(Song, 0, false);
         }
-        //EventID = 
-        NoteSpeedSlider.value = InGameNoteSpeed;  //Inital Sliders
+        if (PlayerPrefs.GetFloat("NoteSpeed") != 0)
+        {
+            NoteSpeedSlider.value = PlayerPrefs.GetFloat("NoteSpeed");
+            InGameNoteSpeed = PlayerPrefs.GetFloat("NoteSpeed");
+            Debug.Log(PlayerPrefs.GetFloat("NoteSpeed"));
+        }
+        else
+        {
+            NoteSpeedSlider.value = InGameNoteSpeed;  //Inital Sliders
+        }
         NoteOffsetSlider.value = NoteOffset_ms;
 
         InitializeLeadIn();
@@ -162,6 +177,23 @@ public class RythmGameManager : MonoBehaviour
                             noteID = 10; //Big Right Flick Start
                             skip = true;
                             break;
+                        case 23:
+                            noteID = 5; //SideNote(Tap) - Upper Left
+                            skip = true;
+                            break;
+                        case 24:
+                            noteID = 6; //SideNote(Tap) - Downer Left
+                            skip = true;
+                            break;
+                        case 25:
+                            noteID = 7; //SideNote(Tap) - Upper Right
+                            skip = true;
+                            break;
+                        case 26:
+                            noteID = 8; //SideNote(Tap) - Downer Right
+                            skip = true;
+                            break;
+
                         default:
                             break;
                     }
@@ -198,8 +230,12 @@ public class RythmGameManager : MonoBehaviour
         NoteOffset_ms = (int)NoteOffsetSlider.value;
 
         //Multiply the note speed
-
-        NoteSpeed = InGameNoteSpeed * 10;
+        NoteSpeed = InGameNoteSpeed * 15;
+        //Update Combos
+        if (Combo > MaxCombo)
+        {
+            MaxCombo = Combo;
+        }
 
         //CountDown
         if (TimeLeftToPlay > 0)
@@ -232,16 +268,28 @@ public class RythmGameManager : MonoBehaviour
 #endif
         if (GameStart)
         {
-            if (!simpleMusicPlayer.IsPlaying)
+            if (Pure == TotalNotes)
+            {
+                CurScore = FullScore;
+            }
+            if (!simpleMusicPlayer.IsPlaying || GameEnd)
             {
                 //Game Ends
+                GameEnd = true;
+                if (EndOnce)
+                {
+                    EndOnce = false;
+                    simpleMusicPlayer.Pause();
+                    Debug.Log("Game End");
+                    Result.ShowResult(CurScore, MaxCombo, Pure, Far, Lost);
+                }
             }
         }
 
     }
-    /// <summary>
-    /// InitializeLeadTime  
-    /// </summary>
+    // <summary>
+    // InitializeLeadTime  
+    // </summary>
     void InitializeLeadIn ()
     {
         if (LeadInTime>0)
@@ -292,12 +340,17 @@ public class RythmGameManager : MonoBehaviour
                 //Debug.Log("side note spawned as" + NoteIDref + ", in Lane" + LaneID);
                 retObj = Instantiate(noteObjectSide);
             }
-            else
+            else if (NoteIDref > 16 && NoteIDref <= 22)
             {
                 //Debug.Log("Big NOTE SPAWNED AS" + NoteIDref + ", in Lane" + LaneID);
                 retObj = Instantiate(noteObjectBig);
             }
-            
+            else
+            {
+                //Debug.Log("side note spawned as" + NoteIDref + ", in Lane" + LaneID);
+                retObj = Instantiate(noteObjectSide);
+            }
+
         }
 
         retObj.gameObject.SetActive(true);

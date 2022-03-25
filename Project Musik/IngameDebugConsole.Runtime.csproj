@@ -312,7 +312,7 @@
  <HintPath>C:/Users/Administrator/Desktop/Project/Music Project/Project Musik/Assets/Ludiq/Assemblies/Bolt.Core.Runtime.dll</HintPath>
  </Reference>
  <Reference Include="TUIOsharp">
- <HintPath>C:/Users/Administrator/Desktop/Project/Music Project/Project Musik/Assets/TouchScript/Modules/TUIO/Libraries/TUIOsharp.dll</HintPath>
+ <HintPath>C:/Users/Administrator/Desktop/Project/Music Project/Project Musik/Assets/Plugins/TouchScript/Modules/TUIO/Libraries/TUIOsharp.dll</HintPath>
  </Reference>
  <Reference Include="Antlr3.Runtime">
  <HintPath>C:/Users/Administrator/Desktop/Project/Music Project/Project Musik/Assets/Ludiq/Assemblies/Antlr3.Runtime.dll</HintPath>
@@ -363,7 +363,7 @@
  <HintPath>C:/Users/Administrator/Desktop/Project/Music Project/Project Musik/Assets/Ludiq/Assemblies/Bolt.State.Runtime.dll</HintPath>
  </Reference>
  <Reference Include="OSCsharp">
- <HintPath>C:/Users/Administrator/Desktop/Project/Music Project/Project Musik/Assets/TouchScript/Modules/TUIO/Libraries/OSCsharp.dll</HintPath>
+ <HintPath>C:/Users/Administrator/Desktop/Project/Music Project/Project Musik/Assets/Plugins/TouchScript/Modules/TUIO/Libraries/OSCsharp.dll</HintPath>
  </Reference>
  <Reference Include="SonicBloom.Koreo">
  <HintPath>C:/Users/Administrator/Desktop/Project/Music Project/Project Musik/Assets/Plugins/Koreographer/Unity Editor/SonicBloom.Koreo.dll</HintPath>

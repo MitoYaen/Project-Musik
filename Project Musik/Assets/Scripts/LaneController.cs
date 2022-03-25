@@ -87,6 +87,8 @@ public class LaneController : MonoBehaviour
         //Clear unused notes
         while (trackedNotes.Count>0&&trackedNotes.Peek().IsNoteMissed())
         {
+            GameController.Combo = 0;
+            GameController.Lost++;
             //Debug.Log("½á¹ûÎª Lost, " + "Â©¼ü¡£");
             trackedNotes.Dequeue();
             //Questionable Code
@@ -216,6 +218,18 @@ public class LaneController : MonoBehaviour
                         isFlick = true;
                         noteNum = 10;
                         break;
+                    case 23:
+                        noteNum = 5; //SideNote(Tap) - Upper Left
+                        break;
+                    case 24:
+                        noteNum = 6; //SideNote(Tap) - Downer Left
+                        break;
+                    case 25:
+                        noteNum = 7; //SideNote(Tap) - Upper Right
+                        break;
+                    case 26:
+                        noteNum = 8; //SideNote(Tap) - Downer Left
+                        break;
                     default:
                         break;
                 }
@@ -280,45 +294,60 @@ public class LaneController : MonoBehaviour
         {
             Note noteObject = trackedNotes.Peek();
             //GoodHolding = true;
-            if (noteObject.isLongNoteEnd && !GoodHolding)
+            if (noteObject.isLongNoteEnd && !GoodHolding && !GameController.AutoPlay)
             {
-                noteObject.HoldFailed = true;
-                return;
+                    noteObject.HoldFailed = true;
+                    return;
             }
             //Check if the note is further than the detect distance
             if (noteObject.hitOffset > noteObject.targetOffset - (GameController.lostFloat * 0.001f * GameController.SampleRate))
             {
-                if (noteObject.isLongNote && Holding)
+                if (!GameController.AutoPlay)
                 {
-                    GoodHolding = true; //Successfully detected the Hold input in right time
-
-                }
-                if (noteObject.isLongNoteEnd && GoodHolding)
-                {
-                    GoodHolding = false;
-                    JudgeHolding = false;
-                }
-                if (noteObject.Big)
-                {
-                    if (PressedBigVisual != null)
+                    if (noteObject.isLongNote && Holding)
                     {
-                        PressedBigVisual.SetActive(true);
-                    }
-                }
-                // Cancel the flick after check note
-                if (RelatedLane1 != null && RelatedLane2 != null)
-                {
-                    Flicking = false;
-                    RelatedLane1.Flicking = false;
-                    RelatedLane2.Flicking = false;
-                }
-                
-                if (RelatedBigLane != null)
-                {
-                    Flicking = false;
-                    RelatedBigLane.Flicking = false;
-                }
+                        GoodHolding = true; //Successfully detected the Hold input in right time
 
+                    }
+                    if (noteObject.isLongNoteEnd && GoodHolding)
+                    {
+                        GoodHolding = false;
+                        JudgeHolding = false;
+                    }
+                    if (noteObject.Big)
+                    {
+                        if (PressedBigVisual != null)
+                        {
+                            if (GameController.AutoPlay)
+                            {
+
+                            }
+                            else
+                            {
+                                PressedBigVisual.SetActive(true);
+                            }
+
+                        }
+                    }
+                    // Cancel the flick after check note
+                    if (RelatedLane1 != null && RelatedLane2 != null)
+                    {
+                        Flicking = false;
+                        RelatedLane1.Flicking = false;
+                        RelatedLane2.Flicking = false;
+                    }
+
+                    if (RelatedBigLane != null)
+                    {
+                        Flicking = false;
+                        RelatedBigLane.Flicking = false;
+                    }
+
+                }
+                else
+                {
+
+                }
                 trackedNotes.Dequeue();
 
                 int hitLevel = noteObject.IsNoteHittable();

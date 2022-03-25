@@ -53,23 +53,27 @@
     <UnityVersion>2020.3.18f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\LevelInfoSender.cs" />
+    <Compile Include="Assets\Scripts\ComboText.cs" />
+    <Compile Include="Assets\Scripts\Transition.cs" />
     <Compile Include="Assets\Scripts\RythmGameManager.cs" />
     <Compile Include="Assets\Scripts\LevelLoader.cs" />
     <Compile Include="Assets\Scripts\Legacy\FileController.cs" />
     <Compile Include="Assets\Scripts\LaneController.cs" />
     <Compile Include="Assets\Scripts\Legacy\TouchDetect.cs" />
+    <Compile Include="Assets\Scripts\ContentScroller.cs" />
     <Compile Include="Assets\Scripts\PauseButton.cs" />
+    <Compile Include="Assets\Scripts\ProgressBar.cs" />
+    <Compile Include="Assets\Scripts\Legacy\TestScroll.cs" />
     <Compile Include="Assets\Scripts\Legacy\FileLoaderTest.cs" />
+    <Compile Include="Assets\Scripts\Legacy\ScrollPanelVerticalLayout.cs" />
     <Compile Include="Assets\Scripts\Note.cs" />
     <Compile Include="Assets\Scripts\Legacy\KoreotoBolt.cs" />
     <Compile Include="Assets\Scripts\Legacy\AudioSourceLoudnessTester.cs" />
-    <Compile Include="Assets\Scripts\LevelInfoSender.cs" />
-    <Compile Include="Assets\Scripts\Legacy\ScrollPanelVerticalLayout.cs" />
-    <Compile Include="Assets\Scripts\Legacy\TestScroll.cs" />
-    <Compile Include="Assets\Scripts\ContentScroller.cs" />
-    <Compile Include="Assets\Scripts\ProgressBar.cs" />
-    <Compile Include="Assets\Scripts\ComboText.cs" />
-    <Compile Include="Assets\Scripts\Transition.cs" />
+    <Compile Include="Assets\Scripts\FpsDisplay.cs" />
+    <Compile Include="Assets\Scripts\FpsLimitter.cs" />
+    <Compile Include="Assets\Scripts\ResultDisplay.cs" />
+    <Compile Include="Assets\Scripts\AppVariables.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Ludiq\Ludiq.Core\DotNetDocumentation\System.Web.Extensions.Design.xml" />
@@ -391,6 +395,9 @@
     <Reference Include="Bolt.Core.Runtime">
       <HintPath>Assets\Ludiq\Assemblies\Bolt.Core.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="TUIOsharp">
+      <HintPath>Assets\Plugins\TouchScript\Modules\TUIO\Libraries\TUIOsharp.dll</HintPath>
+    </Reference>
     <Reference Include="Antlr3.Runtime">
       <HintPath>Assets\Ludiq\Assemblies\Antlr3.Runtime.dll</HintPath>
     </Reference>
@@ -424,14 +431,11 @@
     <Reference Include="Bolt.State.Runtime">
       <HintPath>Assets\Ludiq\Assemblies\Bolt.State.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="SonicBloom.Koreo">
-      <HintPath>Assets\Plugins\Koreographer\Unity Editor\SonicBloom.Koreo.dll</HintPath>
-    </Reference>
     <Reference Include="OSCsharp">
       <HintPath>Assets\Plugins\TouchScript\Modules\TUIO\Libraries\OSCsharp.dll</HintPath>
     </Reference>
-    <Reference Include="TUIOsharp">
-      <HintPath>Assets\Plugins\TouchScript\Modules\TUIO\Libraries\TUIOsharp.dll</HintPath>
+    <Reference Include="SonicBloom.Koreo">
+      <HintPath>Assets\Plugins\Koreographer\Unity Editor\SonicBloom.Koreo.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.18f1\Editor\Data\PlaybackEngines\iOSSupport\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>

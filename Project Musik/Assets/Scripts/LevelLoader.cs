@@ -30,14 +30,21 @@ public class LevelLoader : MonoBehaviour
     {
         LevelLoader.Instance.Diff = Difficulty;
     }
+
+    public void LoadMenu()
+    {
+        Transition.Instance.LeftToMid();
+        StartCoroutine(WaitLoad("Menu"));
+    }
     public void LoadLevel()
     {
         Transition.Instance.RightToMid();
-        StartCoroutine(WaitLoad());
+        StartCoroutine(WaitLoad("InGame"));
     }
-    IEnumerator WaitLoad()
+    IEnumerator WaitLoad(string SceneName)
     {
         yield return new WaitForSeconds(Transition.Instance.WaitDuration);
-        SceneManager.LoadScene("InGame");
+        SceneManager.LoadScene(SceneName);
     }
+
 }
