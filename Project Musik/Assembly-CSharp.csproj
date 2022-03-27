@@ -55,6 +55,8 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\LevelInfoSender.cs" />
     <Compile Include="Assets\Scripts\ComboText.cs" />
+    <Compile Include="Assets\Scripts\ResultDisplay.cs" />
+    <Compile Include="Assets\Scripts\FpsDisplay.cs" />
     <Compile Include="Assets\Scripts\Transition.cs" />
     <Compile Include="Assets\Scripts\RythmGameManager.cs" />
     <Compile Include="Assets\Scripts\LevelLoader.cs" />
@@ -65,15 +67,13 @@
     <Compile Include="Assets\Scripts\PauseButton.cs" />
     <Compile Include="Assets\Scripts\ProgressBar.cs" />
     <Compile Include="Assets\Scripts\Legacy\TestScroll.cs" />
+    <Compile Include="Assets\Scripts\AppVariables.cs" />
     <Compile Include="Assets\Scripts\Legacy\FileLoaderTest.cs" />
     <Compile Include="Assets\Scripts\Legacy\ScrollPanelVerticalLayout.cs" />
     <Compile Include="Assets\Scripts\Note.cs" />
     <Compile Include="Assets\Scripts\Legacy\KoreotoBolt.cs" />
     <Compile Include="Assets\Scripts\Legacy\AudioSourceLoudnessTester.cs" />
-    <Compile Include="Assets\Scripts\FpsDisplay.cs" />
-    <Compile Include="Assets\Scripts\FpsLimitter.cs" />
-    <Compile Include="Assets\Scripts\ResultDisplay.cs" />
-    <Compile Include="Assets\Scripts\AppVariables.cs" />
+    <Compile Include="Assets\Scripts\ChartEditor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Ludiq\Ludiq.Core\DotNetDocumentation\System.Web.Extensions.Design.xml" />

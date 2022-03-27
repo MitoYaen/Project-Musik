@@ -216,6 +216,7 @@ public class RythmGameManager : MonoBehaviour
         HitWindowSize_sample = (int)(0.001f * HitWindowSize_ms * SampleRate );
 
         
+        
     }
 
     void Update() {
@@ -303,6 +304,11 @@ public class RythmGameManager : MonoBehaviour
         }
     }
 
+    //Emitting a ghost Note to prevent first lag
+    public void EmitGhostNote()
+    {
+
+    }
 
     //pick up the object from the pool
     public Note GetFreshNoteObject(int NoteIDref, int LaneID)

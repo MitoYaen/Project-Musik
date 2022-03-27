@@ -57,7 +57,7 @@ public class Transition : MonoBehaviour
     {
         Mask.anchoredPosition = new Vector2(0, 0);
         Mask.DOAnchorPosX(-2800, Duration).SetEase(Ease.InCubic);
-        CurrentState = 2;
+        CurrentState = 0;
     }
     public void LeftToMid()
     {
@@ -73,7 +73,7 @@ public class Transition : MonoBehaviour
     {
         Mask.anchoredPosition = new Vector2(0, 0);
         Mask.DOAnchorPosX(2800, Duration).SetEase(Ease.InCubic);
-        CurrentState = 0;
+        CurrentState = 2;
     }
 
     public IEnumerator NextStep()

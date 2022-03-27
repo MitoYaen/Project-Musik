@@ -34,17 +34,35 @@ public class LevelLoader : MonoBehaviour
     public void LoadMenu()
     {
         Transition.Instance.LeftToMid();
-        StartCoroutine(WaitLoad("Menu"));
+        StartCoroutine(LoadAsync("Menu"));
     }
     public void LoadLevel()
     {
         Transition.Instance.RightToMid();
-        StartCoroutine(WaitLoad("InGame"));
+        StartCoroutine(LoadAsync("InGame"));
     }
-    IEnumerator WaitLoad(string SceneName)
+    IEnumerator LoadAsync(string SceneName)
     {
-        yield return new WaitForSeconds(Transition.Instance.WaitDuration);
-        SceneManager.LoadScene(SceneName);
+        float timer = 0f;
+        float MinLoadTime = 2.5f;
+
+        AsyncOperation operation = SceneManager.LoadSceneAsync(SceneName);
+        operation.allowSceneActivation = false;
+
+        while (timer < MinLoadTime) 
+        {
+            timer += Time.unscaledDeltaTime;
+
+            if (timer > MinLoadTime)
+            {
+                operation.allowSceneActivation = true;
+            }
+
+            yield return null;
+        }
+
+        yield return null;
+
     }
 
 }
