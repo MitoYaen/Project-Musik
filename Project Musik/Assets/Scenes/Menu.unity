@@ -153,6 +153,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   song: {fileID: 0}
+  BackGround: {fileID: 0}
+  EnchanceCol: {r: 0, g: 0, b: 0, a: 0}
 --- !u!4 &21261451
 Transform:
   m_ObjectHideFlags: 0
@@ -1260,6 +1262,10 @@ MonoBehaviour:
   Authur: Slientroom
   illustrator: Slientroom
   LevelDesigner: MitoYager
+  DefaultBackGround: {fileID: 21300000, guid: 0ceeaf7074656ca4f836bc6ee66549ab, type: 3}
+  BackGround: {fileID: 21300000, guid: b94288e70a4de0b4fb07257fa6af2585, type: 3}
+  ChangeColor: 1
+  EnchanceColor: {r: 1, g: 0, b: 0, a: 0.69803923}
 --- !u!1 &618309834
 GameObject:
   m_ObjectHideFlags: 0
@@ -2913,6 +2919,10 @@ MonoBehaviour:
   Authur: Paul Bazooka
   illustrator: START SEED
   LevelDesigner: Not Me
+  DefaultBackGround: {fileID: 21300000, guid: 0ceeaf7074656ca4f836bc6ee66549ab, type: 3}
+  BackGround: {fileID: 21300000, guid: 13e478b64ffb2be479f876a9273036d3, type: 3}
+  ChangeColor: 0
+  EnchanceColor: {r: 1, g: 1, b: 1, a: 0.69803923}
 --- !u!1 &1773655833
 GameObject:
   m_ObjectHideFlags: 0

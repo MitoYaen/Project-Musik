@@ -8,6 +8,8 @@ public class LevelLoader : MonoBehaviour
     public static LevelLoader Instance { get; private set; }
     public int Diff { get; set; } = 0;
     public Koreography song;
+    public Sprite BackGround;
+    public Color EnchanceCol;
 
     private void Awake()
     {
@@ -29,6 +31,11 @@ public class LevelLoader : MonoBehaviour
     public void SetDiff(int Difficulty)
     {
         LevelLoader.Instance.Diff = Difficulty;
+    }
+    public void SetBackGround(Sprite BG,Color color)
+    {
+        LevelLoader.Instance.BackGround = BG;
+        LevelLoader.Instance.EnchanceCol = color;
     }
 
     public void LoadMenu()

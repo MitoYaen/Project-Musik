@@ -9276,7 +9276,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0ceeaf7074656ca4f836bc6ee66549ab, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b94288e70a4de0b4fb07257fa6af2585, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -13670,6 +13670,8 @@ MonoBehaviour:
   - {fileID: 1142062060}
   AudioCom: {fileID: 292384164}
   ScoreUpdate: {fileID: 1377712428}
+  Background: {fileID: 600326557}
+  EnchancerImg: {fileID: 1398423230}
   noteObject: {fileID: 8958161}
   noteObjectSide: {fileID: 288307762}
   noteObjectBig: {fileID: 1909435583}

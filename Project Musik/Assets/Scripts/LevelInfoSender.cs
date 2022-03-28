@@ -14,6 +14,10 @@ public class LevelInfoSender : MonoBehaviour
     public string Authur;
     public string illustrator;
     public string LevelDesigner;
+    public Sprite DefaultBackGround;
+    public Sprite BackGround;
+    public bool ChangeColor;
+    public Color EnchanceColor;
     internal Button button;
     LevelLoader lvlLoader;
     Transition Transition;
@@ -24,10 +28,6 @@ public class LevelInfoSender : MonoBehaviour
         lvlLoader = GameObject.Find("LevelLoader").GetComponent<LevelLoader>();
         Transition = GameObject.Find("Transition").GetComponent<Transition>();
         button = gameObject.GetComponent<Button>();
-        button.onClick.AddListener(delegate{ lvlLoader.SetSong(Song); });
-        button.onClick.AddListener(delegate { lvlLoader.SetDiff(Difficulty); });
-        button.onClick.AddListener(delegate { Transition.SetSongInfo(SongImage, songName, Authur, illustrator, LevelDesigner); });
-        button.onClick.AddListener(delegate { lvlLoader.LoadLevel(); });
         // Null Check
         if (SongImage == null)
         {
@@ -49,6 +49,23 @@ public class LevelInfoSender : MonoBehaviour
         {
             LevelDesigner = "The Big Brain";
         }
+        if (BackGround == null)
+        {
+            BackGround = DefaultBackGround;
+        }
+
+        button.onClick.AddListener(delegate { lvlLoader.SetSong(Song); });
+        button.onClick.AddListener(delegate { lvlLoader.SetDiff(Difficulty); });
+        if (ChangeColor)
+        {
+            button.onClick.AddListener(delegate { lvlLoader.SetBackGround(BackGround, EnchanceColor); });
+        }
+        else
+        {
+            button.onClick.AddListener(delegate { lvlLoader.SetBackGround(BackGround, Color.white); });
+        }
+        button.onClick.AddListener(delegate { Transition.SetSongInfo(SongImage, songName, Authur, illustrator, LevelDesigner); });
+        button.onClick.AddListener(delegate { lvlLoader.LoadLevel(); });
     }
     public void SetSongInfo()
     {

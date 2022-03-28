@@ -78,6 +78,8 @@ public class RythmGameManager : MonoBehaviour
     public List<LaneController> noteLanes = new List<LaneController>();
     public AudioSource AudioCom;
     public ScoreUpdater ScoreUpdate;
+    public Image Background;
+    public Image EnchancerImg;
 
     //Prefab
     public Note noteObject;
@@ -108,6 +110,10 @@ public class RythmGameManager : MonoBehaviour
             Debug.Log("Difficulty " + EventID + "Loaded.");
             Koreography GameSong = LvlLoader.GetComponent<LevelLoader>().song;
             Debug.Log("Song Loaded.");
+            Background.sprite = LvlLoader.GetComponent<LevelLoader>().BackGround;
+            EnchancerImg.color = LvlLoader.GetComponent<LevelLoader>().EnchanceCol;
+            EnchancerImg.color = new Color(EnchancerImg.color.r, EnchancerImg.color.g, EnchancerImg.color.b, 0.6f);
+
             simpleMusicPlayer = SimpleMusicPlayerTransRef.GetComponent<SimpleMusicPlayer>();
             simpleMusicPlayer.LoadSong(GameSong, 0, false);
         }
@@ -135,9 +141,7 @@ public class RythmGameManager : MonoBehaviour
         }
         PlayingKoreo = Koreographer.Instance.GetKoreographyAtIndex(0);
         KoreographyTrackBase rythmTrack = PlayingKoreo.GetTrackByID(EventID);
-        //Get Event
-
-        List<KoreographyEvent> rawEvents = rythmTrack.GetAllEvents();
+        List<KoreographyEvent> rawEvents = rythmTrack.GetAllEvents();        //Get Event
 
         //Init Score
         TotalNotes = rawEvents.Count;
