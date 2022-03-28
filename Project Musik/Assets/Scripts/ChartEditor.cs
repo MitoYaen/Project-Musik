@@ -7,54 +7,69 @@ public class ChartEditor : MonoBehaviour
 {
     public Koreography Koreo;
     public KoreographyTrack Chart;
-    public KoreographyTrack FormatPool;
     public SimpleMusicPlayer MusicPlayer;
     public AudioSource AudioCom;
-    List<KoreographyEvent> EventList = new List<KoreographyEvent>();
     public List<KoreographyEvent> CurEventList = new List<KoreographyEvent>();
     internal string ClipName;
-    public int SampleTime;
-    KoreographyEvent evt;
+    public int sampleTime;
+    public int subdivs = 2;
+    public int CurSample;
+    bool pause;
 
     // Start is called before the first frame update
     void Start()
     {
         ClipName = MusicPlayer.GetCurrentClipName();
-        EventList = FormatPool.GetAllEvents();
-        //MusicPlayer.LoadSong(Koreo, 0, true);
+        //MusicPlayer.LoadSong(Koreo, 0, false);
         AudioCom.Play();
     }
 
     private void Update()
     {
-        SampleTime = MusicPlayer.GetSampleTimeForClip(ClipName);
+        //Debug.Log("dd");
         CurEventList = Chart.GetAllEvents();
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown("w"))
         {
-            AddEvents(1);
+            AddTapEvents(1);
         }
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            AddEvents(2);
+            AddTapEvents(2);
         }
-        if (Input.GetKeyDown(KeyCode.H))
+        if (Input.GetKeyDown(KeyCode.U))
         {
-            AddEvents(3);
+            AddTapEvents(3);
         }
-        if (Input.GetKeyDown(KeyCode.J))
+        if (Input.GetKeyDown(KeyCode.I))
         {
-            AddEvents(4);
+            AddTapEvents(4);
+        }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            AddTapEvents(21);
+        }
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            AddTapEvents(22);
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            ChangePauseState();
         }
     }
 
-    public void AddEvents(int i)
+    public void AddTapEvents(int i)
     {
-        i = i-1;
-        evt = EventList[i];
-        evt.StartSample = SampleTime;
-        evt.EndSample = SampleTime;
+        CurSample = MusicPlayer.GetSampleTimeForClip(ClipName);
+        sampleTime = Koreo.GetSampleOfNearestBeat(CurSample, subdivs);
+        //SampleTime = MusicPlayer.GetSampleTimeForClip(ClipName);
+        KoreographyEvent evt = new KoreographyEvent();
+        IntPayload payload = new IntPayload();
+        payload.IntVal = i;
+        evt.Payload = payload;
+        evt.StartSample = sampleTime;
+        evt.EndSample = sampleTime;
         Chart.AddEvent(evt);
-        //Chart.SetDirty();
         if (Chart.AddEvent(evt))
         {
             Debug.Log("Added in " + i);
@@ -62,6 +77,19 @@ public class ChartEditor : MonoBehaviour
         else
         {
             Debug.Log("Failed to add in " + i);
+        }
+    }
+
+    public void ChangePauseState()
+    {
+        pause = !pause;
+        if (pause)
+        {
+            AudioCom.Play();
+        }
+        else
+        {
+            AudioCom.Pause();
         }
     }
 }

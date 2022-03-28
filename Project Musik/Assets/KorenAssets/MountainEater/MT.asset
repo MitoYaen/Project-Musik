@@ -23,9 +23,10 @@ MonoBehaviour:
     beatsPerMeasure: 4
     bStartNewMeasure: 1
   - sectionName: New Section
-    startSample: 16734
+    startSample: 16261
     samplesPerBeat: 20834.645669291338
     beatsPerMeasure: 4
     bStartNewMeasure: 1
   mTracks:
   - {fileID: 11400000, guid: 9e7d894f74f87df4cadc5f4b2e5defd7, type: 2}
+  - {fileID: 11400000, guid: 4a4c6d76930207f41b12033b9a3849bf, type: 2}

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using SonicBloom.Koreo;
 using SonicBloom.Koreo.Players;
-using Bolt;
+//using Bolt;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -77,6 +77,7 @@ public class RythmGameManager : MonoBehaviour
     Koreography PlayingKoreo;
     public List<LaneController> noteLanes = new List<LaneController>();
     public AudioSource AudioCom;
+    public ScoreUpdater ScoreUpdate;
 
     //Prefab
     public Note noteObject;
@@ -138,9 +139,11 @@ public class RythmGameManager : MonoBehaviour
 
         List<KoreographyEvent> rawEvents = rythmTrack.GetAllEvents();
 
+        //Init Score
         TotalNotes = rawEvents.Count;
+        ScoreUpdate.Value = (int)CurScore;
         PerScore = FullScore / TotalNotes ;
-        Variables.ActiveScene.Set("PerScore",PerScore);
+        //Variables.ActiveScene.Set("PerScore",PerScore);
         for (int i = 0; i < rawEvents.Count; ++i)
         {
             KoreographyEvent evt = rawEvents[i];
@@ -257,7 +260,7 @@ public class RythmGameManager : MonoBehaviour
         }
         
         //Update the scores to Bolt
-        Variables.Object(BoltLinkObject).Set("Score_Ori", CurScore);
+        //Variables.Object(BoltLinkObject).Set("Score_Ori", CurScore);
 #if UNITY_EDITOR
 
         //Cheats to debug
@@ -302,12 +305,6 @@ public class RythmGameManager : MonoBehaviour
         {
             AudioCom.Play();
         }
-    }
-
-    //Emitting a ghost Note to prevent first lag
-    public void EmitGhostNote()
-    {
-
     }
 
     //pick up the object from the pool
@@ -393,12 +390,14 @@ public class RythmGameManager : MonoBehaviour
     public void PureScoreUpdate()
     {
         CurScore += PerScore;
+        ScoreUpdate.Value = (int)CurScore;
     }
 
     //Score Update (Far)
     public void FarScoreUpdate()
     {
         CurScore += PerScore/2;
+        ScoreUpdate.Value = (int)CurScore;
     }
 
     //Reload Scene

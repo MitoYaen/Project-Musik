@@ -44,7 +44,7 @@ public class LevelLoader : MonoBehaviour
     IEnumerator LoadAsync(string SceneName)
     {
         float timer = 0f;
-        float MinLoadTime = 2.5f;
+        float MinLoadTime = 0.5f;
 
         AsyncOperation operation = SceneManager.LoadSceneAsync(SceneName);
         operation.allowSceneActivation = false;
