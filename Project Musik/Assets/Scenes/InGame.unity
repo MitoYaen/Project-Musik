@@ -939,7 +939,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a30759de6305dd4ebe29c802ee57d16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyboardButton: 104
+  keyboardButton: 117
   laneID: 3
   TargetVisual: {fileID: 1979326649}
   PressedVisual: {fileID: 2146436981}
@@ -4520,7 +4520,7 @@ MonoBehaviour:
   ObjHoldLineBack: {fileID: 833830081}
   HoldLineBack: {fileID: 833830082}
   hitOffset: 0
-  HitSound: {fileID: 8300000, guid: 9a653236adaddbf4c93733216a1621de, type: 3}
+  HitSound: {fileID: 8300000, guid: 9ff0443198b686a4aa5b89a481cd885c, type: 3}
   SfxManager: {fileID: 1935523669}
   targetOffset: 2170
   DebugText: {fileID: 19861742}
@@ -7394,7 +7394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a30759de6305dd4ebe29c802ee57d16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyboardButton: 102
+  keyboardButton: 101
   laneID: 2
   TargetVisual: {fileID: 1007837601}
   PressedVisual: {fileID: 2093994601}
@@ -7609,7 +7609,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh60370
+  m_Name: pb_Mesh36936
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -12173,7 +12173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a30759de6305dd4ebe29c802ee57d16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyboardButton: 106
+  keyboardButton: 105
   laneID: 4
   TargetVisual: {fileID: 1979326649}
   PressedVisual: {fileID: 1391143784}
@@ -12705,7 +12705,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh136352
+  m_Name: pb_Mesh22016
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -26536,7 +26536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a30759de6305dd4ebe29c802ee57d16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyboardButton: 100
+  keyboardButton: 119
   laneID: 1
   TargetVisual: {fileID: 1982523358}
   PressedVisual: {fileID: 1533003593}
@@ -32706,7 +32706,7 @@ MonoBehaviour:
   ObjHoldLineBack: {fileID: 913600474}
   HoldLineBack: {fileID: 913600476}
   hitOffset: 0
-  HitSound: {fileID: 8300000, guid: 9a653236adaddbf4c93733216a1621de, type: 3}
+  HitSound: {fileID: 8300000, guid: 9ff0443198b686a4aa5b89a481cd885c, type: 3}
   SfxManager: {fileID: 1935523669}
   targetOffset: 2170
   DebugText: {fileID: 2688384}
@@ -34808,7 +34808,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh136606
+  m_Name: pb_Mesh22270
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -35488,7 +35488,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a30759de6305dd4ebe29c802ee57d16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyboardButton: 115
+  keyboardButton: 113
   laneID: 9
   TargetVisual: {fileID: 2142873520}
   PressedVisual: {fileID: 0}
