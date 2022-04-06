@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Debug
   - Note
+  - T1
   layers:
   - Default
   - TransparentFX

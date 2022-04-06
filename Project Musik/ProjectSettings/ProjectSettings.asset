@@ -49,8 +49,8 @@ PlayerSettings:
   m_StereoRenderingPath: 0
   m_ActiveColorSpace: 0
   m_MTRendering: 1
-  mipStripping: 0
-  numberOfMipsStripped: 0
+  mipStripping: 1
+  numberOfMipsStripped: 1
   m_StackTraceTypes: 010000000100000001000000010000000100000001000000
   iosShowActivityIndicatorOnLoading: -1
   androidShowActivityIndicatorOnLoading: -1
@@ -273,7 +273,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: 55bb1d2eac185724da5bbc627d3b0ae2, type: 3}
+      m_Icon: {fileID: 2800000, guid: bb67cded1ea0b874a823f8de9a000367, type: 3}
       m_Width: 128
       m_Height: 128
       m_Kind: 0
@@ -341,8 +341,8 @@ PlayerSettings:
       m_Kind: 1
       m_SubKind: 
     - m_Textures:
-      - {fileID: 2800000, guid: 55bb1d2eac185724da5bbc627d3b0ae2, type: 3}
-      - {fileID: 2800000, guid: 55bb1d2eac185724da5bbc627d3b0ae2, type: 3}
+      - {fileID: 2800000, guid: bb67cded1ea0b874a823f8de9a000367, type: 3}
+      - {fileID: 2800000, guid: bb67cded1ea0b874a823f8de9a000367, type: 3}
       m_Width: 432
       m_Height: 432
       m_Kind: 2

@@ -126,7 +126,7 @@ public class RythmGameManager : MonoBehaviour
         {
             NoteSpeedSlider.value = PlayerPrefs.GetFloat("NoteSpeed");
             InGameNoteSpeed = PlayerPrefs.GetFloat("NoteSpeed");
-            Debug.Log(PlayerPrefs.GetFloat("NoteSpeed"));
+            //Debug.Log(PlayerPrefs.GetFloat("NoteSpeed"));
         }
         else
         {
@@ -257,14 +257,12 @@ public class RythmGameManager : MonoBehaviour
                 GameStart = true;
             }
         }
-        //
+
         if (LeadInTimeLeft>0)
         {
             LeadInTimeLeft = Mathf.Max(LeadInTimeLeft - Time.unscaledDeltaTime, 0);
         }
         
-        //Update the scores to Bolt
-        //Variables.Object(BoltLinkObject).Set("Score_Ori", CurScore);
 #if UNITY_EDITOR
 
         //Cheats to debug
@@ -321,7 +319,6 @@ public class RythmGameManager : MonoBehaviour
             //Debug.Log("note spawned as" + NoteIDref + ", in Lane" + LaneID);
             retObj = noteObjectPool.Pop();
         }
-        //Questionable Code
         
         if (SidenoteObjectPool.Count > 0)
         {
@@ -333,7 +330,6 @@ public class RythmGameManager : MonoBehaviour
             //Debug.Log("Big note spawned as" + NoteIDref + ", in Lane" + LaneID);
             retObj = BignoteObjectPool.Pop();
         }
-        //Questionable Code 
         else
         {
             //Origin of the resource
@@ -375,12 +371,12 @@ public class RythmGameManager : MonoBehaviour
         {
             obj.enabled = false;
             obj.gameObject.SetActive(false);
-            noteObjectPool.Push(obj);
-            /*if (obj.Type > 1 && obj.Type < 5 )
+            //noteObjectPool.Push(obj);
+            /*if (obj.Type > 1 && obj.Type < 5 || obj.Type == 8)
             {
                 SidenoteObjectPool.Push(obj);
             }
-            if (obj.Type >= 5)
+            if (obj.Type >= 5 && obj.Type <= 8)
             {
                 BignoteObjectPool.Push(obj);
             }

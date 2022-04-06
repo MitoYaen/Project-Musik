@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Scripting;
 using SonicBloom.Koreo;
 using System.Collections;
 
@@ -40,6 +41,7 @@ public class LevelLoader : MonoBehaviour
 
     public void LoadMenu()
     {
+        Debug.Log("menu");
         Transition.Instance.LeftToMid();
         StartCoroutine(LoadAsync("Menu"));
     }
@@ -51,7 +53,7 @@ public class LevelLoader : MonoBehaviour
     IEnumerator LoadAsync(string SceneName)
     {
         float timer = 0f;
-        float MinLoadTime = 0.5f;
+        float MinLoadTime = Transition.Instance.Duration + Transition.Instance.Duration/3;
 
         AsyncOperation operation = SceneManager.LoadSceneAsync(SceneName);
         operation.allowSceneActivation = false;
@@ -62,7 +64,10 @@ public class LevelLoader : MonoBehaviour
 
             if (timer > MinLoadTime)
             {
+                ClearMemory();
                 operation.allowSceneActivation = true;
+                Transition.Instance.StartCoroutine(Transition.Instance.NextStep());
+                yield break;
             }
 
             yield return null;
@@ -70,6 +75,12 @@ public class LevelLoader : MonoBehaviour
 
         yield return null;
 
+    }
+
+    public static void ClearMemory()
+    {
+        GarbageCollector.CollectIncremental();
+        Resources.UnloadUnusedAssets();
     }
 
 }

@@ -9,6 +9,11 @@ public class FpsDisplay : MonoBehaviour
 
     public void Awake()
     {
+#if UNITY_EDITOR
+        Debug.unityLogger.logEnabled = true;
+#else
+        Debug.unityLogger.logEnabled = false;
+#endif
         display_Text = GetComponent<Text>();
         Application.targetFrameRate = 60;
     }

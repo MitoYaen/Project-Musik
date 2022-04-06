@@ -8,7 +8,7 @@ using DG.Tweening;
 public class Transition : MonoBehaviour
 {
     public float Duration = 0.3f;
-    public float WaitDuration = 5f;
+    public float WaitDuration = 2f;
     public static Transition Instance { get; private set; }
     public RectTransform Mask;
     public GameObject SongInfo;
@@ -19,7 +19,6 @@ public class Transition : MonoBehaviour
     public TextMeshProUGUI LD;
 
 
-    //public bool showinfo = false;
     internal int CurrentState;
     internal int NextState;
     /*
@@ -50,7 +49,6 @@ public class Transition : MonoBehaviour
         Mask.DOAnchorPosX(0, Duration).SetEase(Ease.OutCubic);
         SongInfo.SetActive(true);
         CurrentState = 1;
-        StartCoroutine(NextStep());
         NextState = 2;
     }
     public void MidToLeft()
@@ -66,7 +64,6 @@ public class Transition : MonoBehaviour
         Mask.anchoredPosition = new Vector2(-2800, 0);
         Mask.DOAnchorPosX(0, Duration).SetEase(Ease.OutCubic);
         CurrentState = 2;
-        StartCoroutine(NextStep());
         NextState = 0;
     }
     public void MidToRight()
@@ -78,18 +75,19 @@ public class Transition : MonoBehaviour
 
     public IEnumerator NextStep()
     {
-        yield return new WaitForSeconds(WaitDuration);
-        switch (NextState)
-        {
-            case 0:
-                MidToRight();
-                break;
-            case 2:
-                MidToLeft();
-                break;
-            default:
-                break;
-        }
+            yield return new WaitForSeconds(WaitDuration);
+            switch (NextState)
+            {
+                case 0:
+                    MidToRight();
+                    break;
+                case 2:
+                    MidToLeft();
+                    break;
+                default:
+                    break;
+            }
+            yield return null;
     }
 
     public void SetSongInfo(Sprite SongImage,string SongName, string Authur, string illustrator, string LevelDesigner)

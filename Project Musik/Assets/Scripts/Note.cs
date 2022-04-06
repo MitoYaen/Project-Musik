@@ -93,10 +93,6 @@ public class Note : MonoBehaviour
                 //ResetNote();
                 return;
             }
-            else
-            {
-
-            }
             //AutoPlay Options ↑
 
             if (laneController.Flicking && hitOffset >= targetOffset)
@@ -104,10 +100,6 @@ public class Note : MonoBehaviour
                 laneController.CheckNoteHit();
                 //ResetNote();
                 return;
-            }
-            else
-            {
-
             }
 
 
@@ -118,6 +110,8 @@ public class Note : MonoBehaviour
                 return;
 
             }
+
+
 
             if (transform.position.z <= laneController.targetBottomTrans.position.z)
             {
@@ -191,6 +185,15 @@ public class Note : MonoBehaviour
         trackedEvent = null;
         laneController = null;
         gameController = null;
+        if (RelatedEndNote != null && isLongNote)
+        {
+            return;
+        }
+        if (RelatedStartNote != null && isLongNoteEnd)
+        {
+            Destroy(RelatedStartNote.gameObject);
+        }
+        Destroy(gameObject);
 
     }
 
@@ -310,6 +313,7 @@ public class Note : MonoBehaviour
             hitLevel = 2;
             gameController.Pure++;
             SfxManager.PlayOneShot(HitSound);
+            Debug.Log("结果为 Auto-Pure, " + "误差为" + (int)((targetOffset - hitOffset) / 44.4) + "ms.");
             GameObject.Instantiate(PS_Pure, gameObject.transform.position, Quaternion.identity);
             return hitLevel;
         }
@@ -321,7 +325,7 @@ public class Note : MonoBehaviour
 
                 {
                     hitLevel = 2;
-                    //Debug.Log("结果为 Flick-Pure, " + "误差为" + (int)((targetOffset - hitOffset) / 44.4) + "ms.");
+                    Debug.Log("结果为 Flick-Pure, " + "误差为" + (int)((targetOffset - hitOffset) / 44.4) + "ms.");
                     SfxManager.PlayOneShot(HitSound);
                     gameController.Pure++;
                     GameObject.Instantiate(PS_Pure, gameObject.transform.position, Quaternion.identity);
@@ -330,7 +334,7 @@ public class Note : MonoBehaviour
                 else
                 {
                     gameController.Lost++;
-                    //Debug.Log("结果为 Lost, " + "误差为" + Mathf.RoundToInt(targetOffset - hitOffset) / 44.4 + "ms.");
+                    Debug.Log("结果为 Lost, " + "误差为" + Mathf.RoundToInt(targetOffset - hitOffset) / 44.4 + "ms.");
                     this.enabled = false;
                     return hitLevel;
                 }
@@ -343,7 +347,7 @@ public class Note : MonoBehaviour
                 gameController.Combo = 0;
                 hitLevel = 0;
                 gameController.Lost++;
-                //Debug.Log("结果为 Lost, " + "误差为" + (int)((targetOffset - hitOffset) / 44.4) + "ms.");
+                Debug.Log("结果为 Lost, " + "误差为" + (int)((targetOffset - hitOffset) / 44.4) + "ms.");
                 this.enabled = false;
             }
             if
@@ -351,7 +355,7 @@ public class Note : MonoBehaviour
                 <= targetOffset - (gameController.pureFloat * 0.001f * gameController.SampleRate))
             {
                 hitLevel = 1;
-                //Debug.Log("结果为 FarEarly, " + "误差为" + (int)((targetOffset - hitOffset) / 44.4) + "ms.");
+                Debug.Log("结果为 FarEarly, " + "误差为" + (int)((targetOffset - hitOffset) / 44.4) + "ms.");
                 SfxManager.PlayOneShot(HitSound);
                 gameController.Far++;
                 GameObject.Instantiate(PS_Far, gameObject.transform.position, Quaternion.identity);
@@ -361,7 +365,7 @@ public class Note : MonoBehaviour
                 <= targetOffset + (gameController.pureFloat * 0.001f * gameController.SampleRate))
             {
                 hitLevel = 2;
-                //Debug.Log("结果为 Pure, " + "误差为" + (int)((targetOffset - hitOffset) / 44.4) + "ms.");
+                Debug.Log("结果为 Pure, " + "误差为" + (int)((targetOffset - hitOffset) / 44.4) + "ms.");
                 SfxManager.PlayOneShot(HitSound);
                 gameController.Pure++;
                 GameObject.Instantiate(PS_Pure, gameObject.transform.position, Quaternion.identity);
@@ -371,7 +375,7 @@ public class Note : MonoBehaviour
                 <= targetOffset + (gameController.farFloat * 0.001f * gameController.SampleRate))
             {
                 hitLevel = 3;
-                //Debug.Log("结果为 FarLate, " + "误差为" + (int)((targetOffset - hitOffset) / 44.4) + "ms.");
+                Debug.Log("结果为 FarLate, " + "误差为" + (int)((targetOffset - hitOffset) / 44.4) + "ms.");
                 SfxManager.PlayOneShot(HitSound);
                 gameController.Far++;
                 GameObject.Instantiate(PS_Far, gameObject.transform.position, Quaternion.identity);
@@ -383,7 +387,7 @@ public class Note : MonoBehaviour
                 hitLevel = 0;
                 gameController.Combo = 0;
                 gameController.Lost++;
-                //Debug.Log("结果为 Lost, " + "误差为" + Mathf.RoundToInt(targetOffset - hitOffset) / 44.4 + "ms.");
+                Debug.Log("结果为 Lost, " + "误差为" + Mathf.RoundToInt(targetOffset - hitOffset) / 44.4 + "ms.");
                 this.enabled = false;
             }
         return hitLevel;

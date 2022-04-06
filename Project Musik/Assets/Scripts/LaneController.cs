@@ -85,13 +85,12 @@ public class LaneController : MonoBehaviour
         }
 
         //Clear unused notes
-        while (trackedNotes.Count>0&&trackedNotes.Peek().IsNoteMissed())
+        while (trackedNotes.Count>0 && trackedNotes.Peek().IsNoteMissed() && trackedNotes.Peek()!= null)
         {
             GameController.Combo = 0;
             GameController.Lost++;
-            //Debug.Log("结果为 Lost, " + "漏键。");
+            Debug.Log("结果为 Lost, " + "漏键。");
             trackedNotes.Dequeue();
-            //Questionable Code
         }
         //Check the Spawning of the new notes
         CheckSpawnNext();
@@ -389,7 +388,7 @@ public class LaneController : MonoBehaviour
         
         if (DebuglogFlick)
         {
-             Debug.Log("Flick Detected in " + laneID);
+             //Debug.Log("Flick Detected in " + laneID);
             DebuglogFlick = false;
             Flicking = true;
         }
@@ -398,27 +397,27 @@ public class LaneController : MonoBehaviour
 
     public void FlickDone()
     {
-        Debug.Log("Flick Done in" + laneID);
+        //Debug.Log("Flick Done in" + laneID);
         Flicking = false;
         DebuglogFlick = true;
     }
     public void HoldDetect()
     {
-        Debug.Log("Hold Detected in " + laneID);
+        //Debug.Log("Hold Detected in " + laneID);
         Holding = true;
     }
     public void JudgeHoldStart()
     {
         if (DebuglogJudgeHold)
         {
-            Debug.Log("Judge Hold Detected in " + laneID);
+            //Debug.Log("Judge Hold Detected in " + laneID);
             JudgeHolding = true;
         }
         
     }
     public void Release()
     {
-        Debug.Log("Released in " + laneID);
+        //Debug.Log("Released in " + laneID);
         FlickDone();
         DebuglogJudgeHold = true;
         JudgeHolding = false;

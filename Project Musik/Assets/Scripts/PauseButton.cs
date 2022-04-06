@@ -59,19 +59,12 @@ public class PauseButton : MonoBehaviour
 
     public void Replay()
     {
-        Transition.Instance.RightToMid();
-        StartCoroutine(WaitLoad("InGame"));
+        LevelLoader.Instance.LoadLevel();
     }
 
     public void ExitSong()
     {
-        Transition.Instance.LeftToMid();
-        StartCoroutine(WaitLoad("Menu"));
-    }
-    IEnumerator WaitLoad(string Scene)
-    {
-        yield return new WaitForSeconds(Transition.Instance.WaitDuration);
-        SceneManager.LoadScene(Scene);
+        LevelLoader.Instance.LoadMenu();
     }
     
 }
