@@ -2,6 +2,8 @@ using DG.Tweening;
 using SonicBloom.Koreo;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class LaneController : MonoBehaviour
 {
@@ -41,6 +43,7 @@ public class LaneController : MonoBehaviour
     public Transform targetBottomTrans;
 
     //Lane Status
+    [SerializeField]private bool Touching; //Check if touched
     public bool Flicking;    //Check Flick Status
     public bool Holding;    //Check Hold Status (Visual)
     internal bool JudgeHolding; //Check Hold Status (Judgement)
@@ -69,19 +72,6 @@ public class LaneController : MonoBehaviour
         if (GameController.GamePause)
         {
             return;
-        }
-        
-        // PressVisual (Null Check)
-        if ((PressedVisual != null || PressedBigVisual != null))
-        {
-            if (PressedVisual != null)
-            {
-                PressedVisual.SetActive(Holding);
-            }
-            else
-            {
-                
-            }
         }
 
         //Clear unused notes
@@ -347,6 +337,10 @@ public class LaneController : MonoBehaviour
                 {
 
                 }
+                if(noteObject.Flick && !noteObject.FlickGreat)
+                {
+                    return;
+                }
                 trackedNotes.Dequeue();
 
                 int hitLevel = noteObject.IsNoteHittable();
@@ -381,31 +375,23 @@ public class LaneController : MonoBehaviour
             }
         }
     }
-    internal bool DebuglogFlick = true;
-    internal bool DebuglogJudgeHold = true;
     public void FlickDetect() 
     {
-        
-        if (DebuglogFlick)
-        {
-             //Debug.Log("Flick Detected in " + laneID);
-            DebuglogFlick = false;
-            Flicking = true;
-        }
-        
+        //Debug.Log("Flick Detected in " + laneID);
+        Flicking = true;
     }
 
     public void FlickDone()
     {
         //Debug.Log("Flick Done in" + laneID);
         Flicking = false;
-        DebuglogFlick = true;
     }
     public void HoldDetect()
     {
         //Debug.Log("Hold Detected in " + laneID);
         Holding = true;
     }
+    bool DebuglogJudgeHold = true;
     public void JudgeHoldStart()
     {
         if (DebuglogJudgeHold)
@@ -418,7 +404,7 @@ public class LaneController : MonoBehaviour
     public void Release()
     {
         //Debug.Log("Released in " + laneID);
-        FlickDone();
+        //FlickDone();
         DebuglogJudgeHold = true;
         JudgeHolding = false;
         Holding = false;
@@ -432,6 +418,4 @@ public class LaneController : MonoBehaviour
             PressedBigVisual.SetActive(false);
         }
     }
-
-
 }

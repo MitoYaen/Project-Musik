@@ -7,6 +7,11 @@ TagManager:
   - Debug
   - Note
   - T1
+  - Late
+  - Activator
+  - Early
+  - Cleaner
+  - Miss
   layers:
   - Default
   - TransparentFX
@@ -14,7 +19,7 @@ TagManager:
   - No Render
   - Water
   - UI
-  - 
+  - Gameplay
   - 
   - 
   - 

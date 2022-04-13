@@ -34,6 +34,8 @@ public class Note : MonoBehaviour
 
     public bool Flick;
 
+    public bool FlickGreat = true;
+
     public bool Big;
 
     public Note RelatedStartNote;
@@ -95,11 +97,20 @@ public class Note : MonoBehaviour
             }
             //AutoPlay Options ¡ü
 
-            if (laneController.Flicking && hitOffset >= targetOffset)
+            if (Flick && hitOffset >= targetOffset)
             {
-                laneController.CheckNoteHit();
-                //ResetNote();
-                return;
+                if (laneController.Flicking)
+                {
+                    Debug.Log("Flick ok");
+                    FlickGreat = true;
+                    laneController.CheckNoteHit();
+                    return;
+                }
+                else
+                {
+                    Debug.Log("Flick Failed.");
+                    FlickGreat = false;
+                }
             }
 
 
@@ -318,7 +329,7 @@ public class Note : MonoBehaviour
             return hitLevel;
         }
             //Branch When Flick
-            if (Flick)
+            if (Flick )
             {
                 if (hitOffset >= (targetOffset - (gameController.farFloat * 0.001f * gameController.SampleRate)) &&
                     hitOffset <= (targetOffset + (gameController.farFloat * 0.001f * gameController.SampleRate)))
