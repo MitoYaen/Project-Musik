@@ -20,6 +20,7 @@ public class RythmGameManager : MonoBehaviour
     [Range(0.5f,8f)]
     [SerializeField]  public float InGameNoteSpeed;
     public float NoteSpeed;
+    internal float NSpeedScale;
 
     [Range(8f,200f)]
     public float HitWindowSize_ms;
@@ -110,6 +111,7 @@ public class RythmGameManager : MonoBehaviour
             Debug.Log("Difficulty " + EventID + "Loaded.");
             Koreography GameSong = LvlLoader.GetComponent<LevelLoader>().song;
             Debug.Log("Song Loaded.");
+            NSpeedScale = LvlLoader.GetComponent<LevelLoader>().noteSpeedScale;
             Background.sprite = LvlLoader.GetComponent<LevelLoader>().BackGround;
             EnchancerImg.color = LvlLoader.GetComponent<LevelLoader>().EnchanceCol;
             EnchancerImg.color = new Color(EnchancerImg.color.r, EnchancerImg.color.g, EnchancerImg.color.b, 0.6f);
@@ -238,7 +240,7 @@ public class RythmGameManager : MonoBehaviour
         NoteOffset_ms = (int)NoteOffsetSlider.value;
 
         //Multiply the note speed
-        NoteSpeed = InGameNoteSpeed * 15;
+        NoteSpeed = InGameNoteSpeed * 15 * NSpeedScale;
         //Update Combos
         if (Combo > MaxCombo)
         {

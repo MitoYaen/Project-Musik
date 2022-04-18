@@ -38,6 +38,8 @@ public class Note : MonoBehaviour
 
     public bool Big;
 
+    private bool F_LineKeep = false;
+
     public Note RelatedStartNote;
 
     public Note RelatedEndNote;
@@ -84,7 +86,10 @@ public class Note : MonoBehaviour
         }
         if (gameController != null || laneController != null)
         {
-            UpdatePosition();
+            if (!F_LineKeep)
+            {
+                UpdatePosition();
+            }
             GetHitOffset();
             UpdateLinePosition();
 
@@ -193,13 +198,13 @@ public class Note : MonoBehaviour
     //reset note object 
     private void ResetNote()
     {
-        trackedEvent = null;
-        laneController = null;
-        gameController = null;
-        if (RelatedEndNote != null && isLongNote)
+        if (isLongNote)
         {
             return;
         }
+        trackedEvent = null;
+        laneController = null;
+        gameController = null;
         if (RelatedStartNote != null && isLongNoteEnd)
         {
             Destroy(RelatedStartNote.gameObject);
@@ -210,7 +215,11 @@ public class Note : MonoBehaviour
 
     void ReturnToPool()
     {
-        gameController.ReturnNoteObjectToPool(this);
+        if (isLongNote)
+        {
+            F_LineKeep = true;
+        }
+        //gameController.ReturnNoteObjectToPool(this);
         ResetNote();
     }
     public void OnHit()

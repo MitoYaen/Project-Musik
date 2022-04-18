@@ -7,6 +7,7 @@ public class LevelInfoSender : MonoBehaviour
     public string SongName;
     public Koreography Song;
     public int Difficulty;
+    public float NoteSpeedScale;
     public Text SongText;
     public Sprite DefaultImage;
     public Sprite SongImage;
@@ -54,9 +55,13 @@ public class LevelInfoSender : MonoBehaviour
         {
             BackGround = DefaultBackGround;
         }
+        if (NoteSpeedScale == 0 || NoteSpeedScale == null)
+        {
+            NoteSpeedScale = 1;
+        }
 
         button.onClick.AddListener(delegate { lvlLoader.SetSong(Song); });
-        button.onClick.AddListener(delegate { lvlLoader.SetDiff(Difficulty); });
+        button.onClick.AddListener(delegate { lvlLoader.SetDiff(Difficulty,NoteSpeedScale); });
         if (ChangeColor)
         {
             button.onClick.AddListener(delegate { lvlLoader.SetBackGround(BackGround, EnchanceColor); });

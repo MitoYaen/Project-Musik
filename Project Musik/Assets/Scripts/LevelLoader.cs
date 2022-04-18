@@ -8,6 +8,7 @@ public class LevelLoader : MonoBehaviour
 {
     public static LevelLoader Instance { get; private set; }
     public int Diff { get; set; } = 0;
+    public float noteSpeedScale;
     public Koreography song;
     public Sprite BackGround;
     public Color EnchanceCol;
@@ -29,9 +30,10 @@ public class LevelLoader : MonoBehaviour
     {
         LevelLoader.Instance.song = Song;
     }
-    public void SetDiff(int Difficulty)
+    public void SetDiff(int Difficulty, float SpeedScale)
     {
         LevelLoader.Instance.Diff = Difficulty;
+        LevelLoader.Instance.noteSpeedScale = SpeedScale;
     }
     public void SetBackGround(Sprite BG,Color color)
     {
