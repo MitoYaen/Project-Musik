@@ -199,12 +199,12 @@ public class LaneController : MonoBehaviour
                     //21-22 Big Flick;
                     case 21:
                         isBig = true;
-                        isFlick = true;
+                        //isFlick = true;
                         noteNum = 9;
                         break;
                     case 22:
                         isBig = true;
-                        isFlick = true;
+                        //isFlick = true;
                         noteNum = 10;
                         break;
                     case 23:
@@ -412,6 +412,10 @@ public class LaneController : MonoBehaviour
         {
             GoodHolding = false;
             CheckNoteHit();
+        }
+        if (PressedVisual != null)
+        {
+            PressedVisual.GetComponent<SpriteRenderer>().enabled = false;
         }
         if (PressedBigVisual != null)
         {

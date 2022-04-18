@@ -10,7 +10,7 @@ public class LevelInfoSender : MonoBehaviour
     public Text SongText;
     public Sprite DefaultImage;
     public Sprite SongImage;
-    public string songName;
+    internal string songName;
     public string Authur;
     public string illustrator;
     public string LevelDesigner;
@@ -24,7 +24,8 @@ public class LevelInfoSender : MonoBehaviour
 
     private void Start()
     {
-        SongText.text = SongName; 
+        SongText.text = SongName;
+        songName = SongName;
         lvlLoader = GameObject.Find("LevelLoader").GetComponent<LevelLoader>();
         Transition = GameObject.Find("Transition").GetComponent<Transition>();
         button = gameObject.GetComponent<Button>();

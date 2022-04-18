@@ -331,7 +331,7 @@ public class Note : MonoBehaviour
             //Branch When Flick
             if (Flick )
             {
-                if (hitOffset >= (targetOffset - (gameController.farFloat * 0.001f * gameController.SampleRate)) &&
+                if ((targetOffset - (gameController.farFloat * 0.001f * gameController.SampleRate)) <= hitOffset &&
                     hitOffset <= (targetOffset + (gameController.farFloat * 0.001f * gameController.SampleRate)))
 
                 {

@@ -11,7 +11,6 @@ public class FlickDetect : MonoBehaviour, IDragHandler, IPointerEnterHandler,IPo
     [SerializeField] float ClearTime;
     public UnityEvent WhileFlicking;
     public UnityEvent WhenDone;
-    //public List<Material> Mats = new List<Material>();
     private bool update;
     private bool InArea;
 
@@ -37,8 +36,8 @@ public class FlickDetect : MonoBehaviour, IDragHandler, IPointerEnterHandler,IPo
 
     public void OnDrag(PointerEventData eventData)
     {
-        update = true;
-        UpdateStop();
+        //update = true;
+        //UpdateStop();
     }
     public void OnPointerExit(PointerEventData eventData)
     {
@@ -54,6 +53,12 @@ public class FlickDetect : MonoBehaviour, IDragHandler, IPointerEnterHandler,IPo
     }
 
     Coroutine CountingCoroutine;
+
+    public void WhenFlick()
+    {
+        update = true;
+        UpdateStop();
+    }
     private void UpdateStop()
     {
         if (CountingCoroutine != null)
