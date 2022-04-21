@@ -48,9 +48,13 @@ public class Note : MonoBehaviour
 
     RythmGameManager gameController;
 
-    public ParticleSystem PS_Pure;
+    [SerializeField] private ParticleSystem PS_Pure;
 
-    public ParticleSystem PS_Far;
+    [SerializeField] private ParticleSystem PS_Far;
+
+    [SerializeField] private ParticleSystem HoldEffect;
+
+    protected ParticleSystem LongHoldEffect;
 
     public GameObject ObjHoldLineFront;
 
@@ -297,6 +301,10 @@ public class Note : MonoBehaviour
                 HoldLineFront.SetPosition(1, Losepos);
                 HoldLineBack.SetPosition(0, transform.position);
                 HoldLineBack.SetPosition(1, Losepos);
+                if (isLongNoteEnd && RelatedStartNote.LongHoldEffect != null)
+                {
+                    RelatedStartNote.LongHoldEffect.Stop();
+                }
             }
 
         }
@@ -334,7 +342,20 @@ public class Note : MonoBehaviour
             gameController.Pure++;
             SfxManager.PlayOneShot(HitSound);
             Debug.Log("结果为 Auto-Pure, " + "误差为" + (int)((targetOffset - hitOffset) / 44.4) + "ms.");
-            GameObject.Instantiate(PS_Pure, gameObject.transform.position, Quaternion.identity);
+            if (isLongNote && HoldEffect != null)
+            {
+                LongHoldEffect = GameObject.Instantiate(HoldEffect, gameObject.transform.position, Quaternion.identity);
+                LongHoldEffect.Play();
+            }
+            else if (isLongNoteEnd && RelatedStartNote.LongHoldEffect != null)
+            {
+                GameObject.Instantiate(PS_Pure, gameObject.transform.position, Quaternion.identity);
+                RelatedStartNote.LongHoldEffect.Stop();
+            }
+            else
+            {
+                GameObject.Instantiate(PS_Pure, gameObject.transform.position, Quaternion.identity);
+            }
             return hitLevel;
         }
             //Branch When Flick
@@ -388,7 +409,20 @@ public class Note : MonoBehaviour
                 Debug.Log("结果为 Pure, " + "误差为" + (int)((targetOffset - hitOffset) / 44.4) + "ms.");
                 SfxManager.PlayOneShot(HitSound);
                 gameController.Pure++;
-                GameObject.Instantiate(PS_Pure, gameObject.transform.position, Quaternion.identity);
+                if (isLongNote && HoldEffect != null)
+                {
+                    LongHoldEffect = GameObject.Instantiate(HoldEffect, gameObject.transform.position, Quaternion.identity);
+                    LongHoldEffect.Play();
+                }
+                else if (isLongNoteEnd && RelatedStartNote.LongHoldEffect != null)
+                {
+                    GameObject.Instantiate(PS_Pure, gameObject.transform.position, Quaternion.identity);
+                    RelatedStartNote.LongHoldEffect.Stop();
+                }
+                else
+                {
+                    GameObject.Instantiate(PS_Pure, gameObject.transform.position, Quaternion.identity);
+                }
             }
             if
                 (targetOffset + (gameController.pureFloat * 0.001f * gameController.SampleRate) <= hitOffset && hitOffset
@@ -407,7 +441,7 @@ public class Note : MonoBehaviour
                 hitLevel = 0;
                 gameController.Combo = 0;
                 gameController.Lost++;
-                Debug.Log("结果为 Lost, " + "误差为" + Mathf.RoundToInt(targetOffset - hitOffset) / 44.4 + "ms.");
+            Debug.Log("结果为 Lost, " + "误差为" + Mathf.RoundToInt(targetOffset - hitOffset) / 44.4 + "ms.");
                 this.enabled = false;
             }
         return hitLevel;
