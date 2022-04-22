@@ -490,7 +490,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Duration: 1
-  WaitDuration: 2
+  WaitDuration: 4.5
   Mask: {fileID: 8904573412115000167}
   SongInfo: {fileID: 8904573412484374210}
   songimage: {fileID: 8904573412625399772}

@@ -5,6 +5,7 @@ using SonicBloom.Koreo;
 public class LevelInfoSender : MonoBehaviour
 {
     public string SongName;
+    public string InGameName;
     public Koreography Song;
     public int Difficulty;
     public float NoteSpeedScale;
@@ -19,14 +20,17 @@ public class LevelInfoSender : MonoBehaviour
     public Sprite BackGround;
     public bool ChangeColor;
     public Color EnchanceColor;
+    public AudioClip PreviewClip;
     internal Button button;
     LevelLoader lvlLoader;
     Transition Transition;
+    LevelManager lvlManager;
 
     private void Start()
     {
         SongText.text = SongName;
         songName = SongName;
+        lvlManager = GameObject.Find("Level Manager").GetComponent<LevelManager>();
         lvlLoader = GameObject.Find("LevelLoader").GetComponent<LevelLoader>();
         Transition = GameObject.Find("Transition").GetComponent<Transition>();
         button = gameObject.GetComponent<Button>();
@@ -55,11 +59,13 @@ public class LevelInfoSender : MonoBehaviour
         {
             BackGround = DefaultBackGround;
         }
-        if (NoteSpeedScale == 0 || NoteSpeedScale == null)
+        if (NoteSpeedScale == 0)
         {
             NoteSpeedScale = 1;
         }
 
+        button.onClick.AddListener(ChooseSong) ;
+        /*
         button.onClick.AddListener(delegate { lvlLoader.SetSong(Song); });
         button.onClick.AddListener(delegate { lvlLoader.SetDiff(Difficulty,NoteSpeedScale); });
         if (ChangeColor)
@@ -72,9 +78,42 @@ public class LevelInfoSender : MonoBehaviour
         }
         button.onClick.AddListener(delegate { Transition.SetSongInfo(SongImage, songName, Authur, illustrator, LevelDesigner); });
         button.onClick.AddListener(delegate { lvlLoader.LoadLevel(); });
+        */
     }
     public void SetSongInfo()
     {
         Transition.Instance.SetSongInfo(SongImage,songName, Authur, illustrator, LevelDesigner);
+    }
+
+    public void ChooseSong()
+    {
+        bool Same = lvlManager.isSame(this.InGameName);
+        if (Same)
+        {
+            Debug.Log("Game Start!");
+            lvlLoader.SetSong(Song);
+            lvlLoader.SetDiff(Difficulty, NoteSpeedScale);
+            if (ChangeColor)
+            {
+                lvlLoader.SetBackGround(BackGround, EnchanceColor);
+            }
+            else
+            {
+                lvlLoader.SetBackGround(BackGround, Color.white);
+            }
+            Transition.SetSongInfo(SongImage, songName, Authur, illustrator, LevelDesigner);
+            lvlManager.PreviewSong.Stop();
+            lvlManager.MainLoop.Stop();
+            lvlLoader.LoadLevel();
+            lvlManager.GetComponent<AudioSource>().PlayOneShot(lvlManager.StartingSFX);
+            //lvlLoader.PlaySFX(lvlManager.StartingSFX);
+
+        }
+        else
+        {
+            Debug.Log("Preview as " + SongName);
+            lvlManager.StopAllCoroutines();
+            lvlManager.StartCoroutine(lvlManager.Preview(SongImage, SongName, PreviewClip));
+        }
     }
 }

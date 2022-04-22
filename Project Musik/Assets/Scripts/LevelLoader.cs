@@ -55,7 +55,8 @@ public class LevelLoader : MonoBehaviour
     IEnumerator LoadAsync(string SceneName)
     {
         float timer = 0f;
-        float MinLoadTime = Transition.Instance.Duration + Transition.Instance.Duration/3;
+        float MinLoadTime = Transition.Instance.Duration * 5;
+            //+ Transition.Instance.Duration/3;
 
         AsyncOperation operation = SceneManager.LoadSceneAsync(SceneName);
         operation.allowSceneActivation = false;
@@ -83,6 +84,12 @@ public class LevelLoader : MonoBehaviour
     {
         GarbageCollector.CollectIncremental();
         Resources.UnloadUnusedAssets();
+    }
+
+    public void PlaySFX(AudioClip Clip)
+    {
+        gameObject.GetComponent<AudioSource>().clip = Clip;
+        gameObject.GetComponent<AudioSource>().Play();
     }
 
 }

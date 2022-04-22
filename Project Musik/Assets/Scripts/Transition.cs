@@ -8,7 +8,7 @@ using DG.Tweening;
 public class Transition : MonoBehaviour
 {
     public float Duration = 0.3f;
-    public float WaitDuration = 2f;
+    public float WaitDuration = 4.5f;
     public static Transition Instance { get; private set; }
     public RectTransform Mask;
     public GameObject SongInfo;

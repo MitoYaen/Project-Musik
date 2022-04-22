@@ -409,16 +409,9 @@ public class RythmGameManager : MonoBehaviour
     }
 
     //Auto Plays
-    public void EAP()
+    public void SwitchAP()
     {
-        AutoPlay = true;
-        Debug.Log("AP Enabled.");
-    }
-
-    public void DAP()
-    {
-        AutoPlay = false;
-        Debug.Log("AP Disabled.");
+        AutoPlay = !AutoPlay;
     }
 
     public void PlayMusic()
