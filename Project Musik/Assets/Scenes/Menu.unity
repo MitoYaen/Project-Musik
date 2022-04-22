@@ -3700,22 +3700,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Transition
       objectReference: {fileID: 0}
-    - target: {fileID: 8904573412698463504, guid: b6e78220f150c2942bf0789adc858ae7, type: 3}
-      propertyPath: WaitDuration
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8904573412698463507, guid: b6e78220f150c2942bf0789adc858ae7, type: 3}
-      propertyPath: m_AdditionalShaderChannelsFlag
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 8904573412738392572, guid: b6e78220f150c2942bf0789adc858ae7, type: 3}
-      propertyPath: m_Maskable
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8904573412738392572, guid: b6e78220f150c2942bf0789adc858ae7, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6e78220f150c2942bf0789adc858ae7, type: 3}
 --- !u!1 &1230932609

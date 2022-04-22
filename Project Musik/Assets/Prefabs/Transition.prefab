@@ -490,7 +490,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Duration: 1
-  WaitDuration: 4.5
+  WaitDuration: 2
   Mask: {fileID: 8904573412115000167}
   SongInfo: {fileID: 8904573412484374210}
   songimage: {fileID: 8904573412625399772}
@@ -619,9 +619,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0.5019608}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1199,7 +1199,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Level Design :'
+  m_text: 'Chart Design :'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 43af8be4b3d6cdf429a7752c4725eaba, type: 2}
   m_sharedMaterial: {fileID: 8271658968642076460, guid: 43af8be4b3d6cdf429a7752c4725eaba, type: 2}

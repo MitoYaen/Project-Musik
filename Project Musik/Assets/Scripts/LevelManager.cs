@@ -23,10 +23,6 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private RectTransform EZList;
     [SerializeField] private RectTransform HDList;
 
-    private void Start()
-    {
-
-    }
 
     private void Update()
     {

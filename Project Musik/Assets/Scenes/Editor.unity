@@ -410,6 +410,7 @@ MonoBehaviour:
   RelatedEndNote: {fileID: 0}
   PS_Pure: {fileID: 807490715696432001, guid: 1cd6fe319a9bfaa42a873b708d63796d, type: 3}
   PS_Far: {fileID: 807490715696432001, guid: 6fbaa4cafb27de1449e63e41263f0507, type: 3}
+  HoldEffect: {fileID: 0}
   ObjHoldLineFront: {fileID: 0}
   HoldLineFront: {fileID: 0}
   ObjHoldLineBack: {fileID: 0}
@@ -4518,6 +4519,7 @@ MonoBehaviour:
   RelatedEndNote: {fileID: 0}
   PS_Pure: {fileID: 807490715696432001, guid: 1cd6fe319a9bfaa42a873b708d63796d, type: 3}
   PS_Far: {fileID: 807490715696432001, guid: 6fbaa4cafb27de1449e63e41263f0507, type: 3}
+  HoldEffect: {fileID: 0}
   ObjHoldLineFront: {fileID: 1806733365}
   HoldLineFront: {fileID: 1806733366}
   ObjHoldLineBack: {fileID: 833830081}
@@ -11698,6 +11700,7 @@ MonoBehaviour:
   RelatedEndNote: {fileID: 0}
   PS_Pure: {fileID: 807490715696432001, guid: 1cd6fe319a9bfaa42a873b708d63796d, type: 3}
   PS_Far: {fileID: 807490715696432001, guid: 6fbaa4cafb27de1449e63e41263f0507, type: 3}
+  HoldEffect: {fileID: 0}
   ObjHoldLineFront: {fileID: 0}
   HoldLineFront: {fileID: 0}
   ObjHoldLineBack: {fileID: 0}
@@ -13915,9 +13918,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data:
-    _json: '{"nest":{"source":"Macro","macro":0,"embed":null}}'
-    _objectReferences:
-    - {fileID: 11400000, guid: 68e05bb81ebc87a40b5fef0bcb437519, type: 2}
+    _json: '{"nest":{"source":"Macro","macro":null,"embed":null}}'
+    _objectReferences: []
 --- !u!114 &895018919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20584,6 +20586,7 @@ MonoBehaviour:
   RelatedEndNote: {fileID: 0}
   PS_Pure: {fileID: 807490715696432001, guid: 1cd6fe319a9bfaa42a873b708d63796d, type: 3}
   PS_Far: {fileID: 807490715696432001, guid: 6fbaa4cafb27de1449e63e41263f0507, type: 3}
+  HoldEffect: {fileID: 0}
   ObjHoldLineFront: {fileID: 0}
   HoldLineFront: {fileID: 0}
   ObjHoldLineBack: {fileID: 0}
@@ -24472,6 +24475,7 @@ MonoBehaviour:
   RelatedEndNote: {fileID: 0}
   PS_Pure: {fileID: 807490715696432001, guid: 1cd6fe319a9bfaa42a873b708d63796d, type: 3}
   PS_Far: {fileID: 807490715696432001, guid: 6fbaa4cafb27de1449e63e41263f0507, type: 3}
+  HoldEffect: {fileID: 0}
   ObjHoldLineFront: {fileID: 0}
   HoldLineFront: {fileID: 0}
   ObjHoldLineBack: {fileID: 0}
@@ -29133,6 +29137,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8904573412698463504, guid: b6e78220f150c2942bf0789adc858ae7, type: 3}
+      propertyPath: WaitDuration
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8904573412698463507, guid: b6e78220f150c2942bf0789adc858ae7, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
@@ -32613,6 +32621,7 @@ MonoBehaviour:
   RelatedEndNote: {fileID: 0}
   PS_Pure: {fileID: 807490715696432001, guid: 1cd6fe319a9bfaa42a873b708d63796d, type: 3}
   PS_Far: {fileID: 807490715696432001, guid: 6fbaa4cafb27de1449e63e41263f0507, type: 3}
+  HoldEffect: {fileID: 0}
   ObjHoldLineFront: {fileID: 1963060185}
   HoldLineFront: {fileID: 1963060187}
   ObjHoldLineBack: {fileID: 913600474}
