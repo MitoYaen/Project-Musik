@@ -21,6 +21,7 @@ public class LevelInfoSender : MonoBehaviour
     public bool ChangeColor;
     public Color EnchanceColor;
     public AudioClip PreviewClip;
+    [SerializeField] PreviewButton PreviewBtn;
     internal Button button;
     LevelLoader lvlLoader;
     Transition Transition;
@@ -112,8 +113,11 @@ public class LevelInfoSender : MonoBehaviour
         else
         {
             Debug.Log("Preview as " + SongName);
+            PreviewBtn.SentLevel(this);
             lvlManager.StopAllCoroutines();
             lvlManager.StartCoroutine(lvlManager.Preview(SongImage, SongName, PreviewClip));
         }
     }
+
+    
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 using SonicBloom.Koreo;
 using UnityEngine.UI;
 
@@ -24,7 +25,7 @@ public class Note : MonoBehaviour
      * 8 - SideTap
      ==============*/
 
-    public bool isLongNote;
+    public bool isLongNote = false;
 
     public bool isLongNoteEnd;
 
@@ -48,12 +49,6 @@ public class Note : MonoBehaviour
 
     RythmGameManager gameController;
 
-    [SerializeField] private ParticleSystem PS_Pure;
-
-    [SerializeField] private ParticleSystem PS_Far;
-
-    [SerializeField] private ParticleSystem HoldEffect;
-
     protected ParticleSystem LongHoldEffect;
 
     public GameObject ObjHoldLineFront;
@@ -74,6 +69,16 @@ public class Note : MonoBehaviour
 
     public Text DebugText;
 
+    [Header("Effects")]
+    //[SerializeField] private ParticleSystem PS_Pure;
+    [SerializeField] private List<ParticleSystem> PS_Pure = new List<ParticleSystem>();
+
+    //[SerializeField] private ParticleSystem PS_Far;
+    [SerializeField] private List<ParticleSystem> PS_Far = new List<ParticleSystem>();
+
+    [SerializeField] private ParticleSystem HoldEffect;
+
+    [SerializeField] private Animator IndiLost;
 
     void Start()
     {
@@ -135,8 +140,10 @@ public class Note : MonoBehaviour
 
             if (transform.position.z <= laneController.targetBottomTrans.position.z)
             {
-                gameController.ReturnNoteObjectToPool(this);
+                //gameController.ReturnNoteObjectToPool(this);
                 gameController.Combo = 0;
+                ReturnToPool();
+                SpawnEffects(2);
                 ResetNote();
                 return;
 
@@ -281,6 +288,10 @@ public class Note : MonoBehaviour
             HoldLineBack.SetPosition(0, transform.position);
             HoldLineBack.SetPosition(1, WaitPos);
         }
+        if (isLongNote && LongHoldEffect != null && HoldFailed) //Stop the hold effect if hold failed
+        {
+            LongHoldEffect.Stop();
+        }
         if (RelatedStartNote != null && isLongNoteEnd)
         {
             //Render the line after found the StartNote(EndNote)
@@ -344,17 +355,20 @@ public class Note : MonoBehaviour
             Debug.Log("结果为 Auto-Pure, " + "误差为" + (int)((targetOffset - hitOffset) / 44.4) + "ms.");
             if (isLongNote && HoldEffect != null)
             {
+                
                 LongHoldEffect = GameObject.Instantiate(HoldEffect, gameObject.transform.position, Quaternion.identity);
                 LongHoldEffect.Play();
             }
             else if (isLongNoteEnd && RelatedStartNote.LongHoldEffect != null)
             {
-                GameObject.Instantiate(PS_Pure, gameObject.transform.position, Quaternion.identity);
+                //GameObject.Instantiate(PS_Pure, gameObject.transform.position, Quaternion.identity);
+                SpawnEffects(0);
                 RelatedStartNote.LongHoldEffect.Stop();
             }
             else
             {
-                GameObject.Instantiate(PS_Pure, gameObject.transform.position, Quaternion.identity);
+                //GameObject.Instantiate(PS_Pure, gameObject.transform.position, Quaternion.identity);
+                SpawnEffects(0);
             }
             return hitLevel;
         }
@@ -369,13 +383,15 @@ public class Note : MonoBehaviour
                     Debug.Log("结果为 Flick-Pure, " + "误差为" + (int)((targetOffset - hitOffset) / 44.4) + "ms.");
                     SfxManager.PlayOneShot(HitSound);
                     gameController.Pure++;
-                    GameObject.Instantiate(PS_Pure, gameObject.transform.position, Quaternion.identity);
+                    //GameObject.Instantiate(PS_Pure, gameObject.transform.position, Quaternion.identity);
+                    SpawnEffects(1);
                     return hitLevel;
                 }
                 else
                 {
                     gameController.Lost++;
                     Debug.Log("结果为 Lost, " + "误差为" + Mathf.RoundToInt(targetOffset - hitOffset) / 44.4 + "ms.");
+                    SpawnEffects(2);
                     this.enabled = false;
                     return hitLevel;
                 }
@@ -389,6 +405,7 @@ public class Note : MonoBehaviour
                 hitLevel = 0;
                 gameController.Lost++;
                 Debug.Log("结果为 Lost, " + "误差为" + (int)((targetOffset - hitOffset) / 44.4) + "ms.");
+                SpawnEffects(2);
                 this.enabled = false;
             }
             if
@@ -399,7 +416,8 @@ public class Note : MonoBehaviour
                 Debug.Log("结果为 FarEarly, " + "误差为" + (int)((targetOffset - hitOffset) / 44.4) + "ms.");
                 SfxManager.PlayOneShot(HitSound);
                 gameController.Far++;
-                GameObject.Instantiate(PS_Far, gameObject.transform.position, Quaternion.identity);
+                //GameObject.Instantiate(PS_Far, gameObject.transform.position, Quaternion.identity);
+                SpawnEffects(1);
             }
             if
                 (targetOffset - (gameController.pureFloat * 0.001f * gameController.SampleRate) <= hitOffset && hitOffset
@@ -416,13 +434,15 @@ public class Note : MonoBehaviour
                 }
                 else if (isLongNoteEnd && RelatedStartNote.LongHoldEffect != null)
                 {
-                    GameObject.Instantiate(PS_Pure, gameObject.transform.position, Quaternion.identity);
+                    //GameObject.Instantiate(PS_Pure, gameObject.transform.position, Quaternion.identity);
+                    SpawnEffects(0);
                     RelatedStartNote.LongHoldEffect.Stop();
                 }
                 else
                 {
-                    GameObject.Instantiate(PS_Pure, gameObject.transform.position, Quaternion.identity);
-                }
+                    //GameObject.Instantiate(PS_Pure, gameObject.transform.position, Quaternion.identity);
+                    SpawnEffects(0);
+            }
             }
             if
                 (targetOffset + (gameController.pureFloat * 0.001f * gameController.SampleRate) <= hitOffset && hitOffset
@@ -432,7 +452,8 @@ public class Note : MonoBehaviour
                 Debug.Log("结果为 FarLate, " + "误差为" + (int)((targetOffset - hitOffset) / 44.4) + "ms.");
                 SfxManager.PlayOneShot(HitSound);
                 gameController.Far++;
-                GameObject.Instantiate(PS_Far, gameObject.transform.position, Quaternion.identity);
+                //GameObject.Instantiate(PS_Far, gameObject.transform.position, Quaternion.identity);
+                SpawnEffects(1);
             }
             if
                 (targetOffset + (gameController.farFloat * 0.001f * gameController.SampleRate) <= hitOffset && hitOffset
@@ -440,10 +461,41 @@ public class Note : MonoBehaviour
             {
                 hitLevel = 0;
                 gameController.Combo = 0;
-                gameController.Lost++;
-            Debug.Log("结果为 Lost, " + "误差为" + Mathf.RoundToInt(targetOffset - hitOffset) / 44.4 + "ms.");
+                gameController.Lost++; 
+                SpawnEffects(2);
+                Debug.Log("结果为 Lost, " + "误差为" + Mathf.RoundToInt(targetOffset - hitOffset) / 44.4 + "ms.");
                 this.enabled = false;
             }
         return hitLevel;
+    }
+
+    private void SpawnEffects(int hitlevel) // 0 - pure, 1 - far
+    {
+        switch (hitlevel)
+        {
+            case 0:
+                if (SideNote)
+                {
+                    GameObject.Instantiate(PS_Pure[0], gameObject.transform.position, Quaternion.identity); // Ground 
+                    GameObject.Instantiate(PS_Pure[1], gameObject.transform.position, Quaternion.Euler(90, 0, 0)); // Brust Ps
+                }
+                else
+                {
+                    GameObject.Instantiate(PS_Pure[0], gameObject.transform.position, Quaternion.Euler(85, 0, 0));
+                    GameObject.Instantiate(PS_Pure[1], gameObject.transform.position, Quaternion.Euler(90, 0, 0));
+                }
+                break;
+            case 1:
+                foreach (ParticleSystem item in PS_Far)
+                {
+                    GameObject.Instantiate(item, gameObject.transform.position, Quaternion.identity);
+                }
+                break;
+            case 2:
+                IndiLost.SetTrigger("ShowNote");
+                break;
+            default:
+                break;
+        }
     }
 }

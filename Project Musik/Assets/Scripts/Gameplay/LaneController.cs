@@ -412,6 +412,11 @@ public class LaneController : MonoBehaviour
         {
             GoodHolding = false;
             CheckNoteHit();
+            if (LastHoldStartNote != null)
+            {
+                LastHoldStartNote.HoldFailed = true;
+                
+            }
         }
         if (PressedVisual != null)
         {

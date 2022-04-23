@@ -74,13 +74,15 @@ public class RythmGameManager : MonoBehaviour
     public Transform SimpleMusicPlayerTransRef;
     SimpleMusicPlayer simpleMusicPlayer;
 
-    //Quote
+    //Invoke
     Koreography PlayingKoreo;
     public List<LaneController> noteLanes = new List<LaneController>();
     public AudioSource AudioCom;
     public ScoreUpdater ScoreUpdate;
     public Image Background;
     public Image EnchancerImg;
+    public Animator IndiPerfect;
+    public Animator IndiGreat;
 
     //Prefab
     public Note noteObject;
@@ -393,6 +395,8 @@ public class RythmGameManager : MonoBehaviour
     {
         CurScore += PerScore;
         ScoreUpdate.Value = (int)CurScore;
+        //Add Perfect Shown
+        IndiPerfect.SetTrigger("ShowNote");
     }
 
     //Score Update (Far)
@@ -400,6 +404,8 @@ public class RythmGameManager : MonoBehaviour
     {
         CurScore += PerScore/2;
         ScoreUpdate.Value = (int)CurScore;
+        //Add Far Shown
+        IndiGreat.SetTrigger("ShowNote");
     }
 
     //Reload Scene
@@ -412,6 +418,18 @@ public class RythmGameManager : MonoBehaviour
     public void SwitchAP()
     {
         AutoPlay = !AutoPlay;
+        if (!AutoPlay)
+        {
+            Debug.Log("AP Disable !");
+            foreach (LaneController item in noteLanes)
+            {
+                item.Release();
+            }
+        }
+        else
+        {
+            Debug.Log("AP Enable!");
+        }
     }
 
     public void PlayMusic()

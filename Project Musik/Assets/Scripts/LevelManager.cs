@@ -70,8 +70,8 @@ public class LevelManager : MonoBehaviour
         PreviewText.text = songName;
         PreviewImage.sprite = songImage;
         PreviewSong.clip = songPreview;
-
         PreviewSong.Play();
+        DOTween.Clear();
         PreviewObj.anchoredPosition = new Vector2(-700, -72);
         PreviewObj.DOAnchorPosX(300, 1f).SetEase(Ease.OutCubic);
         yield return null;
@@ -82,6 +82,7 @@ public class LevelManager : MonoBehaviour
         TextDifficulty.text = "EASY";
         HDList.gameObject.SetActive(false);
         EZList.gameObject.SetActive(true);
+        DOTween.Clear();
         EZList.anchoredPosition = new Vector2(600, -145);
         EZList.GetComponent<RectTransform>().DOAnchorPosX(-430, DiffShowTimeCost).SetEase(Ease.OutCubic);
     }
@@ -90,6 +91,7 @@ public class LevelManager : MonoBehaviour
         TextDifficulty.text = "HARD";
         EZList.gameObject.SetActive(false);
         HDList.gameObject.SetActive(true);
+        DOTween.Clear();
         HDList.anchoredPosition = new Vector2(600, -145);
         HDList.GetComponent<RectTransform>().DOAnchorPosX(-430, DiffShowTimeCost).SetEase(Ease.OutCubic);
     }
