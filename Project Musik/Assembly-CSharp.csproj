@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>latest</LangVersion>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -53,6 +53,9 @@
     <UnityVersion>2020.3.18f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Assets\Scripts\LevelInfoSender.cs" />
     <Compile Include="Assets\Scripts\Gameplay\ComboText.cs" />
     <Compile Include="Assets\Scripts\Gameplay\ResultDisplay.cs" />
@@ -69,6 +72,7 @@
     <Compile Include="Assets\Scripts\Gameplay\ProgressBar.cs" />
     <Compile Include="Assets\Scripts\Legacy\TestScroll.cs" />
     <Compile Include="Assets\Scripts\AppVariables.cs" />
+    <Compile Include="Assets\Scripts\UI\PreviewButton.cs" />
     <Compile Include="Assets\Scripts\Legacy\FileLoaderTest.cs" />
     <Compile Include="Assets\Scripts\Legacy\ScrollPanelVerticalLayout.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Note.cs" />
@@ -78,7 +82,8 @@
     <Compile Include="Assets\Scripts\Legacy\KoreotoBolt.cs" />
     <Compile Include="Assets\Scripts\Legacy\AudioSourceLoudnessTester.cs" />
     <Compile Include="Assets\Scripts\Gameplay\ChartEditor.cs" />
-    <Compile Include="Assets\Scripts\UI\PreviewButton.cs" />
+    <Compile Include="Assets\Scripts\UI\DotweenRect.cs" />
+    <Compile Include="Assets\Scripts\UI\NoteSpeedButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Ludiq\Ludiq.Core\DotNetDocumentation\System.Web.Extensions.Design.xml" />

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
-    private bool onHard;
+    private bool onHard ;
     private string LastClickedLevel;
     public AudioSource MainLoop;
     [Header("For Previewing Levels")]
@@ -22,7 +22,6 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Text TextDifficulty;
     [SerializeField] private RectTransform EZList;
     [SerializeField] private RectTransform HDList;
-
 
     private void Update()
     {

@@ -481,7 +481,7 @@ public class Note : MonoBehaviour
                 }
                 else
                 {
-                    GameObject.Instantiate(PS_Pure[0], gameObject.transform.position, Quaternion.Euler(85, 0, 0));
+                    GameObject.Instantiate(PS_Pure[0], gameObject.transform.position, Quaternion.Euler(83, 0, 0));
                     GameObject.Instantiate(PS_Pure[1], gameObject.transform.position, Quaternion.Euler(90, 0, 0));
                 }
                 break;
