@@ -20,7 +20,7 @@ public class RythmGameManager : MonoBehaviour
     [Range(0.5f,8f)]
     [SerializeField]  public float InGameNoteSpeed;
     public float NoteSpeed;
-    internal float NSpeedScale;
+    internal float NSpeedScale = 1;
 
     [Range(8f,200f)]
     public float HitWindowSize_ms;
@@ -110,7 +110,7 @@ public class RythmGameManager : MonoBehaviour
         {
             //Get Param from last scene
             EventID = LvlLoader.GetComponent<LevelLoader>().Diff.ToString();
-            Debug.Log("Difficulty " + EventID + "Loaded.");
+            Debug.Log("Difficulty " + EventID + " Loaded.");
             Koreography GameSong = LvlLoader.GetComponent<LevelLoader>().song;
             Debug.Log("Song Loaded.");
             NSpeedScale = LvlLoader.GetComponent<LevelLoader>().noteSpeedScale;
@@ -123,6 +123,7 @@ public class RythmGameManager : MonoBehaviour
         }
         else
         {
+            Debug.Log("No level Loader assets, loading default assets.");
             simpleMusicPlayer = SimpleMusicPlayerTransRef.GetComponent<SimpleMusicPlayer>();
             simpleMusicPlayer.LoadSong(Song, 0, false);
         }

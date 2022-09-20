@@ -2516,8 +2516,8 @@ MonoBehaviour:
   - mIntVal: 3
   - mIntVal: 4
   - mIntVal: 1
-  - mIntVal: 21
   - mIntVal: 3
+  - mIntVal: 21
   - mIntVal: 1
   - mIntVal: 22
   - mIntVal: 2
@@ -3002,8 +3002,8 @@ MonoBehaviour:
   - mIntVal: 3
   - mIntVal: 11
   - mIntVal: 2
-  - mIntVal: 1
   - mIntVal: 4
+  - mIntVal: 1
   - mIntVal: 22
   - mIntVal: 17
   - mIntVal: 3

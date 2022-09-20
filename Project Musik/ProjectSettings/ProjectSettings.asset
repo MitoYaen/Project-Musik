@@ -49,8 +49,8 @@ PlayerSettings:
   m_StereoRenderingPath: 0
   m_ActiveColorSpace: 0
   m_MTRendering: 1
-  mipStripping: 1
-  numberOfMipsStripped: 1
+  mipStripping: 0
+  numberOfMipsStripped: 0
   m_StackTraceTypes: 010000000100000001000000010000000100000001000000
   iosShowActivityIndicatorOnLoading: -1
   androidShowActivityIndicatorOnLoading: -1
@@ -155,7 +155,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
     Android: com.MitoYager.ProjectMusik
-    Standalone: com.DefaultCompany.ProjectMusik
+    Standalone: com.MitoYager.ProjectMusik
     iPhone: com.MitoYaen.ProjectMusik
   buildNumber:
     Standalone: 0

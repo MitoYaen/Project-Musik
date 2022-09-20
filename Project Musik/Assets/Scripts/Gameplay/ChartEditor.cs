@@ -3,27 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 using SonicBloom.Koreo;
 using SonicBloom.Koreo.Players;
+using System;
+
 public class ChartEditor : MonoBehaviour
 {
+    [Header("Basics")]
+    [Header("")]
+    [Header(" - Normal Keys : W,E,U,I")]
+    [Header(" - Side Keys : Q,O")]
+    [Header("HotKeys:")]
+    [Header("Put your koreo and Chart before start editing!")]
     public Koreography Koreo;
     public KoreographyTrack Chart;
+    [Range(0.1f,1f)]
+    [SerializeField] float PlaybackSpd;
+    public int subdivs = 2;
+    public Boolean HoldMode = false;
+    [Header("Scene")]
+    public GameObject Target;
     public SimpleMusicPlayer MusicPlayer;
     public AudioSource AudioCom;
     public List<KoreographyEvent> CurEventList = new List<KoreographyEvent>();
     internal string ClipName;
+    [Header("Debug")]
     public int TouchInSameTime;
     public int sampleTime;
-    public int subdivs = 2;
     public int CurSample;
     bool pause;
 
-    internal bool addTap1 = true, addTap2 = true, addTap3 = true, addTap4 = true, addBigTap1 = true, addBigTap2 = true;
+    internal bool addTap1 = true, addTap2 = true, addTap3 = true, addTap4 = true, addBigTap1 = true, addBigTap2 = true,addHoldL = true, addHoldR = true;
 
     // Start is called before the first frame update
     void Start()
     {
+        Target.gameObject.SetActive(false);
         ClipName = MusicPlayer.GetCurrentClipName();
         //MusicPlayer.LoadSong(Koreo, 0, false);
+        AudioCom.pitch = PlaybackSpd;
         AudioCom.Play();
     }
 
@@ -66,23 +82,45 @@ public class ChartEditor : MonoBehaviour
         {
             KeyUpEvent(4);
         }
+        if (HoldMode)
+        {
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                KeyDownEvent(17);
+            }
+            if (Input.GetKeyUp(KeyCode.Q))
+            {
+                KeyUpEvent(19);
+            }
 
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            KeyDownEvent(21);
+            if (Input.GetKeyDown(KeyCode.O))
+            {
+                KeyDownEvent(18);
+            }
+            if (Input.GetKeyUp(KeyCode.O))
+            {
+                KeyUpEvent(20);
+            }
         }
-        if (Input.GetKeyUp(KeyCode.Q))
+        else
         {
-            KeyUpEvent(21);
-        }
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                KeyDownEvent(21);
+            }
+            if (Input.GetKeyUp(KeyCode.Q))
+            {
+                KeyUpEvent(21);
+            }
 
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            KeyDownEvent(22);
-        }
-        if (Input.GetKeyUp(KeyCode.O))
-        {
-            KeyUpEvent(22);
+            if (Input.GetKeyDown(KeyCode.O))
+            {
+                KeyDownEvent(22);
+            }
+            if (Input.GetKeyUp(KeyCode.O))
+            {
+                KeyUpEvent(22);
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -182,6 +220,22 @@ public class ChartEditor : MonoBehaviour
                     addTap4 = false;
                 }
                 break;
+            case 17:
+                StartCoroutine(AddEvents(17, TouchInSameTime));
+                if (addHoldL)
+                {
+                    TouchInSameTime++;
+                    addHoldL = false;
+                }
+                break;
+            case 18:
+                StartCoroutine(AddEvents(18, TouchInSameTime));
+                if (addHoldR)
+                {
+                    TouchInSameTime++;
+                    addHoldR = false;
+                }
+                break;
             case 21:
                 StartCoroutine(AddEvents(21, TouchInSameTime));
                 //AddTapEvents(21);
@@ -235,6 +289,22 @@ public class ChartEditor : MonoBehaviour
                 {
                     TouchInSameTime--;
                     addTap4 = true;
+                }
+                break;
+            case 19:
+                if (!addHoldL)
+                {
+                    StartCoroutine(AddEvents(19, TouchInSameTime));
+                    TouchInSameTime--;
+                    addHoldL = true;
+                }
+                break;
+            case 20:
+                if (!addHoldR)
+                {
+                    StartCoroutine(AddEvents(20, TouchInSameTime));
+                    TouchInSameTime--;
+                    addHoldR = true;
                 }
                 break;
             case 21:

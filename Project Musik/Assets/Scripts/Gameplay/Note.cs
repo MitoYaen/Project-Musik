@@ -45,7 +45,7 @@ public class Note : MonoBehaviour
 
     public Note RelatedEndNote;
 
-    LaneController laneController;
+    [SerializeField] LaneController laneController;
 
     RythmGameManager gameController;
 
@@ -248,6 +248,7 @@ public class Note : MonoBehaviour
             pos.z -= (gameController.DelayedSampleTime - (trackedEvent.StartSample + gameController.NoteOffset_ms * 0.01f * gameController.SampleRate))
             / (float)gameController.SampleRate * gameController.NoteSpeed;
             transform.position = pos;
+            //Debug.Log("Moving...");
         }
         else
         {
