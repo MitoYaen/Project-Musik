@@ -9,13 +9,13 @@ public class ChartEditor : MonoBehaviour
 {
     [Header("Basics")]
     [Header("")]
-    [Header(" - Normal Keys : W,E,U,I")]
-    [Header(" - Side Keys : Q,O")]
+    [Header(" - Normal Keys : S,D,J,K")]
+    [Header(" - Side Keys : A,L")]
     [Header("HotKeys:")]
     [Header("Put your koreo and Chart before start editing!")]
     public Koreography Koreo;
     public KoreographyTrack Chart;
-    [Range(0.1f,1f)]
+    [Range(0f,2f)]
     [SerializeField] float PlaybackSpd;
     public int subdivs = 2;
     public Boolean HoldMode = false;
@@ -40,7 +40,6 @@ public class ChartEditor : MonoBehaviour
         Target.gameObject.SetActive(false);
         ClipName = MusicPlayer.GetCurrentClipName();
         //MusicPlayer.LoadSong(Koreo, 0, false);
-        AudioCom.pitch = PlaybackSpd;
         AudioCom.Play();
     }
 
@@ -48,68 +47,69 @@ public class ChartEditor : MonoBehaviour
     {
         //Debug.Log("dd");
         CurEventList = Chart.GetAllEvents();
-        if (Input.GetKeyDown(KeyCode.W))
+        AudioCom.pitch = PlaybackSpd;
+        if (Input.GetKeyDown(KeyCode.S))
         {
             KeyDownEvent(1);
             PressedVisuals[0].GetComponent<SpriteRenderer>().enabled = true;
         }
-        if (Input.GetKeyUp(KeyCode.W))
+        if (Input.GetKeyUp(KeyCode.S))
         {
             KeyUpEvent(1);
             PressedVisuals[0].GetComponent<SpriteRenderer>().enabled = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.D))
         {
             KeyDownEvent(2);
             PressedVisuals[1].GetComponent<SpriteRenderer>().enabled = true;
         }
-        if (Input.GetKeyUp(KeyCode.E))
+        if (Input.GetKeyUp(KeyCode.D))
         {
             KeyUpEvent(2);
             PressedVisuals[1].GetComponent<SpriteRenderer>().enabled = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.U))
+        if (Input.GetKeyDown(KeyCode.J))
         {
             KeyDownEvent(3);
             PressedVisuals[2].GetComponent<SpriteRenderer>().enabled = true;
         }
-        if (Input.GetKeyUp(KeyCode.U))
+        if (Input.GetKeyUp(KeyCode.J))
         {
             KeyUpEvent(3);
             PressedVisuals[2].GetComponent<SpriteRenderer>().enabled = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.K))
         {
             KeyDownEvent(4);
             PressedVisuals[3].GetComponent<SpriteRenderer>().enabled = true;
         }
-        if (Input.GetKeyUp(KeyCode.I))
+        if (Input.GetKeyUp(KeyCode.K))
         {
             KeyUpEvent(4);
             PressedVisuals[3].GetComponent<SpriteRenderer>().enabled = false;
         }
         if (HoldMode)
         {
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetKeyDown(KeyCode.A))
             {
                 KeyDownEvent(17);
                 PressedVisuals[4].gameObject.SetActive(true);
             }
-            if (Input.GetKeyUp(KeyCode.Q))
+            if (Input.GetKeyUp(KeyCode.A))
             {
                 KeyUpEvent(19);
                 PressedVisuals[4].gameObject.SetActive(false);
             }
 
-            if (Input.GetKeyDown(KeyCode.O))
+            if (Input.GetKeyDown(KeyCode.L))
             {
                 KeyDownEvent(18);
                 PressedVisuals[5].gameObject.SetActive(true);
             }
-            if (Input.GetKeyUp(KeyCode.O))
+            if (Input.GetKeyUp(KeyCode.L))
             {
                 KeyUpEvent(20);
                 PressedVisuals[5].gameObject.SetActive(false);
@@ -117,23 +117,23 @@ public class ChartEditor : MonoBehaviour
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetKeyDown(KeyCode.A))
             {
                 KeyDownEvent(21);
                 PressedVisuals[4].gameObject.SetActive(true);
             }
-            if (Input.GetKeyUp(KeyCode.Q))
+            if (Input.GetKeyUp(KeyCode.A))
             {
                 KeyUpEvent(21);
                 PressedVisuals[4].gameObject.SetActive(false);
             }
 
-            if (Input.GetKeyDown(KeyCode.O))
+            if (Input.GetKeyDown(KeyCode.L))
             {
                 KeyDownEvent(22);
                 PressedVisuals[5].gameObject.SetActive(true);
             }
-            if (Input.GetKeyUp(KeyCode.O))
+            if (Input.GetKeyUp(KeyCode.L))
             {
                 KeyUpEvent(22);
                 PressedVisuals[5].gameObject.SetActive(false);

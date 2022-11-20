@@ -2592,22 +2592,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ef790629e1bc8941a516da860ccae3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SongName: EL
+  SongName: Enchanted Love
   InGameName: 1
   Song: {fileID: 11400000, guid: a2d1ba4f835a7f14faf1cf9be35fbde9, type: 2}
   Difficulty: 1
   NoteSpeedScale: 0.7
   SongText: {fileID: 2058857810}
   DefaultImage: {fileID: 21300000, guid: bb67cded1ea0b874a823f8de9a000367, type: 3}
-  SongImage: {fileID: 21300000, guid: 7ca9fc7df34973948a38233802305d19, type: 3}
-  Authur: J.S.Bach
-  illustrator: Pixel4k
+  SongImage: {fileID: 21300000, guid: 8ab4bae23f4b76040938f20397f0d715, type: 3}
+  Authur: Linear Ring
+  illustrator: "\u767E\u820C\u8C37"
   LevelDesigner: Yager
   DefaultBackGround: {fileID: 21300000, guid: 0ceeaf7074656ca4f836bc6ee66549ab, type: 3}
   BackGround: {fileID: 21300000, guid: a089b595310416e489f079a6ff0cf82e, type: 3}
   ChangeColor: 1
   EnchanceColor: {r: 1, g: 0, b: 0.6766882, a: 0.69803923}
-  PreviewClip: {fileID: 8300000, guid: c1deea553bbd3404b8473aa50d0ad4b6, type: 3}
+  PreviewClip: {fileID: 8300000, guid: 4b3aabe99ffce4e4ea2495b3a00eb395, type: 3}
   PreviewBtn: {fileID: 958112480}
 --- !u!1 &527617179
 GameObject:
